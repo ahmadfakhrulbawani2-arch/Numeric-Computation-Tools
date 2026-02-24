@@ -1,1 +1,6 @@
+# ignore cachings
 __pycache__/
+
+# ignore my shell prompts
+*.sh
+*.ps1
