@@ -24,6 +24,6 @@ def main(nEq, nInit):
 
 if __name__ == "__main__":
   arrEq = list(map(int, input("Masukkan koefisien (spasi): ").split()))
-  nInitVal = 3
+  nInitVal = int(input("Masukkan nilai awal x0: "))
   res = main(arrEq, nInitVal)
   print(f"Hasil root finding menggunakan Newton-Raphson adalah = {res}")
