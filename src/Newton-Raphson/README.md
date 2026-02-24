@@ -1,7 +1,7 @@
 # What is Newton Raphson Method?
 
 <div align="center">
-  <img src="../../docs/Wikipedia_Newton-Raphson_Demo.gif">
+  <img src="../../docs/Wikipedia_Newton-Raphson_Demo.gif"> <br />
   By <a href="https://de.wikipedia.org/wiki/Benutzer:Ralf_Pfeifer" class="extiw" title="de:Benutzer:Ralf Pfeifer">Ralf Pfeifer</a> - <a href="https://de.wikipedia.org/wiki/Image:NewtonIteration_Ani.gif" class="extiw" title="de:Image:NewtonIteration Ani.gif">de:Image:NewtonIteration Ani.gif</a>, <a href="http://creativecommons.org/licenses/by-sa/3.0/" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=2268473">Link</a>
 </div>
 
