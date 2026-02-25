@@ -87,7 +87,7 @@ def print_sol(nRes: float | None, nEq: List[int]) -> None:
   sEqState = get_eq_state(nEq)
   print(f"\nThe root of {sEqState} from Newton-Raphson computation is x = {nRes}")
 
-# main driver
+# main driver only solve 1 root
 if __name__ == "__main__":
   while True:
     user_input = input(
@@ -100,10 +100,11 @@ if __name__ == "__main__":
 
     try:
       arrEq = list(map(int, user_input.split()))
-      nInitVal = float(input("Input initial value of x (x0): "))
+      nInitVal: List[float] = list(map(float, input("Input initial root guess (x0), you can input more than one: ").split()))
 
-      res = main(arrEq, nInitVal)
-      print_sol(res, arrEq)
+      for x0 in nInitVal:
+        res = main(arrEq, x0)
+        print_sol(res, arrEq)
 
     except ValueError:
-      print("Invalid input. Please enter integers only or 'q' to exit.")
+      print("Invalid input. Please enter numbers only or 'q' to exit.")
