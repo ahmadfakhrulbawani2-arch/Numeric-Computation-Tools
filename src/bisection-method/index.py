@@ -1,6 +1,7 @@
 import time
 from typing import List
 from src.utils.FuncUtils import CalcFunc, Calc_Converngence_Rate
+from src.utils.IoUtils import *
 
 MAX_ITERATION: int = 50
 TOLERANCE: float = 1e-6
@@ -58,6 +59,7 @@ def bisection_method(eq: List[int], a: float, b: float) -> float | None:
   return None
 
 if __name__ == "__main__":
+  PrintIntroProg("Bisection Method Root Finding Method")
   while True:
     user_input = input("\nInput function coefficients (space separated) or 'q' to exit: ").strip()
     if user_input.lower() == "q":
@@ -70,6 +72,7 @@ if __name__ == "__main__":
       bInit = float(input("Input interval end (b): "))
 
       print("\n======= Bisection Method =======\n")
+      PrintSingleEq(eq)
       root = bisection_method(eq, aInit, bInit)
       if root is not None:
         print(f"\nRoot found: x = {root:.6f}")

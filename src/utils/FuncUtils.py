@@ -4,7 +4,7 @@ import math
 def DerivativeF(coeffs: List[float]) -> List[float]:
   return [coeffs[i] * i for i in range(1, len(coeffs))]
 
-
+# reverse the coeffs first
 def CalcFunc(coeffs: List[float], x: float) -> float:
   return sum(coeffs[i] * (x ** i) for i in range(len(coeffs)))
 

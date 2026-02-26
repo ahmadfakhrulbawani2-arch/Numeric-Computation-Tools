@@ -1,6 +1,7 @@
 import time
 from typing import List
 from src.utils.FuncUtils import CalcFunc, DerivativeF, Calc_Converngence_Rate
+from src.utils.IoUtils import *
 
 MAX_ITERATION: int = 50
 
@@ -89,6 +90,7 @@ def print_sol(nRes: float | None, nEq: List[int]) -> None:
 
 # main driver only solve 1 root
 if __name__ == "__main__":
+  PrintIntroProg("Newton-Raphson Root Finding Method")
   while True:
     user_input = input(
       "\nInput function coeffissients (split with space, integer only) or 'q' to exit: "
