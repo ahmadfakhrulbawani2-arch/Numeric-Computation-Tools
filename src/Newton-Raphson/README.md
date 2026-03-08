@@ -25,6 +25,6 @@ git clone https://github.com/ahmadfakhrulbawani2-arch/numeric-computation-tools.
 
 ```bash
 # bash
-python -m src.Newton-Raphson.rootFindingProb
+python -m src.Newton-Raphson.index
 # run as module
 ```
