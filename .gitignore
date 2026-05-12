@@ -4,3 +4,7 @@ __pycache__/
 # ignore my shell prompts
 *.sh
 *.ps1
+
+# ignore virtual env
+*.venv
+*.env

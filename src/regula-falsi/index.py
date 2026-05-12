@@ -20,7 +20,7 @@ def increment_search(eq: List[int], a: float, b: float) -> float | None:
     x += step
     fx_curr = CalcFunc(eq, x)
     PrintIterations(iter, ("new_b", "new_f(b)"), x, fx_curr)
-    csv_file.write(f"{iter},{x},{fx_curr}")
+    csv_file.write(f"{iter},{x},{fx_curr}\n")
 
     eval: float = fx_curr * fx_prev
     if eval < 0:
