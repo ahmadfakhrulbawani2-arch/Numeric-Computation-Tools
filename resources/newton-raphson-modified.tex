@@ -1,0 +1,55 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[indonesian]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{hyperref}
+
+\geometry{margin=2.5cm}
+
+\title{Metode Newton-Raphson Modifikasi dalam Komputasi Numerik}
+\author{Ahmad Fakhrul Bawani}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Pendahuluan}
+Metode Newton-Raphson standar memiliki kelemahan utama ketika berhadapan dengan akar ganda (akar dengan multiplisitas $m > 1$). Pada kondisi ini, konvergensi yang seharusnya kuadratik akan melambat menjadi linear. Metode Newton-Raphson Modifikasi dirancang untuk mengembalikan kecepatan konvergensi kuadratik tersebut.
+
+\section{Konsep dan Rumus}
+Terdapat dua pendekatan utama dalam modifikasi metode ini:
+
+\subsection{Pendekatan 1: Jika Multiplisitas ($m$) Diketahui}
+Jika kita mengetahui bahwa akar tersebut memiliki multiplisitas $m$ (misalnya akar ganda dua, maka $m=2$), rumus iterasinya menjadi:
+\begin{equation}
+x_{n+1} = x_n - m \frac{f(x_n)}{f'(x_n)}
+\end{equation}
+
+\subsection{Pendekatan 2: Menggunakan Fungsi Bantu $u(x)$}
+Jika multiplisitas $m$ tidak diketahui, kita dapat mendefinisikan fungsi baru $u(x)$:
+\begin{equation}
+u(x) = \frac{f(x)}{f'(x)}
+\end{equation}
+Akar dari $u(x)$ adalah sama dengan akar dari $f(x)$, namun akar ganda pada $f(x)$ akan menjadi akar tunggal pada $u(x)$. Dengan menerapkan metode Newton-Raphson pada $u(x)$, kita mendapatkan rumus:
+\begin{equation}
+x_{n+1} = x_n - \frac{f(x_n)f'(x_n)}{[f'(x_n)]^2 - f(x_n)f''(x_n)}
+\end{equation}
+
+\section{Kelebihan dan Kekurangan}
+\subsection{Kelebihan}
+\begin{itemize}
+  \item Sangat efektif untuk menyelesaikan persamaan yang memiliki akar ganda.
+  \item Mengembalikan laju konvergensi kuadratik yang hilang pada metode standar.
+\end{itemize}
+
+\subsection{Kekurangan}
+\begin{itemize}
+  \item Memerlukan perhitungan turunan kedua $f''(x)$ untuk pendekatan kedua, yang secara komputasi bisa sangat mahal atau sulit diturunkan.
+  \item Lebih kompleks dalam implementasi kode dibandingkan metode standar.
+\end{itemize}
+
+\end{document}
