@@ -1,0 +1,58 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[indonesian]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{hyperref}
+
+\geometry{margin=2.5cm}
+
+\title{Metode Biseksi dalam Komputasi Numerik}
+\author{Ahmad Fakhrul Bawani}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Pendahuluan}
+Metode Biseksi adalah salah satu algoritma pencarian akar paling sederhana untuk fungsi kontinu. Metode ini didasarkan pada Teorema Nilai Antara, yang menyatakan bahwa jika sebuah fungsi kontinu $f(x)$ memiliki tanda yang berbeda pada ujung-ujung interval $[a, b]$, maka setidaknya terdapat satu akar di dalam interval tersebut.
+
+\section{Konsep dan Rumus}
+Metode ini bekerja dengan cara membagi interval menjadi dua bagian secara berulang. Titik tengah $c$ dari interval $[a, b]$ dihitung dengan rumus:
+\begin{equation}
+c = \frac{a + b}{2}
+\end{equation}
+
+Setelah mendapatkan titik tengah, interval baru dipilih berdasarkan tanda dari nilai fungsi $f(c)$. Jika $f(a) \cdot f(c) < 0$, maka akar berada di sub-interval kiri $[a, c]$. Jika tidak, maka akar berada di sub-interval kanan $[c, b]$.
+
+\section{Algoritma Iterasi}
+\begin{enumerate}
+  \item Tentukan interval $[a, b]$ sedemikian rupa sehingga $f(a) \cdot f(b) < 0$.
+  \item Hitung titik tengah: $c = \frac{a + b}{2}$.
+  \item Uji posisi akar:
+  \begin{itemize}
+    \item Jika $f(a) \cdot f(c) < 0$, maka akar di $[a, c]$, set $b = c$.
+    \item Jika $f(b) \cdot f(c) < 0$, maka akar di $[c, b]$, set $a = c$
+    \item Jika $f(c) = 0$, maka $c$ adalah akar eksak.
+  \end{itemize}
+  \item Ulangi langkah 2 dan 3 sampai lebar interval $|b - a|$ lebih kecil dari toleransi $\epsilon$ yang diinginkan.
+\end{enumerate}
+
+\section{Kelebihan dan Kekurangan}
+\subsection{Kelebihan}
+\begin{itemize}
+  \item Selalu konvergen menuju akar (pasti ketemu selama fungsi kontinu).
+  \item Sangat stabil dan tidak memerlukan perhitungan turunan fungsi.
+  \item Mudah diimplementasikan dalam pemrograman.
+\end{itemize}
+
+\subsection{Kekurangan}
+\begin{itemize}
+  \item Konvergensi sangat lambat (memerlukan banyak iterasi untuk mencapai akurasi tinggi).
+  \item Tidak dapat digunakan jika fungsi tidak berganti tanda di sekitar akar (misal pada akar ganda).
+\end{itemize}
+
+\end{document}
