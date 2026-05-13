@@ -1,0 +1,61 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[indonesian]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{hyperref}
+
+\geometry{margin=2.5cm}
+
+\title{Metode Secant dalam Komputasi Numerik}
+\author{Ahmad Fakhrul Bawani}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Pendahuluan}
+Metode Secant merupakan perbaikan dari metode Newton-Raphson bagi fungsi yang turunannya sulit untuk dicari. Dalam metode ini, turunan pertama $f'(x)$ didekati dengan kemiringan garis (tali busur atau \textit{secant}) yang melalui dua titik hampiran awal. Berbeda dengan Biseksi, metode ini termasuk dalam kategori metode terbuka karena tidak selalu membutuhkan akar di dalam rentang awal.
+
+\section{Konsep dan Penurunan Rumus}
+Ide utama metode Secant adalah mengganti turunan $f'(x_n)$ pada rumus Newton-Raphson:
+\begin{equation}
+f'(x_n) \approx \frac{f(x_n) - f(x_{n-1})}{x_n - x_{n-1}}
+\end{equation}
+
+Jika kita substitusikan pendekatan tersebut ke dalam rumus Newton-Raphson, kita akan mendapatkan rumus iterasi Secant:
+\begin{equation}
+x_{n+1} = x_n - f(x_n) \frac{x_n - x_{n-1}}{f(x_n) - f(x_{n-1})}
+\end{equation}
+
+Di mana:
+\begin{itemize}
+  \item $x_{n+1}$ adalah hampiran akar baru.
+  \item $x_n$ dan $x_{n-1}$ adalah dua hampiran akar sebelumnya.
+\end{itemize}
+
+\section{Algoritma Iterasi}
+\begin{enumerate}
+  \item Tentukan dua tebakan awal, $x_0$ dan $x_1$.
+  \item Hitung $x_2$ menggunakan rumus iterasi Secant.
+  \item Gunakan nilai $x_1$ dan $x_2$ untuk mencari $x_3$, dan seterusnya.
+  \item Iterasi berhenti jika $|x_{n+1} - x_n| < \epsilon$ atau $|f(x_{n+1})| < \epsilon$.
+\end{enumerate}
+
+\section{Kelebihan dan Kekurangan}
+\subsection{Kelebihan}
+\begin{itemize}
+  \item Tidak memerlukan perhitungan turunan fungsi $f'(x)$, sehingga sangat berguna untuk fungsi yang kompleks.
+  \item Kecepatan konvergensi lebih cepat daripada metode Biseksi dan Regula Falsi (mendekati superlinear).
+\end{itemize}
+
+\subsection{Kekurangan}
+\begin{itemize}
+  \item Membutuhkan dua tebakan awal ($x_0$ dan $x_1$).
+  \item Karena merupakan metode terbuka, ada kemungkinan iterasi menjadi divergen (menjauh dari akar) jika tebakan awal tidak tepat.
+\end{itemize}
+
+\end{document}
