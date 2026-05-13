@@ -1,0 +1,73 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[indonesian]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{hyperref}
+
+\geometry{margin=2.5cm}
+
+\title{Metode Newton-Raphson dalam Komputasi Numerik}
+\author{Ahmad Fakhrul Bawani}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Pendahuluan}
+Metode Newton-Raphson adalah salah satu algoritma pencarian akar yang paling populer dan kuat dalam komputasi numerik. Metode ini digunakan untuk menemukan akar-akar dari fungsi bernilai riil $f(x) = 0$ dengan menggunakan pendekatan iteratif berbasis kalkulus.
+
+\section{Penurunan Rumus}
+Metode ini didasarkan pada prinsip bahwa jika kita memiliki tebakan awal $x_n$ untuk akar suatu fungsi, kita dapat memperoleh estimasi yang lebih baik dengan menarik garis singgung (tangen) pada kurva $f(x)$ di titik $(x_n, f(x_n))$.
+
+Persamaan garis singgung di titik $(x_n, f(x_n))$ adalah:
+\begin{equation}
+y - f(x_n) = f'(x_n)(x - x_n)
+\end{equation}
+
+Akar dari fungsi tersebut adalah nilai $x$ di mana $y = 0$. Jika kita menetapkan $y = 0$ dan mencari nilai $x$ yang baru (kita sebut $x_{n+1}$), maka:
+\begin{equation}
+0 - f(x_n) = f'(x_n)(x_{n+1} - x_n)
+\end{equation}
+
+Dengan menyusun ulang persamaan di atas untuk mengisolasi $x_{n+1}$, kita mendapatkan rumus iterasi Newton-Raphson:
+\begin{equation}
+x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}
+\end{equation}
+
+Di mana:
+\begin{itemize}
+  \item $x_{n+1}$ adalah hampiran akar pada iterasi berikutnya.
+  \item $x_n$ adalah hampiran akar pada iterasi saat ini.
+  \item $f(x_n)$ adalah nilai fungsi pada $x_n$.
+  \item $f'(x_n)$ adalah turunan pertama fungsi pada $x_n$.
+\end{itemize}
+
+\section{Algoritma Iterasi}
+Langkah-langkah untuk mengimplementasikan metode Newton-Raphson adalah sebagai berikut:
+\begin{enumerate}
+  \item Tentukan tebakan awal $x_0$.
+  \item Tentukan toleransi galat (error) $\epsilon$ dan maksimum iterasi.
+  \item Hitung nilai baru menggunakan rumus: $x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}$.
+  \item Periksa kriteria penghentian: apakah $|x_{n+1} - x_n| < \epsilon$ atau $|f(x_{n+1})| < \epsilon$.
+  \item Jika terpenuhi, $x_{n+1}$ adalah akarnya. Jika tidak, ulangi langkah 3 dengan memperbarui $x_n = x_{n+1}$.
+\end{enumerate}
+
+\section{Kelebihan dan Kekurangan}
+\subsection{Kelebihan}
+\begin{itemize}
+  \item Konvergensi bersifat kuadratik, yang berarti jumlah digit akurasi kira-kira berlipat ganda pada setiap iterasi (sangat cepat).
+  \item Sangat efisien untuk fungsi yang turunannya mudah dihitung.
+\end{itemize}
+
+\subsection{Kekurangan}
+\begin{itemize}
+  \item Memerlukan perhitungan turunan fungsi $f'(x)$.
+  \item Jika $f'(x_n) = 0$ (titik stasioner), metode ini akan gagal karena terjadi pembagian dengan nol.
+  \item Sensitif terhadap pemilihan tebakan awal ($x_0$); jika terlalu jauh dari akar, iterasi bisa menjadi divergen.
+\end{itemize}
+
+\end{document}
