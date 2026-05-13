@@ -1,0 +1,66 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[indonesian]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{hyperref}
+
+\geometry{margin=2.5cm}
+
+\title{Metode Regula Falsi dalam Komputasi Numerik}
+\author{Ahmad Fakhrul Bawani}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Pendahuluan}
+Metode Regula Falsi, atau sering disebut metode posisi palsu (\textit{false position method}), adalah metode pencarian akar yang bersifat tertutup (\textit{bracketing method}). Berbeda dengan metode Biseksi yang membagi rentang menjadi dua bagian sama besar, metode ini menggunakan garis lurus yang menghubungkan dua titik ujung selang untuk memperkirakan letak akar.
+
+\section{Konsep dan Penurunan Rumus}
+Metode ini didasarkan pada interpolasi linear antara dua titik $[a, f(a)]$ dan $[b, f(b)]$ sedemikian rupa sehingga $f(a) \cdot f(b) < 0$. Garis lurus yang menghubungkan kedua titik tersebut akan memotong sumbu-$x$ pada titik $c$, yang dianggap sebagai hampiran akar.
+
+Persamaan garis yang melewati kedua titik tersebut adalah:
+\begin{equation}
+\frac{y - f(b)}{x - b} = \frac{f(b) - f(a)}{b - a}
+\end{equation}
+
+Dengan mencari titik potong sumbu-$x$ ($y=0$), kita peroleh rumus untuk $c$:
+\begin{equation}
+c = b - \frac{f(b)(b - a)}{f(b) - f(a)}
+\end{equation}
+
+Atau sering ditulis dalam bentuk:
+\begin{equation}
+c = \frac{a \cdot f(b) - b \cdot f(a)}{f(b) - f(a)}
+\end{equation}
+
+\section{Algoritma Iterasi}
+\begin{enumerate}
+  \item Pilih interval $[a, b]$ sedemikian rupa sehingga $f(a) \cdot f(b) < 0$.
+  \item Hitung nilai $c$ menggunakan rumus Regula Falsi.
+	\item Evaluasi nilai $f(c)$:
+  \begin{itemize}
+    \item Jika $f(a) \cdot f(c) < 0$, maka akar berada di antara $[a, c]$, set $b = c$.
+    \item Jika $f(a) \cdot f(c) > 0$, maka akar berada di antara $[c, b]$, set $a = c$.
+  \end{itemize}
+  \item Ulangi langkah di atas hingga $|f(c)| < \epsilon$ atau selisih $|x_{n+1} - x_n| < \epsilon$.
+\end{enumerate}
+
+\section{Kelebihan dan Kekurangan}
+\subsection{Kelebihan}
+\begin{itemize}
+	\item Selalu konvergen karena merupakan metode tertutup (pasti menemukan akar selama tebakan awal benar).
+  \item Biasanya lebih cepat mencapai konvergensi dibandingkan metode Biseksi karena memanfaatkan nilai fungsi, bukan hanya tanda (+/-).
+\end{itemize}
+
+\subsection{Kekurangan}
+\begin{itemize}
+  \item Bisa mengalami konvergensi yang sangat lambat jika salah satu titik ujung selang tetap ("stagnan") dan tidak bergerak menuju akar.
+  \item Lebih lambat dibandingkan metode Newton-Raphson yang menggunakan informasi turunan.
+\end{itemize}
+
+\end{document}
