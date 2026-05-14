@@ -1,4 +1,9 @@
 from typing import List
+from datetime import datetime
+
+# this is to get time.now
+def GetTimeNow() -> str:
+  return datetime.now().strftime("%H:%M:%S | %d-%m-%Y")
 
 # this print intro statement
 def PrintIntroProg(title: str) -> None:
@@ -7,7 +12,7 @@ def PrintIntroProg(title: str) -> None:
 # This return equation string
 def GetEqState(eq: List[int]) -> str:
   new_eq: List[int] = list(reversed(eq))
-  sEq = ""
+  sEq: str = ""
 
   # reverse the loop to reverse the printed eq
   for i in range(len(new_eq)-1, -1, -1): 
@@ -33,6 +38,6 @@ def PrintIterations(iter: int, vars: List[str], *params) -> None:
   ]
 
   evals_str: str = ", ".join(evals)
-  log = f"Iteration-{iter}: {evals_str}"
+  log: str = f"[{GetTimeNow()}] Iteration-{iter}: {evals_str}"
   print(log)
 

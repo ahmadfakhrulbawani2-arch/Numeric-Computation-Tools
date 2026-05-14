@@ -1,9 +1,8 @@
 # ignore cachings
 __pycache__/
 
-# ignore my shell prompts
-*.sh
-*.ps1
+# ignore initializer
+__init__.py
 
 # ignore virtual env
 *.venv
