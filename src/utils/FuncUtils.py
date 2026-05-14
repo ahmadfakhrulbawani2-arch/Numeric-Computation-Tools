@@ -1,6 +1,8 @@
 from typing import List
 import math
 
+EPSILON: float = 1e-12
+
 def DerivativeF(coeffs: List[float]) -> List[float]:
   return [coeffs[i] * i for i in range(1, len(coeffs))]
 
@@ -9,11 +11,22 @@ def CalcFunc(coeffs: List[float], x: float) -> float:
   return sum(coeffs[i] * (x ** i) for i in range(len(coeffs)))
 
 def Calc_Converngence_Rate(err: List[float]) -> float | None:
-  if len(err) < 3: 
+  if len(err) < 3:
     return None
-  
-  e_n1: float = err[-1] 
-  e_n: float = err[-2]
-  e_n_1: float = err[-3]
 
-  return math.log(e_n1 / e_n) / math.log(e_n / e_n_1)
+  e_n1 = max(err[-1], EPSILON)
+  e_n = max(err[-2], EPSILON)
+  e_n_1 = max(err[-3], EPSILON)
+
+  denumerator = math.log(e_n / e_n_1)
+
+  if denumerator == 0:
+    return None
+
+  return math.log(e_n1 / e_n) / denumerator
+
+def CalcTrueError(real_root: float, approx_root: float) -> float:
+  if abs(real_root) < EPSILON:
+    return abs(approx_root)
+
+  return abs((real_root - approx_root) / real_root)
