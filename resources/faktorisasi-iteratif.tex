@@ -9,7 +9,7 @@
 
 \geometry{margin=2.5cm}
 
-\title{Metode Faktorisasi Polinomial Iteratif}
+\title{Metode Faktorisasi Polinomial Iteratif Berbasis Koefisien \\ (Metode Lin Derajat 4 dan 5)}
 \author{Ahmad Fakhrul Bawani}
 \date{}
 
@@ -18,46 +18,73 @@
 \maketitle
 
 \section{Pendahuluan}
-Metode ini digunakan untuk memfaktorkan polinomial derajat tinggi secara iteratif. Untuk polinomial derajat tiga dengan bentuk umum $P(x) = x^3 + A_2x^2 + A_1x + A_0$, kita dapat memfaktorkannya menjadi bentuk:
-\begin{equation}
-(x + b_0)(x^2 + a_1x + a_0) = 0
-\end{equation}
-Tujuannya adalah menemukan nilai $b_0, a_1, \text{dan } a_0$ yang memenuhi persamaan tersebut melalui pendekatan iterasi.
+Metode Lin merupakan metode numerik iteratif untuk memfaktorkan polinomial derajat tinggi dengan cara mencocokkan koefisien hasil kali faktor-faktornya terhadap polinomial asli. Berbeda dengan metode rumpun Newton-Raphson, metode ini tidak membutuhkan perhitungan turunan (matriks Jacobian) maupun tebakan awal yang spesifik, melainkan memanfaatkan skema iterasi titik tetap (\textit{fixed-point iteration}) dengan nilai awal berupa nol.
 
-\section{Penurunan Rumus Iterasi}
-Jika kita mengalikan kembali $(x + b_0)(x^2 + a_1x + a_0)$, kita mendapatkan:
+\section{Formulasi untuk Polinomial Derajat 4}
+Misalkan terdapat polinomial derajat 4 dengan bentuk umum:
 \begin{equation}
-x^3 + (a_1 + b_0)x^2 + (a_0 + a_1b_0)x + a_0b_0 = 0
+P(x) = x^4 + A_3x^3 + A_2x^2 + A_1x + A_0
+\end{equation}
+Polinomial ini akan difaktorkan menjadi dua buah bagian kuadratik:
+\begin{equation}
+P(x) = (x^2 + b_1x + b_0)(x^2 + a_1x + a_0)
 \end{equation}
 
-Dengan menyamakan koefisien tersebut dengan persamaan asli $x^3 + A_2x^2 + A_1x + A_0$, kita peroleh sistem persamaan:
-\begin{enumerate}
-  \item $A_2 = a_1 + b_0 \implies a_1 = A_2 - b_0$
-  \item $A_1 = a_0 + a_1b_0 \implies a_0 = A_1 - a_1b_0$
-  \item $A_0 = a_0b_0 \implies b_0 = \frac{A_0}{a_0}$
-\end{enumerate}
+Dengan mengalikan kedua faktor tersebut dan menyamakan koefisiennya dengan persamaan asli, diperoleh sistem persamaan non-linear sebagai berikut:
+\begin{align}
+A_3 &= a_1 + b_1 \\
+A_2 &= a_0 + a_1b_1 + b_0 \\
+A_1 &= a_1b_0 + a_0b_1 \\
+A_0 &= a_0b_0
+\end{align}
+
+Sistem di atas ditransformasikan menjadi skema iterasi balik dengan mengisolasi masing-masing variabel:
+\begin{align}
+b_0 &= \frac{A_0}{a_0} \\
+b_1 &= \frac{A_1 - a_1b_0}{a_0} \\
+a_1 &= A_3 - b_1 \\
+a_0 &= A_2 - b_0 - a_1b_1
+\end{align}
+
+\section{Formulasi untuk Polinomial Derajat 5}
+Untuk polinomial derajat 5 dengan bentuk umum:
+\begin{equation}
+P(x) = x^5 + A_4x^4 + A_3x^3 + A_2x^2 + A_1x + A_0
+\end{equation}
+Faktorisasi dilakukan dengan memecahnya menjadi satu faktor linear dan dua faktor kuadratik:
+\begin{equation}
+P(x) = (x + a_0)(x^2 + b_1x + b_0)(x^2 + c_1x + c_0)
+\end{equation}
+
+Melalui ekspansi aljabar dan penyamaan koefisien secara runtut dari pangkat tertinggi hingga terendah, kita dapat menyusun urutan rumus pembaruan variabel untuk setiap siklus iterasi:
+\begin{align}
+c_1 &= A_4 - a_0 - b_1 \\
+c_0 &= A_3 - a_0A_4 + a_0^2 - b_0 - c_1b_1 \\
+b_1 &= \frac{A_2 - a_0c_0 - b_0c_1}{c_0} \\
+b_0 &= \frac{A_1 - a_0b_1c_0 - b_0c_1}{c_0} \\
+a_0 &= \frac{A_0}{b_0c_0}
+\end{align}
 
 \section{Algoritma Iterasi}
-Karena variabel-variabel ini saling bergantung, kita menggunakan skema iterasi dengan nilai awal tertentu (misalnya $b_0 = 0$):
+Prosedur komputasi dilakukan tanpa memerlukan input tebakan numerik dari luar, dengan langkah sebagai berikut:
 \begin{itemize}
-  \item \textbf{Langkah 1:} Tentukan nilai awal $b_0 = 0$.
-  \item \textbf{Langkah 2:} Hitung $a_1 = A_2 - b_0$.
-  \item \textbf{Langkah 3:} Hitung $a_0 = A_1 - a_1b_0$.
-  \item \textbf{Langkah 4:} Perbarui nilai $b_0$ yang baru: $b_{0, \text{baru}} = \frac{A_0}{a_0}$.
-  \item \textbf{Langkah 5:} Ulangi langkah 2-4 sampai nilai $b_0$ konvergen (selisihnya sangat kecil).
+  \item \textbf{Langkah 1:} Inisialisasi seluruh variabel pembantu ($a_i, b_i, c_i$) dengan nilai awal \textit{starter} sama dengan $0$.
+  \item \textbf{Langkah 2:} Untuk derajat 4, hitung nilai $b_0, b_1, a_1,$ dan $a_0$ berturut-turut menggunakan persamaan pada Seksi 2. Untuk derajat 5, hitung nilai $c_1, c_0, b_1, b_0,$ dan $a_0$ berturut-turut menggunakan persamaan pada Seksi 3.
+  \item \textbf{Langkah 3:} Gunakan nilai yang baru saja diperoleh untuk dimasukkan kembali ke langkah perhitungan berikutnya.
+  \item \textbf{Langkah 4:} Ulangi proses siklus tersebut hingga selisih nilai antar-iterasi (\textit{error}) bernilai sangat kecil atau konvergen.
 \end{itemize}
 
-\section{Kelebihan dan Kekurangan}
+\section{Analisis Metode}
 \subsection{Kelebihan}
 \begin{itemize}
-  \item Memungkinkan pencarian akar polinomial sekaligus (satu akar real dan dua akar lainnya melalui rumus kuadrat).
-  \item Algoritmanya sangat ringkas untuk diprogram dalam bahasa C++ atau Python.
+  \item Struktur algoritma sangat sederhana dan linier, sehingga mudah diimplementasikan ke dalam kode program seperti C++ atau Python hanya dengan \textit{looping} biasa.
+  \item Tidak memerlukan tebakan nilai awal yang rumit; nilai awal $0$ sudah cukup untuk memulai proses iterasi efek domino koefisien.
 \end{itemize}
 
 \subsection{Kekurangan}
 \begin{itemize}
-  \item Sangat bergantung pada pemilihan nilai awal.
-  \item Jika nilai $a_0$ mendekati nol pada saat iterasi, perhitungan $b_0$ akan menjadi tidak terdefinisi (pembagian dengan nol).
+  \item Kecepatan konvergensi bertipe linier, cenderung lebih lambat dibandingkan metode Bairstow (Newton-Raphson) yang bertipe kuadratik.
+  \item Rentan terjadi kegagalan operasi jika pada tengah-tengah iterasi nilai variabel pembagi ($a_0$ pada derajat 4 atau $c_0$ pada derajat 5) bernilai mendekati nol.
 \end{itemize}
 
 \end{document}

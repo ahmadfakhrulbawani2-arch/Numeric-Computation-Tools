@@ -37,7 +37,7 @@ def PrintIterations(iter: int, vars: List[str], *params) -> None:
     f"{label} = {value}" for label, value in zip(vars, params)
   ]
 
-  evals_str: str = ", ".join(evals)
+  evals_str: str = ",    ".join(evals)
   log: str = f"[{GetTimeNow()}] Iteration-{iter}: {evals_str}"
   print(log)
 
