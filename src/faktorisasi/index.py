@@ -1,180 +1,292 @@
-from typing import List, Tuple, Optional
+from typing import List
 from src.utils.FuncUtils import *
 from src.utils.IoUtils import *
+
 import numpy as np
-import os
+from datetime import datetime
 
-def lin_method_deg3(eq: List[int], acc: float, max_iter: int, csv_file) -> Optional[Tuple[float, float, float]]:
-  # eq: [A3, A2, A1, A0] -> x^3 + A2x^2 + A1x + A0
-  A2, A1, A0 = eq[1], eq[2], eq[3]
-  
-  # Starter awal bernilai 0 sesuai rumus di file TeX kamu
-  b0 = 0.0
-  a1, a0 = 0.0, 0.0
+PROG_NAME = "Numeric Factorization (Lin Method) Root Finding"
+DIR_NAME = "faktorisasi"
 
-  csv_file.write("iter,a1,a0,b0,error\n")
-  print(f"\nInitial values: b0 = {b0:.6f}\n")
+# UTILS
+def calc_error(old_vals, new_vals) -> float:
+  return max(
+    abs(n - o)
+    for o, n in zip(old_vals, new_vals)
+  )
 
-  for iter in range(1, max_iter + 1):
-    b0_prev = b0
 
-    # Siklus rumus dari TeX awalmu
-    a1 = A2 - b0
-    
-    # Proteksi division by zero jika a0 bernilai 0 saat iterasi
-    if a0 == 0:
-      a0 = 0.0001
-      
-    a0 = A1 - (a1 * b0)
-    b0 = A0 / a0
+# DEGREE 3
+def lin_deg_3(
+  eq: List[float],
+  acc: float,
+  max_iter: int,
+  csv_file
+):
 
-    err = abs(b0 - b0_prev)
+  # x^3 + A2x^2 + A1x + A0
+  A2, A1, A0 = eq[1:]
 
-    print(f"Iter {iter:02d} | a1: {a1:.6f} | a0: {a0:.6f} | b0: {b0:.6f} | Err: {err:.6f}")
-    csv_file.write(f"{iter},{a1},{a0},{b0},{err}\n")
+  a0 = 1.0
+  b1 = 0.0
+  b0 = 1.0
 
-    if err <= acc:
-      return a1, a0, b0
+  csv_file.write("iter,a0,b1,b0,error\n")
 
-  return None
+  converged = False
 
-def lin_method_deg4(eq: List[int], acc: float, max_iter: int, csv_file) -> Optional[Tuple[float, float]]:
-  # eq: [A4, A3, A2, A1, A0]
-  A3, A2, A1, A0 = eq[1], eq[2], eq[3], eq[4]
-  
-  a1, a0 = 0.0, 0.0
-  b1, b0 = 0.0, 0.0
+  for i in range(1, max_iter + 1):
+    old_vals = [a0, b1, b0]
+    try:
+      b1 = A2 - a0
+      b0 = (A0 / a0)
+      a0 = (A1 - b0) / b1
 
-  csv_file.write("iter,a1,a0,b1,b0,error\n")
-  print(f"\nInitial values: a1 = {a1:.6f}, a0 = {a0:.6f}\n")
+    except ZeroDivisionError:
+      print("Division by zero detected")
+      return None
 
-  for iter in range(1, max_iter + 1):
-    a1_prev, a0_prev = a1, a0
+    new_vals = [a0, b1, b0]
+    err = calc_error(old_vals, new_vals)
+    csv_file.write(f"{i},{a0},{b1},{b0},{err}\n")
 
-    if a0 == 0:
-      a0 = 0.0001
+    now: datetime = GetTimeNow()
+    print(f"[{now}] Iter {i:3d} |  a0={a0:.2f}  b1={b1:.2f}  b0={b0:.2f}  %Ea={err:.2f}")
 
-    b0 = A0 / a0
-    b1 = (A1 - (a1 * b0)) / a0
-    a1 = A3 - b1
-    a0 = A2 - b0 - (a1 * b1)
-
-    err = max(abs(a1 - a1_prev), abs(a0 - a0_prev))
-
-    print(f"Iter {iter:02d} | a1: {a1:.6f} | a0: {a0:.6f} | b1: {b1:.6f} | b0: {b0:.6f} | Err: {err:.6f}")
-    csv_file.write(f"{iter},{a1},{a0},{b1},{b0},{err}\n")
-
-    if err <= acc:
-      return a1, a0
-
-  return None
-
-def lin_method_deg5(eq: List[int], acc: float, max_iter: int, csv_file) -> Optional[Tuple[float, float, float]]:
-  # eq: [A5, A4, A3, A2, A1, A0]
-  A4, A3, A2, A1, A0 = eq[1], eq[2], eq[3], eq[4], eq[5]
-
-  a0 = 0.0
-  b1, b0 = 0.0, 0.0
-  c1, c0 = 0.0, 0.0
-
-  csv_file.write("iter,c1,c0,b1,b0,a0,error\n")
-  print(f"\nInitial values: c1 = {c1:.6f}, c0 = {c0:.6f}, a0 = {a0:.6f}\n")
-
-  for iter in range(1, max_iter + 1):
-    a0_prev = a0
-
-    if c0 == 0:
-      c0 = 0.0001
-    if b0 == 0:
-      b0 = 0.0001
-
-    c1 = A4 - a0 - b1
-    c0 = A3 - (a0 * A4) + (a0 ** 2) - b0 - (c1 * b1)
-    b1 = (A2 - (a0 * c0) - (b0 * c1)) / c0
-    b0 = (A1 - (a0 * b1 * c0) - (b0 * c1)) / c0
-    a0 = A0 / (b0 * c0)
-
-    err = abs(a0 - a0_prev)
-
-    print(f"Iter {iter:02d} | c1: {c1:.6f} | c0: {c0:.6f} | b1: {b1:.6f} | b0: {b0:.6f} | a0: {a0:.6f} | Err: {err:.6f}")
-    csv_file.write(f"{iter},{c1},{c0},{b1},{b0},{a0},{err}\n")
-
-    if err <= acc:
-      return c1, c0, a0
-
-  return None
-
-def lin_method_driver(eq: List[int], acc: float, max_iter: int) -> Optional[str]:
-  if eq[0] != 1:
-    lead_coeff = eq[0]
-    eq = [coef / lead_coeff for coef in eq]
-
-  deg = len(eq) - 1
-  os.makedirs("./out/lin-method", exist_ok=True)
-  csv_file = open("./out/lin-method/iterations.csv", "w")
-
-  if deg == 3:
-    print("\n======= Running Lin Method for Degree 3 =======")
-    result = lin_method_deg3(eq, acc, max_iter, csv_file)
-    csv_file.close()
-    if result:
-      a1, a0, b0 = result
-      return f"Faktor: (x + {b0:.6f})(x^2 + {a1:.6f}x + {a0:.6f})"
-  elif deg == 4:
-    print("\n======= Running Lin Method for Degree 4 =======")
-    result = lin_method_deg4(eq, acc, max_iter, csv_file)
-    csv_file.close()
-    if result:
-      a1, a0 = result
-      return f"Faktor: (x^2 + {a1:.6f}x + {a0:.6f}) (sisa kuadratik pasangannya)"
-  elif deg == 5:
-    print("\n======= Running Lin Method for Degree 5 =======")
-    result = lin_method_deg5(eq, acc, max_iter, csv_file)
-    csv_file.close()
-    if result:
-      c1, c0, a0 = result
-      return f"Faktor: (x + {a0:.6f})(x^2 + {c1:.6f}x + {c0:.6f})"
-  else:
-    csv_file.close()
-    print(f"\nMetode Lin di kode ini di-scale khusus untuk derajat 3, 4, atau 5. Input kamu derajat {deg}.")
-    return None
-
-if __name__ == "__main__":
-  res_file = open("./out/lin-method/factors.txt", "a")
-  PrintIntroProg("Lin Method (Coefficient Iteration) Factorization")
-  
-  while True:
-    user_input = input("\nInput function coefficients (space separated) or 'q' to exit: ").strip()
-    if user_input == 'q':
-      print("exiting program...")
+    if err < acc:
+      converged = True
       break
 
+  if not converged:
+    print("Method did not converge")
+    return None
+
+  factor1 = [1, b1, b0]
+  factor2 = [1, a0]
+  roots1 = np.roots(factor1)
+  roots2 = np.roots(factor2)
+  roots = np.concatenate((roots1, roots2))
+
+  return roots
+
+# DEGREE 4
+def lin_deg_4(
+  eq: List[float],
+  acc: float,
+  max_iter: int,
+  csv_file
+):
+
+  # x^4 + A3x^3 + A2x^2 + A1x + A0
+  A3, A2, A1, A0 = eq[1:]
+
+  # starter
+  a0 = 1.0
+  a1 = 0.0
+  b0 = 1.0
+  b1 = 0.0
+
+  csv_file.write("iter,a0,a1,b0,b1,error\n")
+
+  converged = False
+
+  for i in range(1, max_iter + 1):
+
+    old_vals = [a0, a1, b0, b1]
+
     try:
-      eq: List[int] = list(map(int, user_input.split()))
-      deg = len(eq) - 1
-      
-      if deg not in [3, 4, 5]:
-        print("Please input coefficients for exactly degree 3, 4, or 5!")
+      b0 = A0 / a0
+      b1 = (A1 - a1 * b0) / a0
+      a1 = A3 - b1
+      a0 = A2 - b0 - a1 * b1
+
+    except ZeroDivisionError:
+      print("Division by zero detected")
+      return None
+
+    new_vals = [a0, a1, b0, b1]
+
+    err = calc_error(old_vals, new_vals)
+
+    csv_file.write(f"{i},{a0},{a1},{b0},{b1},{err}\n")
+
+    now = datetime.now()
+    print(f"[{now}] Iter {i:3d} |  a0={a0:.2f}  a1={a1:.2f}  b0={b0:.2f}  b1={b1:.2f}  %Ea={err:.2f}")
+
+    if err < acc:
+      converged = True
+      break
+
+  if not converged:
+    print("Method did not converge")
+    return None
+  
+  factor1 = [1, b1, b0]
+  factor2 = [1, a1, a0]
+  roots1 = np.roots(factor1)
+  roots2 = np.roots(factor2)
+  roots = np.concatenate((roots1, roots2))
+
+  return roots
+
+# DEGREE 5
+def lin_deg_5(
+  eq: List[float],
+  acc: float,
+  max_iter: int,
+  csv_file
+):
+
+  # x^5 + A4x^4 + A3x^3 + A2x^2 + A1x + A0
+  A4, A3, A2, A1, A0 = eq[1:]
+
+  a0 = 1.0
+  b1 = 0.0
+  b0 = 1.0
+  c1 = 0.0
+  c0 = 1.0
+
+  csv_file.write("iter,a0,b1,b0,c1,c0,error\n")
+  converged = False
+
+  for i in range(1, max_iter + 1):
+    old_vals = [a0, b1, b0, c1, c0]
+    try:
+      c1 = A4 - a0 - b1
+      c0 = (A3 - a0 * A4 + (a0 ** 2) - b0 - c1 * b1)
+      b1 = (A2 - a0 * c0 - b0 * c1) / c0
+      b0 = (A1 - a0 * b1 * c0 - b0 * c1) / c0
+      a0 = A0 / (b0 * c0)
+
+    except ZeroDivisionError:
+      print("Division by zero detected")
+      return None
+
+    new_vals = [a0, b1, b0, c1, c0]
+
+    err = calc_error(old_vals, new_vals)
+    csv_file.write(f"{i},{a0},{b1},{b0},{c1},{c0},{err}\n")
+    now = datetime.now()
+    print(f"[{now}] Iter {i:3d} |  a0={a0:.2f}  b1={b1:.2f}  b0={b0:.2f}  c1={c1:.2f}  c0={c0:.2f}  %Ea={err:.2f}")
+
+    if err < acc:
+      converged = True
+      break
+
+  if not converged:
+    print("Method did not converge")
+    return None
+
+  factor1 = [1, a0]
+  factor2 = [1, b1, b0]
+  factor3 = [1, c1, c0]
+  roots1 = np.roots(factor1)
+  roots2 = np.roots(factor2)
+  roots3 = np.roots(factor3)
+  roots = np.concatenate((roots1, roots2, roots3))
+
+  return roots
+
+def lin_method_driver(
+  eq: List[float],
+  acc: float,
+  max_iter: int,
+  degree: int
+):
+
+  csv_file = open(
+    f"./out/{DIR_NAME}/iterations.csv",
+    "w"
+  )
+
+  roots = None
+
+  match degree:
+
+    case 3:
+      roots = lin_deg_3(
+        eq,
+        acc,
+        max_iter,
+        csv_file
+      )
+
+    case 4:
+      roots = lin_deg_4(
+        eq,
+        acc,
+        max_iter,
+        csv_file
+      )
+
+    case 5:
+      roots = lin_deg_5(
+        eq,
+        acc,
+        max_iter,
+        csv_file
+      )
+
+  csv_file.close()
+
+  return roots
+
+if __name__ == "__main__":
+  res_file = open(f"./out/{DIR_NAME}/root.txt", "a")
+  PrintIntroProg(PROG_NAME)
+
+  while True:
+    user_input = input("\nInput function coefficients (space separated) or 'q' to exit and 'h' for help: ").strip()
+    if user_input == 'q':
+      print("Exiting program...")
+      break
+
+    elif user_input == 'h':
+      print(f"\n======= {PROG_NAME} Help =======\n")
+      print(
+        "1. Example:\n"
+        "1 -10 35 -50 24\n"
+        "= x^4 - 10x^3 + 35x^2 - 50x + 24\n"
+      )
+      print("2. Polynomial MUST be monic (highest coefficient = 1)\n")
+      print("3. Available degree: 3, 4, and 5\n")
+      continue
+
+    try:
+      eq: List[float] = list(map(float, user_input.split()))
+      degree = len(eq) - 1
+
+      if degree < 3:
+        print("Cannot solve equation below degree 3\n")
+        continue
+      elif degree > 5:
+        print("Degree above 5 is not available yet\n")
+        continue
+      elif eq[0] != 1:
+        print("Highest degree coefficient must be 1\n")
         continue
 
-      err_tol: float = float(input("Input tolerance (lowest = 0.0001): "))
-      max_iter: int = int(input("Input max iterations: "))
+      err_tol = float(input("Input tolerance (maximum 0.001): "))
+      max_iter = int(input("Input max iterations: "))
+      print(f"\n======= {PROG_NAME} =======\n")
+      PrintSingleEq(eq)
+      roots = lin_method_driver(eq,err_tol,max_iter,degree)
 
-      print("\n======= Lin Method Factorization =======")
-      PrintSingleEq(eq) 
-      
-      factor_res = lin_method_driver(eq, err_tol, max_iter)
-      now = GetTimeNow()
+      now: datetime = GetTimeNow()
+      if roots is not None:
+        print(f"\n[{now}] Roots found:\n")
+        res_file.write(f"\n[{now}] Roots:\n")
 
-      if factor_res is not None:
-        print(f"\n[{now}] Result -> {factor_res}")
-        res_file.write(f"\n[{now}] {factor_res}")
+        for r in roots:
+          print(f"{r}")
+          res_file.write(f"{r}\n")
+
       else:
-        print(f"\n[{now}] Factorization failed or diverged.")
-        res_file.write(f"\n[{now}] Factorization failed")
-        
+        print(f"\n[{now}] Method failed")
+        res_file.write(f"\n[{now}] Method failed\n")
+
     except ValueError as e:
       print("Invalid input. Please enter numbers only.")
       print(f"Error: {e}")
-      
+
   res_file.close()
