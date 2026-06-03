@@ -114,7 +114,7 @@ def update_jam_realtime(stop_event):
   while not stop_event.is_set():
     if not dalam_menu_kalkulasi:
       sekarang = datetime.datetime.now()
-      waktu_skrg = sekarang.strftime("%d-%m-%Y | %H:%M:%S WIB")
+      waktu_skrg = sekarang.strftime("%A, %d-%m-%Y | %H:%M:%S WIB")
       jam = sekarang.hour
       
       # Penentuan ucapan salam berdasarkan jam saat ini
