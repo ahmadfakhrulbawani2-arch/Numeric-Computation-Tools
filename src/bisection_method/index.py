@@ -58,10 +58,27 @@ def bisection_method(eq: List[int], a: float, b: float) -> float | None:
   print("Maximum iterations reached")
   return None
 
+RESET = "\033[0m"
+BOLD = "\033[1m"
+HEADER: str = fr'''
+  ____ _____  _____ ______ _____ _______ _____ ____  _   _ 
+ |  _ \_   _|/ ____|  ____/ ____|__   __|_   _/ __ \| \ | |
+ | |_) || | | (___ | |__ | |       | |    | || |  | |  \| |
+ |  _ < | |  \___ \|  __|| |       | |    | || |  | | . ` |
+ | |_) || |_ ____) | |___| |____   | |   _| || |__| | |\  |
+ |____/_____|_____/|______\_____|__|_|__|_____\____/|_| \_|
+ |  \/  |  ____|__   __| |  | |/ __ \|  __ \               
+ | \  / | |__     | |  | |__| | |  | | |  | |              
+ | |\/| |  __|    | |  |  __  | |  | | |  | |              
+ | |  | | |____   | |  | |  | | |__| | |__| |              
+ |_|  |_|______|  |_|  |_|  |_|\____/|_____/               
+'''
 def run_bisection():
-  PrintIntroProg("Bisection Method Root Finding Method")
+  Lazy_Loading("Opening files...")
+
+  PrintIntroProg(HEADER, "Bisection Method Root Finding Method")
   while True:
-    user_input = input("\nInput function coefficients (space separated) or 'q' to exit: ").strip()
+    user_input = input(f"\nInput function coefficients (space separated) or {BOLD}'q'{RESET} to exit: ").strip()
     if user_input.lower() == "q":
       print("Exiting program...")
       break

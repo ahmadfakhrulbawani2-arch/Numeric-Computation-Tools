@@ -1,6 +1,9 @@
+import time
+from halo import Halo
 from typing import List
 import math
 import datetime
+import os
 
 EPSILON: float = 1e-12
 LOG_FILE: str = "../../activities.log"
@@ -53,3 +56,15 @@ def log_activities(action: str, status: str = "INFO") -> None:
     log_file.write(f"{color_code}[{clock_now}] [{status}] {action}\033[0m\n")
   else:
     log_file.write(f"[{clock_now}] [{status}] {action}\n")
+
+def Lazy_Loading(texts: str) -> None:
+  spinner = Halo(text=texts, color='cyan', spinner='dots')
+  # Mulai muter
+  spinner.start()
+  # Simulasi proses matematika/loading (misal 3 detik)
+  time.sleep(3)
+  # Selesai dengan status sukses (Centang Hijau)
+  spinner.succeed('Perhitungan kelar, Bos!')
+  print("Ok Done...")
+  time.sleep(0.5)
+  os.system('cls' if os.name == 'nt' else 'clear')

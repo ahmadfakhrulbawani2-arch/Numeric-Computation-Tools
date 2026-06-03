@@ -10,7 +10,8 @@ def GetTimeNow() -> str:
   return datetime.now().strftime("%H:%M:%S | %d-%m-%Y")
 
 # this print intro statement
-def PrintIntroProg(title: str) -> None:
+def PrintIntroProg(ascii: str, title: str) -> None:
+  print(ascii)
   print(f"Welcome to {title}. Please input the equation (only support up to x^0, dosen't support x^-1, etc...)")
 
 # This return equation string
