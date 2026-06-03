@@ -84,10 +84,10 @@ def get_header():
  {ME}| . \{JI}| |__| |{KU}| |  | |{HI}| |\  |{BI}| |_| |{CYAN}| |  | |{NI} / __/{U} | (_) |{RESET}
  {ME}|_|\_\{JI}\____/{KU} |_|  |_|{HI}|_| \_|{BI} \___/{CYAN} |_|  |_|{NI}|_____|{U} \___/{RESET}
 
-                            Hi Human, nice to meet you 👋
+            Hi Human, nice to meet you 👋
 """
 
-JUMLAH_MENU = 7  # Total item termasuk pilihan "Quit"
+JUMLAH_MENU = 7  
 
 def draw_menu(menu_items, selected_index, awal_jalan=False):
   if awal_jalan:
