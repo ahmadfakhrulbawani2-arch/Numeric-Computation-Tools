@@ -58,7 +58,7 @@ def bisection_method(eq: List[int], a: float, b: float) -> float | None:
   print("Maximum iterations reached")
   return None
 
-if __name__ == "__main__":
+def run_bisection():
   PrintIntroProg("Bisection Method Root Finding Method")
   while True:
     user_input = input("\nInput function coefficients (space separated) or 'q' to exit: ").strip()
@@ -79,3 +79,6 @@ if __name__ == "__main__":
 
     except ValueError:
       print("Invalid input. Please enter numbers only or 'q' to exit.")
+
+if __name__ == "__main__":
+  run_bisection()

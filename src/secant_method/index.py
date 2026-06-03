@@ -82,7 +82,7 @@ def secant_method(
 
     return root
 
-if __name__ == "__main__":
+def run_secand():
   res_file = open("./out/secant-method/root.txt", "a")
   PrintIntroProg("Secant Method Root Finding Method")
   while True: 
@@ -128,3 +128,6 @@ if __name__ == "__main__":
         break
     except ValueError:
       print("Invalid input. Please enter numbers only or q to exit.")
+
+if __name__ == "__main__":
+  run_secand

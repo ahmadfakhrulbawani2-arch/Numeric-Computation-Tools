@@ -81,8 +81,7 @@ def regula_falsi(eq: List[int], xLowest: float, xHighest: float) -> float | None
 
   csv_file.close()
 
-# main input driver
-if __name__ == "__main__":
+def run_regulaFalsi():
   res_file = open("./out/regula-falsi/root.txt", "w")
   PrintIntroProg("Regula Falsi (false position) Root Finding Method")
   while True:
@@ -109,3 +108,7 @@ if __name__ == "__main__":
       print("Invalid input. Please enter numbers only or 'q' to exit.")
 
   res_file.close()
+
+# main input driver
+if __name__ == "__main__":
+  run_regulaFalsi()

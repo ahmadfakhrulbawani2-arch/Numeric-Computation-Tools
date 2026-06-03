@@ -88,8 +88,7 @@ def print_sol(nRes: float | None, nEq: List[int]) -> None:
   sEqState = get_eq_state(nEq)
   print(f"\nThe root of {sEqState} from Newton-Raphson computation is x = {nRes}")
 
-# main driver only solve 1 root
-if __name__ == "__main__":
+def run_NR():
   PrintIntroProg("Newton-Raphson Root Finding Method")
   while True:
     user_input = input(
@@ -110,3 +109,7 @@ if __name__ == "__main__":
 
     except ValueError:
       print("Invalid input. Please enter numbers only or 'q' to exit.")
+
+# main driver only solve 1 root
+if __name__ == "__main__":
+  run_NR

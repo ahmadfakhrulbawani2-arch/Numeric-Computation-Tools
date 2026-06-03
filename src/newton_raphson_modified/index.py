@@ -88,7 +88,7 @@ def newton_raphson_modified(
     csv_file.close()
     return root
 
-if __name__ == "__main__":
+def run_NR_modified():
   res_file = open("./out/newton-raphson-modified/root.txt", "a")
   PrintIntroProg("Newton Raphson Modified Method Root Finding Method")
   while True: 
@@ -128,3 +128,6 @@ if __name__ == "__main__":
       print("Invalid input. Please enter numbers only or q to exit.")
       print(f"Error: {e}")
   res_file.close()
+
+if __name__ == "__main__":
+  run_NR_modified()

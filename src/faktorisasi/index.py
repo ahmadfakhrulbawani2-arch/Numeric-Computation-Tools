@@ -231,7 +231,7 @@ def lin_method_driver(
 
   return roots
 
-if __name__ == "__main__":
+def factorization_main():
   res_file = open(f"./out/{DIR_NAME}/root.txt", "a")
   PrintIntroProg(PROG_NAME)
 
@@ -290,3 +290,6 @@ if __name__ == "__main__":
       print(f"Error: {e}")
 
   res_file.close()
+
+if __name__ == "__main__":
+  factorization_main()
