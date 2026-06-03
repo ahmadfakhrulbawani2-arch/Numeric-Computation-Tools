@@ -123,10 +123,10 @@ def update_jam_realtime(stop_event):
       elif 12 <= jam < 17:
         greet = "Good Afternoon 🏙️"
       elif 17 <= jam < 19:
-        greet = "Good Evening 🌃"
+        greet = "Good Evening 🌆"
       else:
-        greet = "Good Night"
-        
+        greet = "Good Night 🌃"
+
       # Menembak jam dinamis + greeting ke baris paling bawah terminal
       sys.stdout.write(f"\033[s\033[999;1H\033[K{JI}[ {greet} | {waktu_skrg} ]\033[0m\033[u")
       sys.stdout.flush()
