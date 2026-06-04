@@ -36,13 +36,13 @@ def CalcTrueError(real_root: float, approx_root: float) -> float:
   return abs((real_root - approx_root) / real_root)
 
 def Lazy_Loading(texts: str) -> None:
+  # os.system('cls' if os.name == 'nt' else 'clear')
   spinner = Halo(text=texts, color='cyan', spinner='dots')
   # Mulai muter
   spinner.start()
   # Simulasi proses matematika/loading (misal 3 detik)
-  time.sleep(3)
+  time.sleep(1.5)
   # Selesai dengan status sukses (Centang Hijau)
-  spinner.succeed('Perhitungan kelar, Bos!')
-  print("Ok Done...")
+  spinner.succeed('Ok done...')
   time.sleep(0.5)
-  os.system('cls' if os.name == 'nt' else 'clear')
+  # os.system('cls' if os.name == 'nt' else 'clear')

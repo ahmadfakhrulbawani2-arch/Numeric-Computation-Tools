@@ -136,7 +136,6 @@ def update_jam_realtime(stop_event):
 
 # --- ALUR UTAMA ---
 if __name__ == "__main__":
-  Lazy_Loading("Loading program list...")
 
   menu_options = [
     "Chapter-2.1 Bisection Method",
