@@ -8,8 +8,10 @@ from src import \
   run_bisection, \
   run_NR, \
   run_NR_modified, \
-  run_regulaFalsi
+  run_regulaFalsi, \
+  factorization_main
 from src.utils.FuncUtils import Lazy_Loading
+from src.utils.Logger import *
 
 # Setup pembaca input keyboard cross-platform
 if os.name == 'nt':
@@ -87,7 +89,7 @@ def get_header():
             Hi Human, nice to meet you 👋
 """
 
-JUMLAH_MENU = 7  
+JUMLAH_MENU = 8
 
 def draw_menu(menu_items, selected_index, awal_jalan=False):
   if awal_jalan:
@@ -143,7 +145,8 @@ if __name__ == "__main__":
     "Chapter-3.2 Secand Method",
     "Chapter-4.1 Newton Raphson Modified",
     "Chapter-4.2 Factorization Method",
-    "Quit"
+    "Open program history",
+    "Quit",
   ]
   
   current_select = 0
@@ -176,26 +179,38 @@ if __name__ == "__main__":
       
       if current_select == 0:
         print(f"=== [MENU 1: Bisection Method] ===")
+        ("Opening Bisection Method")
+        log_activities("Opening Bisection Method")
         run_bisection()
       elif current_select == 1:
         print("=== [MENU 2: Regula Falsi] ===")
+        log_activities("Opening Regula Falsi")
         run_regulaFalsi()
       elif current_select == 2:
         print("=== [MENU 3: Newton Raphson] ===")
+        log_activities("Opening Newton Raphson")
         run_NR()
       elif current_select == 3:
         print(f"=== [MENU 4: Secand Method] ===")
+        log_activities("Opening Secand Method")
         run_secand()
       elif current_select == 4:
         print(f"=== [MENU 5: Newton Raphson Modified] ===")
+        log_activities("Opening Newton Raphson Modified")
         run_NR_modified()
       elif current_select == 5:
         print(f"=== [MENU 6: Factorization Method] ===")
-        # Jalankan fungsi faktorisasi di sini
-      elif current_select == len(menu_options) - 1:
+        log_activities("Opening Factorization Method")
+        factorization_main()
+      elif current_select == JUMLAH_MENU - 2:
+        Lazy_Loading("Opening log file...")
+        log_activities("Opening log file...")
+        read_logs()
+      elif current_select == JUMLAH_MENU - 1:
         stop_jam.set()
         clear_screen()
         print("\n Keluar dari program. Sampai jumpa, Bre!")
+        log_activities("Closing program...")
         break
         
       pilihan = input(f"\nTekan {BOLD}[Enter]{RESET} untuk kembali ke menu, atau ketik {BOLD}[q]{RESET} untuk keluar: ").strip().lower()
@@ -204,6 +219,7 @@ if __name__ == "__main__":
         stop_jam.set()
         clear_screen()
         print("\nKeluar dari program. Sampai jumpa, Bre!")
+        log_activities("Closing program...")
         break
       
       dalam_menu_kalkulasi = False

@@ -71,9 +71,9 @@ def download_from_gdrive(url: str, output_path: str = "../input/input.txt") -> b
           f.write(chunk)
           
     print(f"[Cloud] File successfully downloaded and saved to: {output_path}")
-    log_activities("Succesfully fetch input from cloud", "SUCCESS 200")
+    # log_activities("Succesfully fetch input from cloud", "SUCCESS 200")
     return True
   except Exception as e:
     print(f"[Error] Failed to download file: {e}")
-    log_activities(f"Unable to fetch input from cloud. Please check your connection or the file permission. Err: {e}", "ERROR 400")
+    # log_activities(f"Unable to fetch input from cloud. Please check your connection or the file permission. Err: {e}", "ERROR 400")
     return False

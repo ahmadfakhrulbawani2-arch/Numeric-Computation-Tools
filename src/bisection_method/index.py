@@ -2,6 +2,7 @@ import time
 from typing import List
 from src.utils.FuncUtils import CalcFunc, Calc_Converngence_Rate
 from src.utils.IoUtils import *
+from src.utils.Logger import *
 
 MAX_ITERATION: int = 50
 TOLERANCE: float = 1e-6
@@ -21,6 +22,7 @@ def bisection_method(eq: List[int], a: float, b: float) -> float | None:
   
   if fa * fb > 0:
     print("f(a) * f(b) > 0, can't guarantee root in interval")
+    log_activities("Can't get root", "ERROR")
     return None
 
   iter = 1
@@ -75,8 +77,8 @@ HEADER: str = fr'''
 '''
 def run_bisection():
   Lazy_Loading("Opening files...")
-
   PrintIntroProg(HEADER, "Bisection Method Root Finding Method")
+  log_activities("Running bisection method", "SUCCESS")
   while True:
     user_input = input(f"\nInput function coefficients (space separated) or {BOLD}'q'{RESET} to exit: ").strip()
     if user_input.lower() == "q":
@@ -93,9 +95,11 @@ def run_bisection():
       root = bisection_method(eq, aInit, bInit)
       if root is not None:
         print(f"\nRoot found: x = {root:.6f}")
+        log_activities(f"Successfully get root: {root:.6f}", "SUCCESS")
 
     except ValueError:
       print("Invalid input. Please enter numbers only or 'q' to exit.")
+      log_activities(f"Invalid input", "ERROR")
 
 if __name__ == "__main__":
   run_bisection()
