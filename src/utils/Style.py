@@ -107,9 +107,7 @@ def update_jam_realtime(stop_event):
         sekarang = datetime.datetime.now()
         waktu_skrg = sekarang.strftime("%A, %d-%m-%Y | %H:%M:%S WIB")
         jam = sekarang.hour
-        color_code = ""
-        
-        # Penentuan ucapan salam berdasarkan jam saat ini
+
         if 5 <= jam < 12:
           greet = "Good Morning 🌄"
           color_code = AnsiColors.YELLOW
@@ -123,10 +121,17 @@ def update_jam_realtime(stop_event):
           greet = "Good Night 🌃"
           color_code = AnsiColors.PURPLE
 
-        # Menembak jam dinamis + greeting ke baris paling bawah terminal
-        sys.stdout.write("\033[s")
-        sys.stdout.write(f"\n{color_code}[ {greet} | {waktu_skrg} ]\033[1A")
-        sys.stdout.write("\033[u")
+        jam_str = f"{color_code}[ {greet} | {waktu_skrg} ]{AnsiColors.RESET}"
+
+        # Tulis jam di baris baru, lalu naikan kursor kembali 1 baris ke atas
+        # \033[2K = hapus seluruh baris saat ini (bersihkan jam lama)
+        # \033[1A = naikan kursor 1 baris ke atas (kembali ke baris prompt)
+        sys.stdout.write(
+          f"\033[s"           # 1. simpan posisi kursor (posisi user sedang ngetik)
+          f"\033[1B\r\033[2K" # 2. turun 1 baris, ke kolom 0, hapus baris itu
+          f"{jam_str}"        # 3. tulis jam
+          f"\033[u"           # 4. kembalikan kursor ke posisi user tadi
+        )
         sys.stdout.flush()
     time.sleep(1)
 
