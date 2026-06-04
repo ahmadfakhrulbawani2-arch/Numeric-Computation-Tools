@@ -21,3 +21,71 @@
 2026-06-04 07:25:32 - INFO - Closing program...
 2026-06-04 07:25:44 - INFO - Opening log file...
 2026-06-04 07:26:11 - INFO - Closing program...
+2026-06-04 07:53:21 - INFO - Opening Bisection Method
+2026-06-04 07:53:25 - INFO - Running bisection method
+2026-06-04 07:53:33 - INFO - Successfully get root: 0.999999
+2026-06-04 07:58:17 - INFO - Closing program...
+2026-06-04 07:58:27 - INFO - Success unpacking numeric computation package
+2026-06-04 07:58:27 - INFO - Success unpacking internal package
+2026-06-04 07:58:30 - INFO - Opening Bisection Method
+2026-06-04 07:58:33 - INFO - Running bisection method
+2026-06-04 07:58:46 - INFO - Closing program...
+2026-06-04 07:59:22 - INFO - Success unpacking numeric computation package
+2026-06-04 07:59:22 - INFO - Success unpacking internal package
+2026-06-04 07:59:23 - INFO - Closing program...
+2026-06-04 07:59:55 - INFO - Success unpacking numeric computation package
+2026-06-04 07:59:55 - INFO - Success unpacking internal package
+2026-06-04 07:59:56 - INFO - Closing program...
+2026-06-04 08:00:15 - INFO - Success unpacking numeric computation package
+2026-06-04 08:00:15 - INFO - Success unpacking internal package
+2026-06-04 08:00:18 - INFO - Opening Bisection Method
+2026-06-04 08:00:20 - INFO - Running bisection method
+2026-06-04 08:00:27 - INFO - Closing program...
+2026-06-04 08:01:30 - INFO - Success unpacking numeric computation package
+2026-06-04 08:01:30 - INFO - Success unpacking internal package
+2026-06-04 08:01:57 - INFO - Success unpacking numeric computation package
+2026-06-04 08:01:57 - INFO - Success unpacking internal package
+2026-06-04 08:02:19 - INFO - Opening Bisection Method
+2026-06-04 08:02:22 - INFO - Running bisection method
+2026-06-04 08:02:34 - INFO - Closing program...
+2026-06-04 08:02:40 - INFO - Success unpacking numeric computation package
+2026-06-04 08:02:40 - INFO - Success unpacking internal package
+2026-06-04 08:04:03 - INFO - Success unpacking numeric computation package
+2026-06-04 08:04:03 - INFO - Success unpacking internal package
+2026-06-04 08:04:05 - INFO - Opening Regula Falsi
+2026-06-04 08:05:10 - INFO - Success unpacking numeric computation package
+2026-06-04 08:05:10 - INFO - Success unpacking internal package
+2026-06-04 08:05:11 - INFO - Opening Regula Falsi
+2026-06-04 08:05:11 - INFO - Running Regula falsi...
+2026-06-04 08:05:15 - WARNING - [Regula falsi] Unable to solve because the input interval found no root of the function
+2026-06-04 08:05:25 - INFO - Opening Bisection Method
+2026-06-04 08:05:27 - INFO - Running bisection method
+2026-06-04 08:05:30 - INFO - Closing program...
+2026-06-04 08:06:55 - INFO - Success unpacking numeric computation package
+2026-06-04 08:06:56 - INFO - Success unpacking internal package
+2026-06-04 08:07:06 - INFO - Success unpacking numeric computation package
+2026-06-04 08:07:06 - INFO - Success unpacking internal package
+2026-06-04 08:07:57 - INFO - Success unpacking numeric computation package
+2026-06-04 08:07:58 - INFO - Success unpacking internal package
+2026-06-04 08:07:59 - INFO - Opening Bisection Method
+2026-06-04 08:08:01 - INFO - Running bisection method
+2026-06-04 08:08:24 - INFO - Closing program...
+2026-06-04 08:08:31 - INFO - Success unpacking numeric computation package
+2026-06-04 08:08:31 - INFO - Success unpacking internal package
+2026-06-04 08:08:33 - INFO - Opening Bisection Method
+2026-06-04 08:08:35 - INFO - Running bisection method
+2026-06-04 08:08:46 - INFO - Closing program...
+2026-06-04 08:23:37 - INFO - Success unpacking numeric computation package
+2026-06-04 08:23:37 - INFO - Success unpacking internal package
+2026-06-04 08:23:47 - INFO - Success unpacking numeric computation package
+2026-06-04 08:23:47 - INFO - Success unpacking internal package
+2026-06-04 08:23:49 - INFO - Opening Bisection Method
+2026-06-04 08:23:51 - INFO - Running bisection method
+2026-06-04 08:23:53 - INFO - Closing program...
+2026-06-04 08:23:59 - INFO - Success unpacking numeric computation package
+2026-06-04 08:23:59 - INFO - Success unpacking internal package
+2026-06-04 08:24:02 - INFO - Opening Regula Falsi
+2026-06-04 08:24:02 - INFO - Running Regula falsi...
+2026-06-04 08:24:09 - INFO - Opening Newton Raphson
+2026-06-04 08:24:12 - INFO - Opening Secand Method
+2026-06-04 08:24:15 - INFO - Opening Newton Raphson Modified

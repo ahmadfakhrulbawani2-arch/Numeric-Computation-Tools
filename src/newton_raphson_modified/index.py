@@ -1,6 +1,5 @@
 from typing import List
-from src.utils.FuncUtils import *
-from src.utils.IoUtils import *
+from src.utils import *
 import numpy as np
 
 from typing import List
@@ -88,9 +87,27 @@ def newton_raphson_modified(
     csv_file.close()
     return root
 
+HEADER = """
+ _   _               _                  
+| \ | | _____      _| |_ ___  _ __      
+|  \| |/ _ \ \ /\ / / __/ _ \| '_ \     
+| |\  |  __/\ V  V /| || (_) | | | |    
+|_|_\_|\___| \_/\_/  \__\___/|_| |_|    
+ ____             _                     
+|  _ \ __ _ _ __ | |__  ___  ___  _ __  
+| |_) / _` | '_ \| '_ \/ __|/ _ \| '_ \ 
+|  _ < (_| | |_) | | | \__ \ (_) | | | |
+|_| \_\__,_| .__/|_|_|_|___/\___/|_| |_|
+|  \/  | __|_| __| (_)/ _(_) ___  __| | 
+| |\/| |/ _ \ / _` | | |_| |/ _ \/ _` | 
+| |  | | (_) | (_| | |  _| |  __/ (_| | 
+|_|  |_|\___/ \__,_|_|_| |_|\___|\__,_| 
+
+"""
 def run_NR_modified():
+  Lazy_Loading("Opening files...")
   res_file = open("./out/newton-raphson-modified/root.txt", "a")
-  PrintIntroProg("Newton Raphson Modified Method Root Finding Method")
+  PrintIntroProg(HEADER, "Newton Raphson Modified Method Root Finding Method")
   while True: 
     user_input = input("\nInput function coefficients (space separated) or 'q' to exit and 'h' for help: ").strip()
     if user_input == 'q':

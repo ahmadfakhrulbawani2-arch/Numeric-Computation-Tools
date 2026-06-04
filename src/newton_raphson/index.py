@@ -1,7 +1,6 @@
 import time
 from typing import List
-from src.utils.FuncUtils import CalcFunc, DerivativeF, Calc_Converngence_Rate
-from src.utils.IoUtils import *
+from src.utils import *
 
 MAX_ITERATION: int = 50
 
@@ -88,8 +87,23 @@ def print_sol(nRes: float | None, nEq: List[int]) -> None:
   sEqState = get_eq_state(nEq)
   print(f"\nThe root of {sEqState} from Newton-Raphson computation is x = {nRes}")
 
+HEADER = """
+ _   _               _                  
+| \ | | _____      _| |_ ___  _ __      
+|  \| |/ _ \ \ /\ / / __/ _ \| '_ \     
+| |\  |  __/\ V  V /| || (_) | | | |    
+|_| \_|\___| \_/\_/  \__\___/|_| |_|    
+ ____             _                       
+|  _ \ __ _ _ __ | |__  ___  ___  _ __  
+| |_) / _` | '_ \| '_ \/ __|/ _ \| '_ \ 
+|  _ < (_| | |_) | | | \__ \ (_) | | | |
+|_| \_\__,_| .__/|_| |_|___/\___/|_| |_|
+           |_|                          
+
+"""
 def run_NR():
-  PrintIntroProg("Newton-Raphson Root Finding Method")
+  Lazy_Loading("Opening files...")
+  PrintIntroProg(HEADER, "Newton-Raphson Root Finding Method")
   while True:
     user_input = input(
       "\nInput function coeffissients (split with space, integer only) or 'q' to exit: "

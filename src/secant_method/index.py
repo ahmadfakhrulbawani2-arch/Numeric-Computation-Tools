@@ -1,6 +1,5 @@
 from typing import List
-from src.utils.FuncUtils import *
-from src.utils.IoUtils import *
+from src.utils import *
 import numpy as np
 
 from typing import List
@@ -82,9 +81,23 @@ def secant_method(
 
     return root
 
+HEADER = """
+ ____                           _  
+/ ___|  ___  ___ __ _ _ __   __| | 
+\___ \ / _ \/ __/ _` | '_ \ / _` | 
+ ___) |  __/ (_| (_| | | | | (_| | 
+|____/_\___|\___\__,_|_| |_|\__,_| 
+ __  __      _   _               _ 
+|  \/  | ___| |_| |__   ___   __| |
+| |\/| |/ _ \ __| '_ \ / _ \ / _` |
+| |  | |  __/ |_| | | | (_) | (_| |
+|_|  |_|\___|\__|_| |_|\___/ \__,_|
+
+"""
 def run_secand():
+  Lazy_Loading("Opening files...")
   res_file = open("./out/secant-method/root.txt", "a")
-  PrintIntroProg("Secant Method Root Finding Method")
+  PrintIntroProg(HEADER, "Secant Method Root Finding Method")
   while True: 
     user_input = input("\nInput function coefficients (space separated) or 'q' to exit and 'h' for help: ").strip()
     if user_input == 'q':
@@ -130,4 +143,4 @@ def run_secand():
       print("Invalid input. Please enter numbers only or q to exit.")
 
 if __name__ == "__main__":
-  run_secand
+  run_secand()

@@ -1,6 +1,5 @@
 from typing import List
-from src.utils.FuncUtils import *
-from src.utils.IoUtils import *
+from src.utils import *
 
 import numpy as np
 from datetime import datetime
@@ -231,9 +230,24 @@ def lin_method_driver(
 
   return roots
 
+HEADER = """
+ _   _                           _                         
+| \ | |_   _ _ __ ___   ___ _ __(_) ___                    
+|  \| | | | | '_ ` _ \ / _ \ '__| |/ __|                   
+| |\  | |_| | | | | | |  __/ |  | | (__                    
+|_|_\_|\__,_|_| |_| |_|\___|_|  |_|\___|              
+ _____          _             _          _   _         
+|  ___|_ _  ___| |_ ___  _ __(_)______ _| |_(_) ___  _ __  
+| |_ / _` |/ __| __/ _ \| '__| |_  / _` | __| |/ _ \| '_ \ 
+|  _| (_| | (__| || (_) | |  | |/ / (_| | |_| | (_) | | | |
+|_|  \__,_|\___|\__\___/|_|  |_/___\__,_|\__|_|\___/|_| |_|
+
+"""
+
 def factorization_main():
+  Lazy_Loading("Opening files...")
   res_file = open(f"./out/{DIR_NAME}/root.txt", "a")
-  PrintIntroProg(PROG_NAME)
+  PrintIntroProg(HEADER, PROG_NAME)
 
   while True:
     user_input = input("\nInput function coefficients (space separated) or 'q' to exit and 'h' for help: ").strip()

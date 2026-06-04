@@ -1,6 +1,7 @@
 from typing import List
 from src.utils.FuncUtils import *
 from src.utils.IoUtils import *
+from src.utils.Logger import *
 
 MAX_ITERATION_CNT = 100
 TOLERANCE = 1e-6
@@ -49,6 +50,7 @@ def regula_falsi(eq: List[int], xLowest: float, xHighest: float) -> float | None
   # return none if can't find the root
   if xHighest == None:
     print("Unable to solve because the input interval found no root of the function")
+    log_activities("[Regula falsi] Unable to solve because the input interval found no root of the function", "WARNING")
     return None
   
   for iter in range(1, MAX_ITERATION_CNT+1, 1):
@@ -81,9 +83,27 @@ def regula_falsi(eq: List[int], xLowest: float, xHighest: float) -> float | None
 
   csv_file.close()
 
+
+HEADER = """
+ ____                  _        
+|  _ \ ___  __ _ _   _| | __ _  
+| |_) / _ \/ _` | | | | |/ _` | 
+|  _ <  __/ (_| | |_| | | (_| | 
+|_| \_\___|\__, |\__,_|_|\__,_| 
+           |___/
+ _____     _     _              
+|  ___|_ _| |___(_)             
+| |_ / _` | / __| |             
+|  _| (_| | \__ \ |             
+|_|  \__,_|_|___/_|             
+
+"""
+
 def run_regulaFalsi():
   res_file = open("./out/regula-falsi/root.txt", "w")
-  PrintIntroProg("Regula Falsi (false position) Root Finding Method")
+  PrintIntroProg(HEADER, "Regula Falsi (false position) Root Finding Method")
+  log_activities("Running Regula falsi...")
+
   while True:
     user_input = input("\nInput function coefficients (space separated) or 'q' to exit: ").strip()
     if user_input.lower() == "q":
@@ -106,6 +126,7 @@ def run_regulaFalsi():
 
     except ValueError:
       print("Invalid input. Please enter numbers only or 'q' to exit.")
+      log_activities("[Regula Falsi] Invalid input", "ERROR")
 
   res_file.close()
 
