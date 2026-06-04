@@ -22,6 +22,6 @@ from src.newton_raphson.index import run_NR
 from src.newton_raphson_modified.index import run_NR_modified
 from src.regula_falsi.index import run_regulaFalsi
 from src.secant_method.index import run_secand
-from src.utils import log_activities
+from src.utils import *
 
 log_activities("Success unpacking internal package")
