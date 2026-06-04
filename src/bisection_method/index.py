@@ -85,9 +85,17 @@ def run_bisection():
   clock_widget.dalam_menu_kalkulasi = False
   Clock_Widget()
   while True:
-    # 1. Hidupkan jam saat menunggu input utama
     clock_widget.dalam_menu_kalkulasi = False
-    time.sleep(0.1) # Kasih jeda dikit biar jam sempat nge-refresh posisinya
+
+    # Cetak 1 baris kosong sebagai "slot" reserved untuk jam,
+    # lalu naikan kursor 1 baris agar input() tepat di atasnya
+    # print()
+    # sys.stdout.write("\n\033[1A")
+    # sys.stdout.flush()
+    # time.sleep(0.1)
+    # 1. Hidupkan jam saat menunggu input utama
+    # clock_widget.dalam_menu_kalkulasi = False
+    # time.sleep(0.1) # Kasih jeda dikit biar jam sempat nge-refresh posisinya
     
     # 2. SEBELUM nanya input, cetak enter kosong untuk tempat jam, 
     # lalu naikkan kursor kembali ke atas (\033[1A)
@@ -101,7 +109,8 @@ def run_bisection():
     # Ini memastikan baris paling akhir di layar tetap aman dihuni oleh jam.
     # 2. Bersihkan baris di bawah kursor (menghilangkan sisa jam yang beku)
     # \033[J artinya menghapus semua teks dari posisi kursor sampai akhir layar bawah
-    sys.stdout.write("\033[J")
+    # sys.stdout.write("\033[J")
+    sys.stdout.write("\n\n\033[2A")
     sys.stdout.flush()
     user_input = input(f"\nInput function coefficients (space separated) or {BOLD}'q'{RESET} to exit: ").strip()
     if user_input.lower() == "q":
@@ -110,33 +119,35 @@ def run_bisection():
       break
 
     try:
-      clock_widget.dalam_menu_kalkulasi = True
       eq = list(map(int, user_input.split()))
+      clock_widget.dalam_menu_kalkulasi = False
 
-      # Bersihkan bawah kursor lagi sebelum nanya input baru
       sys.stdout.write("\033[J")
+      sys.stdout.write("\n\n\033[2A")
       sys.stdout.flush()
       aInit = float(input("Input interval start (a): "))
-      # Bersihkan bawah kursor lagi sebelum nanya input baru
+
       sys.stdout.write("\033[J")
+      sys.stdout.write("\n\n\033[2A")
       sys.stdout.flush()
       bInit = float(input("Input interval end (b): "))
 
+      # # Bersihkan bawah kursor lagi sebelum nanya input baru
+      # sys.stdout.write("\033[J")
+      # sys.stdout.flush()
+      # aInit = float(input("Input interval start (a): "))
+      # # Bersihkan bawah kursor lagi sebelum nanya input baru
+      # sys.stdout.write("\033[J")
+      # sys.stdout.flush()
+      # bInit = float(input("Input interval end (b): "))
+
       print("\n======= Bisection Method =======\n")
       PrintSingleEq(eq)
-      # sys.stdout.write("\n\n\033[2A")
-      # sys.stdout.flush()
+      clock_widget.dalam_menu_kalkulasi = True
       root = bisection_method(eq, aInit, bInit)
       if root is not None:
         print(f"\nRoot found: x = {root:.6f}")
         log_activities(f"Successfully get root: {root:.6f}", "SUCCESS")
-
-      # 2. HINT SOLUSI KAMU:
-      # Beri jeda sebentar agar user sempat membaca hasil akar kuadratnya.
-      # Setelah user menekan Enter, barulah kita trigger reset kursor ke atas.
-      print(f"\nPress {BOLD}[Enter]{RESET} to calculate another equation...")
-      input()
-      # time.sleep(0.1)
 
     except ValueError:
       clock_widget.stop_jam.set()
