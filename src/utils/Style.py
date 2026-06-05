@@ -135,7 +135,6 @@ def update_jam_realtime(stop_event):
         sys.stdout.flush()
     time.sleep(1)
 
-stop_jam = threading.Event()
 def Clock_Widget():
   thread_jam = threading.Thread(target=update_jam_realtime, args=(stop_jam,))
   thread_jam.daemon = True 

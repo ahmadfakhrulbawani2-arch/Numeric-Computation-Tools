@@ -692,3 +692,42 @@
 2026-06-04 22:39:08 - INFO - Successfully get root: 0.999999
 2026-06-04 22:40:17 - INFO - Successfully get root: 0.999999
 2026-06-04 22:45:46 - INFO - Closing program...
+2026-06-05 07:07:19 - INFO - Success unpacking numeric computation package
+2026-06-05 07:07:21 - INFO - Success unpacking internal package
+2026-06-05 07:07:28 - INFO - Opening Bisection Method
+2026-06-05 07:07:30 - INFO - Running bisection method
+2026-06-05 07:07:42 - INFO - Successfully get root: 0.999999
+2026-06-05 07:08:19 - INFO - Successfully get root: 0.999999
+2026-06-05 07:09:17 - ERROR - Can't get root
+2026-06-05 07:09:53 - INFO - Successfully get root: 0.999999
+2026-06-05 07:11:00 - INFO - Success unpacking numeric computation package
+2026-06-05 07:11:01 - INFO - Success unpacking internal package
+2026-06-05 07:11:11 - INFO - Opening Bisection Method
+2026-06-05 07:11:14 - INFO - Running bisection method
+2026-06-05 07:11:23 - INFO - Successfully get root: 0.999999
+2026-06-05 07:12:09 - INFO - Closing program...
+2026-06-05 07:12:18 - INFO - Success unpacking numeric computation package
+2026-06-05 07:12:18 - INFO - Success unpacking internal package
+2026-06-05 07:12:21 - INFO - Opening Bisection Method
+2026-06-05 07:12:23 - INFO - Running bisection method
+2026-06-05 07:12:32 - INFO - Successfully get root: 0.999999
+2026-06-05 07:16:29 - INFO - Success unpacking numeric computation package
+2026-06-05 07:16:30 - INFO - Success unpacking internal package
+2026-06-05 07:16:32 - INFO - Opening Bisection Method
+2026-06-05 07:16:34 - INFO - Running bisection method
+2026-06-05 07:16:44 - INFO - Successfully get root: 0.999999
+2026-06-05 07:16:58 - INFO - Opening Bisection Method
+2026-06-05 07:17:00 - INFO - Running bisection method
+2026-06-05 07:17:12 - INFO - Successfully get root: -0.414214
+2026-06-05 07:34:24 - INFO - Success unpacking numeric computation package
+2026-06-05 07:34:24 - INFO - Success unpacking internal package
+2026-06-05 07:34:41 - INFO - Closing program...
+2026-06-05 07:36:06 - INFO - Success unpacking numeric computation package
+2026-06-05 07:36:06 - INFO - Success unpacking internal package
+2026-06-05 07:36:20 - INFO - Opening Bisection Method
+2026-06-05 07:36:22 - INFO - Running bisection method
+2026-06-05 07:36:33 - INFO - Successfully get root: 0.999999
+2026-06-05 07:36:37 - INFO - Closing program...
+2026-06-05 07:36:47 - INFO - Success unpacking numeric computation package
+2026-06-05 07:36:47 - INFO - Success unpacking internal package
+2026-06-05 07:37:17 - INFO - Opening log file...

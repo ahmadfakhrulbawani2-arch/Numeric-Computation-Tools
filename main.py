@@ -132,12 +132,15 @@ if __name__ == "__main__":
   current_select = 0
 
   # Kasih widget jam di thread berbeda
-  Clock_Widget()
+  clock_widget.Clock_Widget()
   
   # Gambar menu pertama kali
   draw_menu(menu_options, current_select, awal_jalan=True)
   
   while True:
+    clock_widget.stop_jam.clear()
+    clock_widget.dalam_menu_kalkulasi = False
+    clock_widget.Clock_Widget()
     key = get_key()
     
     if key == 'up':
