@@ -5,12 +5,9 @@ import numpy as np
 from typing import List
 import numpy as np
 
+
 def secant_method(
-    eq: List[int],
-    xLo: float,
-    xHi: float,
-    acc: float,
-    max_iter: int
+    eq: List[int], xLo: float, xHi: float, acc: float, max_iter: int
 ) -> float:
 
     csv_file = open("./out/secant-method/iterations.csv", "w")
@@ -42,14 +39,10 @@ def secant_method(
             break
 
         # secant formula
-        x_new = x_curr - (
-            (x_curr - x_prev) / (f_curr - f_prev)
-        ) * f_curr
+        x_new = x_curr - ((x_curr - x_prev) / (f_curr - f_prev)) * f_curr
 
         # cari nearest real root
-        nearest_root = real_roots[
-            np.argmin(np.abs(real_roots - x_new))
-        ]
+        nearest_root = real_roots[np.argmin(np.abs(real_roots - x_new))]
 
         err_true = abs((nearest_root - x_new) / nearest_root)
 
@@ -59,12 +52,10 @@ def secant_method(
             x_prev,
             x_curr,
             x_new,
-            err_true
+            err_true,
         )
 
-        csv_file.write(
-            f"{iter},{x_prev},{x_curr},{x_new},{err_true}\n"
-        )
+        csv_file.write(f"{iter},{x_prev},{x_curr},{x_new},{err_true}\n")
 
         # stopping condition
         if err_true <= acc:
@@ -81,6 +72,7 @@ def secant_method(
 
     return root
 
+
 HEADER = """
  ____                           _  
 / ___|  ___  ___ __ _ _ __   __| | 
@@ -94,53 +86,66 @@ HEADER = """
 |_|  |_|\___|\__|_| |_|\___/ \__,_|
 
 """
+
+
 def run_secand():
-  Lazy_Loading("Opening files...")
-  res_file = open("./out/secant-method/root.txt", "a")
-  PrintIntroProg(HEADER, "Secant Method Root Finding Method")
-  while True: 
-    user_input = input("\nInput function coefficients (space separated) or 'q' to exit and 'h' for help: ").strip()
-    if user_input == 'q':
-      print("exiting program...")
-      break
-    elif user_input == 'h':
-      print("\n======= Secant Method Root Finding Help =======\n")
-      print("1. You need to only input function coeffs\n")
-      print("   For example: 1 2 3 means 1x^2 + 2x + 3,\n   -8 9 3 2 1 means -8x^4 + 9x^3 + 3x^2 + 2x + 1\n")
-      print("2. You'll need to guess your initial interval value for domain. This is for narrowing the iterations.\nI will add interval value recomendation in the future\n")
-      print("3. Press 'q' to exit because the program keeps running in a loop\n")
-      print("Any bugs? Let me know by making an issue in this repo, really appreciate your feedbacks\n")
+    Lazy_Loading("Opening files...")
+    res_file = open("./out/secant-method/root.txt", "a")
+    PrintIntroProg(HEADER, "Secant Method Root Finding Method")
+    while True:
+        user_input = input(
+            "\nInput function coefficients (space separated) or 'q' to exit and 'h' for help: "
+        ).strip()
+        if user_input == "q":
+            print("exiting program...")
+            break
+        elif user_input == "h":
+            print("\n======= Secant Method Root Finding Help =======\n")
+            print("1. You need to only input function coeffs\n")
+            print(
+                "   For example: 1 2 3 means 1x^2 + 2x + 3,\n   -8 9 3 2 1 means -8x^4 + 9x^3 + 3x^2 + 2x + 1\n"
+            )
+            print(
+                "2. You'll need to guess your initial interval value for domain. This is for narrowing the iterations.\nI will add interval value recomendation in the future\n"
+            )
+            print("3. Press 'q' to exit because the program keeps running in a loop\n")
+            print(
+                "Any bugs? Let me know by making an issue in this repo, really appreciate your feedbacks\n"
+            )
 
-    try:
-      eq: List[int] = list(map(int, user_input.split()))
-      xLo: float = float(input("Input of xLower (int/float): "))
-      xHi: float = float(input("Input of xHi (int/float): "))
-      err_tol: float = float(input("Input tolerance (Et/Error true, lowest = 0.0001): "))
-      max_iter: int = int(input("Input max iterations: "))
-      # Debug
-      # print(f"Input is: {xLo}, {xHi}, {err_tol}, {max_iter}")
+        try:
+            eq: List[int] = list(map(int, user_input.split()))
+            xLo: float = float(input("Input of xLower (int/float): "))
+            xHi: float = float(input("Input of xHi (int/float): "))
+            err_tol: float = float(
+                input("Input tolerance (Et/Error true, lowest = 0.0001): ")
+            )
+            max_iter: int = int(input("Input max iterations: "))
+            # Debug
+            # print(f"Input is: {xLo}, {xHi}, {err_tol}, {max_iter}")
 
-      while xLo >= xHi:
-        print("\nxLo must be lower than xHi!!!\n")
-        xLo = float(input("Input of xLower (int/float): "))
-        xHi = float(input("Input of xHi (int/float): "))
+            while xLo >= xHi:
+                print("\nxLo must be lower than xHi!!!\n")
+                xLo = float(input("Input of xLower (int/float): "))
+                xHi = float(input("Input of xHi (int/float): "))
 
-      print("\n======= Secant Method Root Finding =======\n")
-      PrintSingleEq(eq)
-      root = secant_method(eq, xLo, xHi, err_tol, max_iter)
+            print("\n======= Secant Method Root Finding =======\n")
+            PrintSingleEq(eq)
+            root = secant_method(eq, xLo, xHi, err_tol, max_iter)
 
-      now: datetime = GetTimeNow()
-      if root is not None:
-        print(f"\n[{now}] Root found: {root:.6f}")
-        res_file.write(f"\n[{now}]Root found: {root:.6f}")
-        res_file.close()
-      else:
-        print(f"\n[{now}] Root not found")
-        res_file.write(f"\n[{now}]Root not found")
-        res_file.close()
-        break
-    except ValueError:
-      print("Invalid input. Please enter numbers only or q to exit.")
+            now: datetime = GetTimeNow()
+            if root is not None:
+                print(f"\n[{now}] Root found: {root:.6f}")
+                res_file.write(f"\n[{now}]Root found: {root:.6f}")
+                res_file.close()
+            else:
+                print(f"\n[{now}] Root not found")
+                res_file.write(f"\n[{now}]Root not found")
+                res_file.close()
+                break
+        except ValueError:
+            print("Invalid input. Please enter numbers only or q to exit.")
+
 
 if __name__ == "__main__":
-  run_secand()
+    run_secand()
