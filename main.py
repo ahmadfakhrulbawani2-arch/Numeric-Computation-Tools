@@ -10,60 +10,14 @@ from src import (
     Lazy_Loading,
     log_activities,
     read_logs,
-    print_text_gradient_angle,
     AnsiColors,
-    Clock_Widget,
     stop_jam,
+    draw_menu,
+    clear_screen,
+    get_key,
+    linear_regression
 )
-import src.utils.Style as clock_widget
-
-# Setup pembaca input keyboard cross-platform
-if os.name == "nt":
-    import msvcrt
-
-    def get_key():
-        """Membaca input tombol di Windows"""
-        ch = msvcrt.getch()
-        if ch in (b"\x00", b"\xe0"):  # Tombol fungsi atau arrow keys
-            ch = msvcrt.getch()
-            if ch == b"H":
-                return "up"
-            if ch == b"P":
-                return "down"
-        if ch == b"\r":
-            return "enter"
-        try:
-            return ch.decode("utf-8").lower()
-        except:
-            return None
-
-else:
-    import tty
-    import termios
-
-    def get_key():
-        """Membaca input tombol di Linux / macOS"""
-        fd = sys.stdin.fileno()
-        old_settings = termios.tcgetattr(fd)
-        try:
-            tty.setraw(sys.stdin.fileno())
-            ch = sys.stdin.read(1)
-            if ch == "\x1b":  # Escape sequence untuk arrow keys
-                ch2 = sys.stdin.read(2)
-                if ch2 == "[A":
-                    return "up"
-                if ch2 == "[B":
-                    return "down"
-            if ch == "\r" or ch == "\n":
-                return "enter"
-            return ch.lower()
-        finally:
-            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-
-
-def clear_screen():
-    os.system("cls" if os.name == "nt" else "clear")
-
+import src.utils.Style as style
 
 # --- VARIABEL WARNA ---
 
@@ -110,29 +64,7 @@ STATS = rf"""
 
 """
 
-JUMLAH_MENU = 8
-
-
-def draw_menu(menu_items, selected_index, awal_jalan=False):
-    if awal_jalan:
-        clear_screen()
-        print(STATS)
-        print_text_gradient_angle(ASCII_HEADER, cyberpunk_colors, 0)
-        print(
-            f"\n Gunakan [↑/↓] Panah untuk Navigasi, {AnsiColors.BOLD}[Enter]{AnsiColors.RESET} untuk Memilih, {AnsiColors.BOLD}[Q]{AnsiColors.RESET} untuk Keluar\n"
-        )
-        print("─" * 108)
-    else:
-        # Mengembalikan kursor naik ke atas agar menu tertimpa dengan halus tanpa reload global
-        sys.stdout.write(f"\033[{JUMLAH_MENU + 1}A")
-        sys.stdout.flush()
-
-    for i, item in enumerate(menu_items):
-        if i == selected_index:
-            print(f"\033[K \033[92m{AnsiColors.BOLD}►   {item}\033[0m")
-        else:
-            print(f"\033[K \033[90m    {item}\033[0m")
-    print("\033[K" + "─" * 108)
+JUMLAH_MENU = 9
 
 
 # --- ALUR UTAMA ---
@@ -145,6 +77,7 @@ if __name__ == "__main__":
         "Chapter-3.2 Secand Method",
         "Chapter-4.1 Newton Raphson Modified",
         "Chapter-4.2 Factorization Method",
+        "Chapter-6.1 Linear Regression",
         "Open program history",
         "Quit",
     ]
@@ -152,30 +85,41 @@ if __name__ == "__main__":
     current_select = 0
 
     # Kasih widget jam di thread berbeda
-    clock_widget.Clock_Widget()
+    style.Clock_Widget()
 
     # Gambar menu pertama kali
-    draw_menu(menu_options, current_select, awal_jalan=True)
+    draw_menu(
+        menu_options,
+        current_select,
+        STATS,
+        ASCII_HEADER,
+        cyberpunk_colors,
+        awal_jalan=True,
+    )
 
     while True:
-        clock_widget.stop_jam.clear()
-        clock_widget.dalam_menu_kalkulasi = False
-        clock_widget.Clock_Widget()
+        style.stop_jam.clear()
+        style.dalam_menu_kalkulasi = False
+        style.Clock_Widget()
         key = get_key()
 
         if key == "up":
             current_select = (current_select - 1) % len(menu_options)
-            draw_menu(menu_options, current_select)
+            draw_menu(
+                menu_options, current_select, STATS, ASCII_HEADER, cyberpunk_colors
+            )
         elif key == "down":
             current_select = (current_select + 1) % len(menu_options)
-            draw_menu(menu_options, current_select)
+            draw_menu(
+                menu_options, current_select, STATS, ASCII_HEADER, cyberpunk_colors
+            )
         elif key == "q":
             stop_jam.set()
             clear_screen()
             print("\n Keluar dari program. Sampai jumpa, Bre!")
             break
         elif key == "enter":
-            clock_widget.dalam_menu_kalkulasi = True
+            style.dalam_menu_kalkulasi = True
             clear_screen()
 
             if current_select == 0:
@@ -203,6 +147,10 @@ if __name__ == "__main__":
                 print(f"=== [MENU 6: Factorization Method] ===")
                 log_activities("Opening Factorization Method")
                 factorization_main()
+            elif current_select == 6:
+                print(f"=== [MENU 7: Linear Regression Method] ===")
+                log_activities("Opening Linear Regression")
+                linear_regression()
             elif current_select == JUMLAH_MENU - 2:
                 Lazy_Loading("Opening log file...")
                 log_activities("Opening log file...")
@@ -229,5 +177,12 @@ if __name__ == "__main__":
                 log_activities("Closing program...")
                 break
 
-            clock_widget.dalam_menu_kalkulasi = False
-            draw_menu(menu_options, current_select, awal_jalan=True)
+            style.dalam_menu_kalkulasi = False
+            draw_menu(
+                menu_options,
+                current_select,
+                STATS,
+                ASCII_HEADER,
+                cyberpunk_colors,
+                awal_jalan=True,
+            )

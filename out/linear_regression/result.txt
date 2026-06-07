@@ -1,0 +1,56 @@
+Sunday, 07-06-2026 | 12:02:25 WIB
+Sum X = 35.0
+Sum Y = 442.0\mSum X*Y = 2792.0
+Sum X^2 = 251.0
+Average X = 5.833333333333333
+Average Y = 73.66666666666667
+Banyak data = 6
+Calculated a1 = -288.142349
+Calculated a1 = -288.142349
+Final Linear Regression result: 
+
+Sunday, 07-06-2026 | 12:05:27 WIB
+Sum X = 35.0
+Sum Y = 442.0\mSum X*Y = 2792.0
+Sum X^2 = 251.0
+Average X = 5.833333333333333
+Average Y = 73.66666666666667
+Banyak data = 6
+Calculated a1 = -288.142349
+Calculated a1 = -288.142349
+Final Linear Regression result: 
+
+Sunday, 07-06-2026 | 12:08:47 WIB
+Sum X = 35.0
+Sum Y = 442.0\mSum X*Y = 2792.0
+Sum X^2 = 251.0
+Average X = 5.833333333333333
+Average Y = 73.66666666666667
+Banyak data = 6
+Calculated a1 = -288.142349
+Calculated a1 = -288.142349
+Final Linear Regression result: 
+
+y = -288.142349x + 1754.497034Sunday, 07-06-2026 | 12:10:45 WIB
+Sum X = 35.0
+Sum Y = 442.0\mSum X*Y = 2792.0
+Sum X^2 = 251.0
+Average X = 5.833333333333333
+Average Y = 73.66666666666667
+Banyak data = 6
+Calculated a1 = -288.142349
+Calculated a1 = -288.142349
+Final Linear Regression result: 
+
+y = -288.142349x + 1754.497034Sunday, 07-06-2026 | 12:11:32 WIB
+Sum X = 35.0
+Sum Y = 442.0\mSum X*Y = 2792.0
+Sum X^2 = 251.0
+Average X = 5.833333333333333
+Average Y = 73.66666666666667
+Banyak data = 6
+Calculated a1 = -288.142349
+Calculated a1 = -288.142349
+Final Linear Regression result: 
+
+y = -288.142349x + 1754.497034
