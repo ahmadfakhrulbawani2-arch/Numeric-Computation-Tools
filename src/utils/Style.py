@@ -126,7 +126,7 @@ def text_gradient_angle(teks, list_warna, sudut_derajat=45):
 console = Console()
 
 
-def print_text_gradient_angle(texts, colors, angle=45):
+def print_text_gradient_angle(texts, colors, angle):
     header_berwarna = text_gradient_angle(texts, colors, angle)
     console.print(header_berwarna)
 

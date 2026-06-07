@@ -15,7 +15,6 @@ from src import (
     draw_menu,
     clear_screen,
     get_key,
-    linear_regression
 )
 import src.utils.Style as style
 
@@ -64,7 +63,7 @@ STATS = rf"""
 
 """
 
-JUMLAH_MENU = 9
+JUMLAH_MENU = 8
 
 
 # --- ALUR UTAMA ---
@@ -77,7 +76,6 @@ if __name__ == "__main__":
         "Chapter-3.2 Secand Method",
         "Chapter-4.1 Newton Raphson Modified",
         "Chapter-4.2 Factorization Method",
-        "Chapter-6.1 Linear Regression",
         "Open program history",
         "Quit",
     ]
@@ -147,10 +145,6 @@ if __name__ == "__main__":
                 print(f"=== [MENU 6: Factorization Method] ===")
                 log_activities("Opening Factorization Method")
                 factorization_main()
-            elif current_select == 6:
-                print(f"=== [MENU 7: Linear Regression Method] ===")
-                log_activities("Opening Linear Regression")
-                linear_regression()
             elif current_select == JUMLAH_MENU - 2:
                 Lazy_Loading("Opening log file...")
                 log_activities("Opening log file...")
