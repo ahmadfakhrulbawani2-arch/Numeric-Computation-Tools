@@ -20,6 +20,9 @@ def PrintIntroProg(ascii: str = "", title: str = "Komnum26") -> None:
         f"Welcome to {title}. Please input the equation (only support up to x^0, dosen't support x^-1, etc...)"
     )
 
+def PrintIntroProg2(title: str = "Komnum26"):
+    print(f"Welcome to {title}")
+    print()
 
 # This return equation string
 def GetEqState(eq: List[int]) -> str:
