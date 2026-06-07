@@ -3,6 +3,9 @@ from datetime import datetime
 import re
 import requests
 from src.utils.FuncUtils import *
+from src.utils.Style import print_text_gradient_angle, AnsiColors
+import os
+import sys
 
 
 # this is to get time.now
@@ -11,7 +14,7 @@ def GetTimeNow() -> str:
 
 
 # this print intro statement
-def PrintIntroProg(ascii: str, title: str) -> None:
+def PrintIntroProg(ascii: str = "", title: str = "Komnum26") -> None:
     print(ascii)
     print(
         f"Welcome to {title}. Please input the equation (only support up to x^0, dosen't support x^-1, etc...)"
@@ -81,3 +84,80 @@ def download_from_gdrive(url: str, output_path: str = "../input/input.txt") -> b
         print(f"[Error] Failed to download file: {e}")
         # log_activities(f"Unable to fetch input from cloud. Please check your connection or the file permission. Err: {e}", "ERROR 400")
         return False
+
+
+# Setup pembaca input keyboard cross-platform
+if os.name == "nt":
+    import msvcrt
+
+    def get_key():
+        """Membaca input tombol di Windows"""
+        ch = msvcrt.getch()
+        if ch in (b"\x00", b"\xe0"):  # Tombol fungsi atau arrow keys
+            ch = msvcrt.getch()
+            if ch == b"H":
+                return "up"
+            if ch == b"P":
+                return "down"
+        if ch == b"\r":
+            return "enter"
+        try:
+            return ch.decode("utf-8").lower()
+        except:
+            return None
+
+else:
+    import tty
+    import termios
+
+    def get_key():
+        """Membaca input tombol di Linux / macOS"""
+        fd = sys.stdin.fileno()
+        old_settings = termios.tcgetattr(fd)
+        try:
+            tty.setraw(sys.stdin.fileno())
+            ch = sys.stdin.read(1)
+            if ch == "\x1b":  # Escape sequence untuk arrow keys
+                ch2 = sys.stdin.read(2)
+                if ch2 == "[A":
+                    return "up"
+                if ch2 == "[B":
+                    return "down"
+            if ch == "\r" or ch == "\n":
+                return "enter"
+            return ch.lower()
+        finally:
+            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+
+
+def clear_screen():
+    os.system("cls" if os.name == "nt" else "clear")
+
+
+def draw_menu(
+    menu_items: List[str],
+    selected_index: int,
+    STATS: str,
+    ASCII_HEADER: str,
+    header_colors: List[str],
+    awal_jalan=False,
+) -> None:
+    if awal_jalan:
+        clear_screen()
+        print(STATS)
+        print_text_gradient_angle(ASCII_HEADER, header_colors, 0)
+        print(
+            f"\n Gunakan [↑/↓] Panah untuk Navigasi, {AnsiColors.BOLD}[Enter]{AnsiColors.RESET} untuk Memilih, {AnsiColors.BOLD}[Q]{AnsiColors.RESET} untuk Keluar\n"
+        )
+        print("─" * 108)
+    else:
+        # Mengembalikan kursor naik ke atas agar menu tertimpa dengan halus tanpa reload global
+        sys.stdout.write(f"\033[{len(menu_items) + 1}A")
+        sys.stdout.flush()
+
+    for i, item in enumerate(menu_items):
+        if i == selected_index:
+            print(f"\033[K \033[92m{AnsiColors.BOLD}►   {item}\033[0m")
+        else:
+            print(f"\033[K \033[90m    {item}\033[0m")
+    print("\033[K" + "─" * 108)
