@@ -888,3 +888,371 @@
 2026-06-07 12:11:28 - INFO - Running Numeric Regression with fetching input file
 2026-06-07 12:11:40 - INFO - Closing program...
 2026-06-07 12:11:43 - INFO - Closing program...
+2026-06-07 23:27:54 - INFO - Success unpacking numeric computation package
+2026-06-07 23:27:55 - INFO - Success unpacking internal package
+2026-06-07 23:27:59 - INFO - Opening Linear Regression
+2026-06-07 23:28:09 - INFO - Running Numeric Regression with fetching input file
+2026-06-07 23:31:04 - DEBUG - Starting new HTTPS connection (1): drive.google.com:443
+2026-06-07 23:31:05 - DEBUG - https://drive.google.com:443 "GET /drive/folders/18HtIW6Iqje2MLEEX8UU9ghrRlatMU14u?usp=sharing HTTP/1.1" 200 None
+2026-06-07 23:31:06 - ERROR - Error: CSV file must have 'x' and 'y' column (case insensitive) in Linear Regression
+2026-06-07 23:32:00 - INFO - Success unpacking numeric computation package
+2026-06-07 23:32:00 - INFO - Success unpacking internal package
+2026-06-07 23:32:02 - INFO - Opening Linear Regression
+2026-06-07 23:32:11 - DEBUG - Starting new HTTPS connection (1): drive.google.com:443
+2026-06-07 23:32:12 - DEBUG - https://drive.google.com:443 "GET /file/d/1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs/view?usp=drive_link HTTP/1.1" 200 None
+2026-06-07 23:32:12 - ERROR - Error: CSV file must have 'x' and 'y' column (case insensitive) in Linear Regression
+2026-06-07 23:32:34 - INFO - Success unpacking numeric computation package
+2026-06-07 23:32:34 - INFO - Success unpacking internal package
+2026-06-07 23:32:36 - INFO - Opening Linear Regression
+2026-06-07 23:32:43 - DEBUG - Starting new HTTPS connection (1): drive.google.com:443
+2026-06-07 23:32:44 - DEBUG - https://drive.google.com:443 "GET /file/d/1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs/view?usp=drive_link HTTP/1.1" 200 None
+2026-06-07 23:32:44 - ERROR - Error: CSV file must have 'x' and 'y' column (case insensitive) in Linear Regression
+2026-06-07 23:34:42 - INFO - Success unpacking numeric computation package
+2026-06-07 23:34:42 - INFO - Success unpacking internal package
+2026-06-07 23:34:47 - INFO - Opening Linear Regression
+2026-06-07 23:35:10 - DEBUG - Starting new HTTPS connection (1): docs.google.com:443
+2026-06-07 23:35:11 - DEBUG - https://docs.google.com:443 "GET /uc?export=download&id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs HTTP/1.1" 303 0
+2026-06-07 23:35:11 - DEBUG - Starting new HTTPS connection (1): drive.usercontent.google.com:443
+2026-06-07 23:35:13 - DEBUG - https://drive.usercontent.google.com:443 "GET /download?id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs&export=download HTTP/1.1" 200 54
+2026-06-07 23:35:19 - INFO - Running Numeric Regression with fetching Google Drive file
+2026-06-07 23:39:45 - INFO - Closing program Linear Regression...
+2026-06-07 23:39:46 - INFO - Closing program...
+2026-06-07 23:39:53 - INFO - Success unpacking numeric computation package
+2026-06-07 23:39:53 - INFO - Success unpacking internal package
+2026-06-07 23:39:55 - INFO - Opening Linear Regression
+2026-06-07 23:40:13 - DEBUG - Starting new HTTPS connection (1): docs.google.com:443
+2026-06-07 23:40:13 - DEBUG - https://docs.google.com:443 "GET /uc?export=download&id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs HTTP/1.1" 303 0
+2026-06-07 23:40:13 - DEBUG - Starting new HTTPS connection (1): drive.usercontent.google.com:443
+2026-06-07 23:40:15 - DEBUG - https://drive.usercontent.google.com:443 "GET /download?id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs&export=download HTTP/1.1" 200 54
+2026-06-07 23:40:21 - INFO - Running Numeric Regression with fetching Google Drive file
+2026-06-07 23:42:55 - INFO - Running Numeric Regression with fetching input file
+2026-06-07 23:42:57 - INFO - Closing program Linear Regression...
+2026-06-07 23:42:58 - INFO - Closing program...
+2026-06-07 23:43:06 - INFO - Success unpacking numeric computation package
+2026-06-07 23:43:07 - INFO - Success unpacking internal package
+2026-06-07 23:43:08 - INFO - Opening Linear Regression
+2026-06-07 23:43:18 - DEBUG - Starting new HTTPS connection (1): docs.google.com:443
+2026-06-07 23:43:19 - DEBUG - https://docs.google.com:443 "GET /uc?export=download&id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs HTTP/1.1" 303 0
+2026-06-07 23:43:19 - DEBUG - Starting new HTTPS connection (1): drive.usercontent.google.com:443
+2026-06-07 23:43:20 - DEBUG - https://drive.usercontent.google.com:443 "GET /download?id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs&export=download HTTP/1.1" 200 54
+2026-06-07 23:43:26 - INFO - Running Numeric Regression with fetching Google Drive file
+2026-06-07 23:49:15 - INFO - Closing program Linear Regression...
+2026-06-07 23:49:16 - INFO - Closing program...
+2026-06-07 23:49:40 - INFO - Success unpacking numeric computation package
+2026-06-07 23:49:40 - INFO - Success unpacking internal package
+2026-06-07 23:49:42 - INFO - Opening Linear Regression
+2026-06-07 23:49:58 - INFO - [Cloud] Downloading file from GDrive (ID: 1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs) in Linear Regression
+2026-06-07 23:49:58 - DEBUG - Starting new HTTPS connection (1): docs.google.com:443
+2026-06-07 23:49:58 - DEBUG - https://docs.google.com:443 "GET /uc?export=download&id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs HTTP/1.1" 303 0
+2026-06-07 23:49:58 - DEBUG - Starting new HTTPS connection (1): drive.usercontent.google.com:443
+2026-06-07 23:50:00 - DEBUG - https://drive.usercontent.google.com:443 "GET /download?id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs&export=download HTTP/1.1" 200 54
+2026-06-07 23:50:00 - INFO - [Cloud] File successfully downloaded and saved to: ./input/linear_regression/cloud_table.csv in Linear Regression
+2026-06-07 23:50:06 - INFO - Running Numeric Regression with fetching Google Drive file
+2026-06-07 23:50:22 - INFO - Closing program Linear Regression...
+2026-06-07 23:50:24 - INFO - Closing program...
+2026-06-07 23:55:23 - INFO - Success unpacking numeric computation package
+2026-06-07 23:55:23 - INFO - Success unpacking internal package
+2026-06-07 23:55:54 - INFO - Success unpacking numeric computation package
+2026-06-07 23:55:54 - INFO - Success unpacking internal package
+2026-06-07 23:55:57 - INFO - Opening Linear Regression
+2026-06-07 23:56:16 - INFO - Running Numeric Regression with fetching input file
+2026-06-07 23:58:03 - INFO - Closing program Linear Regression...
+2026-06-07 23:58:03 - INFO - Closing program...
+2026-06-08 07:12:50 - INFO - Success unpacking numeric computation package
+2026-06-08 07:12:53 - INFO - Success unpacking internal package
+2026-06-08 07:12:58 - INFO - Opening Linear Regression
+2026-06-08 07:14:17 - INFO - [Cloud] Downloading file from GDrive (ID: 1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs) in Linear Regression
+2026-06-08 07:14:17 - DEBUG - Starting new HTTPS connection (1): docs.google.com:443
+2026-06-08 07:14:18 - DEBUG - https://docs.google.com:443 "GET /uc?export=download&id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs HTTP/1.1" 303 0
+2026-06-08 07:14:18 - DEBUG - Starting new HTTPS connection (1): drive.usercontent.google.com:443
+2026-06-08 07:14:20 - DEBUG - https://drive.usercontent.google.com:443 "GET /download?id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs&export=download HTTP/1.1" 200 54
+2026-06-08 07:14:20 - INFO - [Cloud] File successfully downloaded and saved to: ./input/linear_regression/cloud_table.csv in Linear Regression
+2026-06-08 07:14:26 - INFO - Running Numeric Regression with fetching Google Drive file
+2026-06-08 07:15:09 - INFO - Closing program Linear Regression...
+2026-06-08 11:03:57 - INFO - Success unpacking numeric computation package
+2026-06-08 11:03:58 - INFO - Success unpacking internal package
+2026-06-08 11:04:00 - INFO - Opening Linear Regression
+2026-06-08 11:04:59 - INFO - Success unpacking numeric computation package
+2026-06-08 11:04:59 - INFO - Success unpacking internal package
+2026-06-08 11:05:00 - INFO - Opening Linear Regression
+2026-06-08 11:06:25 - INFO - Success unpacking numeric computation package
+2026-06-08 11:06:25 - INFO - Success unpacking internal package
+2026-06-08 11:06:29 - INFO - Opening Linear Regression
+2026-06-08 11:06:35 - INFO - [Cloud] Downloading file from GDrive (ID: 1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs) in Linear Regression
+2026-06-08 11:06:35 - DEBUG - Starting new HTTPS connection (1): docs.google.com:443
+2026-06-08 11:06:36 - DEBUG - https://docs.google.com:443 "GET /uc?export=download&id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs HTTP/1.1" 303 0
+2026-06-08 11:06:36 - DEBUG - Starting new HTTPS connection (1): drive.usercontent.google.com:443
+2026-06-08 11:06:38 - DEBUG - https://drive.usercontent.google.com:443 "GET /download?id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs&export=download HTTP/1.1" 200 54
+2026-06-08 11:06:38 - INFO - [Cloud] File successfully downloaded and saved to: ./input/linear_regression/cloud_table.csv in Linear Regression
+2026-06-08 11:06:44 - INFO - Running Numeric Regression with fetching Google Drive file
+2026-06-08 11:06:54 - INFO - Closing program Linear Regression...
+2026-06-08 11:06:56 - INFO - Closing program...
+2026-06-08 11:07:39 - INFO - Success unpacking numeric computation package
+2026-06-08 11:07:39 - INFO - Success unpacking internal package
+2026-06-08 11:07:40 - INFO - Opening Linear Regression
+2026-06-08 11:07:46 - INFO - [Cloud] Downloading file from GDrive (ID: 1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs) in Linear Regression
+2026-06-08 11:07:46 - DEBUG - Starting new HTTPS connection (1): docs.google.com:443
+2026-06-08 11:07:46 - DEBUG - https://docs.google.com:443 "GET /uc?export=download&id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs HTTP/1.1" 303 0
+2026-06-08 11:07:46 - DEBUG - Starting new HTTPS connection (1): drive.usercontent.google.com:443
+2026-06-08 11:07:48 - DEBUG - https://drive.usercontent.google.com:443 "GET /download?id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs&export=download HTTP/1.1" 200 54
+2026-06-08 11:07:48 - INFO - [Cloud] File successfully downloaded and saved to: ./input/linear_regression/cloud_table.csv in Linear Regression
+2026-06-08 11:07:54 - INFO - Running Numeric Regression with fetching Google Drive file
+2026-06-08 11:09:16 - INFO - Success unpacking numeric computation package
+2026-06-08 11:09:16 - INFO - Success unpacking internal package
+2026-06-08 11:09:17 - INFO - Opening Linear Regression
+2026-06-08 11:09:23 - INFO - [Cloud] Downloading file from GDrive (ID: 1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs) in Linear Regression
+2026-06-08 11:09:23 - DEBUG - Starting new HTTPS connection (1): docs.google.com:443
+2026-06-08 11:09:23 - DEBUG - https://docs.google.com:443 "GET /uc?export=download&id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs HTTP/1.1" 303 0
+2026-06-08 11:09:23 - DEBUG - Starting new HTTPS connection (1): drive.usercontent.google.com:443
+2026-06-08 11:09:25 - DEBUG - https://drive.usercontent.google.com:443 "GET /download?id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs&export=download HTTP/1.1" 200 54
+2026-06-08 11:09:26 - INFO - [Cloud] File successfully downloaded and saved to: ./input/linear_regression/cloud_table.csv in Linear Regression
+2026-06-08 11:09:32 - INFO - Running Numeric Regression with fetching Google Drive file
+2026-06-08 11:10:20 - ERROR - File not found in Linear Regression. Failed to write
+2026-06-08 11:11:18 - INFO - Success unpacking numeric computation package
+2026-06-08 11:11:18 - INFO - Success unpacking internal package
+2026-06-08 11:11:19 - INFO - Opening Linear Regression
+2026-06-08 11:11:24 - INFO - [Cloud] Downloading file from GDrive (ID: 1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs) in Linear Regression
+2026-06-08 11:11:24 - DEBUG - Starting new HTTPS connection (1): docs.google.com:443
+2026-06-08 11:11:25 - DEBUG - https://docs.google.com:443 "GET /uc?export=download&id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs HTTP/1.1" 303 0
+2026-06-08 11:11:25 - DEBUG - Starting new HTTPS connection (1): drive.usercontent.google.com:443
+2026-06-08 11:11:26 - DEBUG - https://drive.usercontent.google.com:443 "GET /download?id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs&export=download HTTP/1.1" 200 54
+2026-06-08 11:11:27 - INFO - [Cloud] File successfully downloaded and saved to: ./input/linear_regression/cloud_table.csv in Linear Regression
+2026-06-08 11:11:33 - INFO - Running Numeric Regression with fetching Google Drive file
+2026-06-08 11:11:41 - ERROR - File not found in Linear Regression. Failed to write
+2026-06-08 11:21:26 - INFO - Success unpacking numeric computation package
+2026-06-08 11:21:26 - INFO - Success unpacking internal package
+2026-06-08 11:21:28 - INFO - Opening Linear Regression
+2026-06-08 11:21:39 - INFO - [Cloud] Downloading file from GDrive (ID: 1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs) in Linear Regression
+2026-06-08 11:21:39 - DEBUG - Starting new HTTPS connection (1): docs.google.com:443
+2026-06-08 11:21:39 - DEBUG - https://docs.google.com:443 "GET /uc?export=download&id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs HTTP/1.1" 303 0
+2026-06-08 11:21:39 - DEBUG - Starting new HTTPS connection (1): drive.usercontent.google.com:443
+2026-06-08 11:21:41 - DEBUG - https://drive.usercontent.google.com:443 "GET /download?id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs&export=download HTTP/1.1" 200 54
+2026-06-08 11:21:42 - INFO - [Cloud] File successfully downloaded and saved to: ./input/linear_regression/cloud_table.csv in Linear Regression
+2026-06-08 11:21:48 - INFO - Running Numeric Regression with fetching Google Drive file
+2026-06-08 11:21:50 - ERROR - File not found in Linear Regression. Failed to write
+2026-06-08 11:27:10 - INFO - Success unpacking numeric computation package
+2026-06-08 11:27:10 - INFO - Success unpacking internal package
+2026-06-08 11:27:12 - INFO - Opening Linear Regression
+2026-06-08 11:27:26 - INFO - [Cloud] Downloading file from GDrive (ID: 1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs) in Linear Regression
+2026-06-08 11:27:26 - DEBUG - Starting new HTTPS connection (1): docs.google.com:443
+2026-06-08 11:27:27 - DEBUG - https://docs.google.com:443 "GET /uc?export=download&id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs HTTP/1.1" 303 0
+2026-06-08 11:27:27 - DEBUG - Starting new HTTPS connection (1): drive.usercontent.google.com:443
+2026-06-08 11:27:28 - DEBUG - https://drive.usercontent.google.com:443 "GET /download?id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs&export=download HTTP/1.1" 200 54
+2026-06-08 11:27:29 - INFO - [Cloud] File successfully downloaded and saved to: ./input/linear_regression/cloud_table.csv in Linear Regression
+2026-06-08 11:27:35 - INFO - Running Numeric Regression with fetching Google Drive file
+2026-06-08 11:28:10 - INFO - Success unpacking numeric computation package
+2026-06-08 11:28:10 - INFO - Success unpacking internal package
+2026-06-08 11:28:12 - INFO - Opening Linear Regression
+2026-06-08 11:28:21 - INFO - [Cloud] Downloading file from GDrive (ID: 1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs) in Linear Regression
+2026-06-08 11:28:21 - DEBUG - Starting new HTTPS connection (1): docs.google.com:443
+2026-06-08 11:28:21 - DEBUG - https://docs.google.com:443 "GET /uc?export=download&id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs HTTP/1.1" 303 0
+2026-06-08 11:28:21 - DEBUG - Starting new HTTPS connection (1): drive.usercontent.google.com:443
+2026-06-08 11:28:23 - DEBUG - https://drive.usercontent.google.com:443 "GET /download?id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs&export=download HTTP/1.1" 200 54
+2026-06-08 11:28:23 - INFO - [Cloud] File successfully downloaded and saved to: ./input/linear_regression/cloud_table.csv in Linear Regression
+2026-06-08 11:28:29 - INFO - Running Numeric Regression with fetching Google Drive file
+2026-06-08 11:29:12 - INFO - [Cloud] Downloading file from GDrive (ID: q) in Linear Regression
+2026-06-08 11:29:12 - DEBUG - Starting new HTTPS connection (1): docs.google.com:443
+2026-06-08 11:29:12 - DEBUG - https://docs.google.com:443 "GET /uc?export=download&id=q HTTP/1.1" 404 None
+2026-06-08 11:29:12 - INFO - [Error] Failed to download file: 404 Client Error: Not Found for url: https://docs.google.com/uc?export=download&id=q in Linear Regression
+2026-06-08 11:29:12 - INFO - Can't download file from Linear Regression
+2026-06-08 11:29:12 - INFO - Running Numeric Regression with fetching Google Drive file
+2026-06-08 11:30:24 - INFO - Success unpacking numeric computation package
+2026-06-08 11:30:24 - INFO - Success unpacking internal package
+2026-06-08 11:30:25 - INFO - Opening Linear Regression
+2026-06-08 11:30:31 - INFO - [Cloud] Downloading file from GDrive (ID: q) in Linear Regression
+2026-06-08 11:30:31 - DEBUG - Starting new HTTPS connection (1): docs.google.com:443
+2026-06-08 11:30:32 - DEBUG - https://docs.google.com:443 "GET /uc?export=download&id=q HTTP/1.1" 404 None
+2026-06-08 11:30:32 - INFO - [Error] Failed to download file: 404 Client Error: Not Found for url: https://docs.google.com/uc?export=download&id=q in Linear Regression
+2026-06-08 11:30:32 - INFO - Can't download file from Linear Regression
+2026-06-08 11:30:32 - INFO - Running Numeric Regression with fetching Google Drive file
+2026-06-08 11:31:21 - INFO - Closing program Linear Regression...
+2026-06-08 11:31:22 - INFO - Closing program...
+2026-06-08 11:31:29 - INFO - Success unpacking numeric computation package
+2026-06-08 11:31:29 - INFO - Success unpacking internal package
+2026-06-08 11:31:32 - INFO - Opening Linear Regression
+2026-06-08 11:31:38 - INFO - [Cloud] Downloading file from GDrive (ID: q) in Linear Regression
+2026-06-08 11:31:38 - DEBUG - Starting new HTTPS connection (1): docs.google.com:443
+2026-06-08 11:31:39 - DEBUG - https://docs.google.com:443 "GET /uc?export=download&id=q HTTP/1.1" 404 None
+2026-06-08 11:31:39 - INFO - [Error] Failed to download file: 404 Client Error: Not Found for url: https://docs.google.com/uc?export=download&id=q in Linear Regression
+2026-06-08 11:31:39 - INFO - Can't download file from Linear Regression
+2026-06-08 11:31:39 - INFO - Running Numeric Regression with fetching Google Drive file
+2026-06-08 11:31:41 - INFO - Closing program Linear Regression...
+2026-06-08 11:31:42 - INFO - Closing program...
+2026-06-08 11:31:49 - INFO - Success unpacking numeric computation package
+2026-06-08 11:31:49 - INFO - Success unpacking internal package
+2026-06-08 11:31:50 - INFO - Opening Linear Regression
+2026-06-08 11:31:59 - INFO - [Cloud] Downloading file from GDrive (ID: 1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs) in Linear Regression
+2026-06-08 11:31:59 - DEBUG - Starting new HTTPS connection (1): docs.google.com:443
+2026-06-08 11:32:00 - DEBUG - https://docs.google.com:443 "GET /uc?export=download&id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs HTTP/1.1" 303 0
+2026-06-08 11:32:00 - DEBUG - Starting new HTTPS connection (1): drive.usercontent.google.com:443
+2026-06-08 11:32:01 - DEBUG - https://drive.usercontent.google.com:443 "GET /download?id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs&export=download HTTP/1.1" 200 54
+2026-06-08 11:32:02 - INFO - [Cloud] File successfully downloaded and saved to: ./input/linear_regression/cloud_table.csv in Linear Regression
+2026-06-08 11:32:08 - INFO - Running Numeric Regression with fetching Google Drive file
+2026-06-08 11:33:53 - INFO - Closing program Linear Regression...
+2026-06-08 11:33:54 - INFO - Closing program...
+2026-06-08 11:34:00 - INFO - Success unpacking numeric computation package
+2026-06-08 11:34:01 - INFO - Success unpacking internal package
+2026-06-08 11:34:02 - INFO - Opening Linear Regression
+2026-06-08 11:34:14 - INFO - [Cloud] Downloading file from GDrive (ID: 1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs) in Linear Regression
+2026-06-08 11:34:14 - DEBUG - Starting new HTTPS connection (1): docs.google.com:443
+2026-06-08 11:34:15 - DEBUG - https://docs.google.com:443 "GET /uc?export=download&id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs HTTP/1.1" 303 0
+2026-06-08 11:34:15 - DEBUG - Starting new HTTPS connection (1): drive.usercontent.google.com:443
+2026-06-08 11:34:16 - DEBUG - https://drive.usercontent.google.com:443 "GET /download?id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs&export=download HTTP/1.1" 200 54
+2026-06-08 11:34:17 - INFO - [Cloud] File successfully downloaded and saved to: ./input/linear_regression/cloud_table.csv in Linear Regression
+2026-06-08 11:34:23 - INFO - Running Numeric Regression with fetching Google Drive file
+2026-06-08 11:34:41 - INFO - Running Numeric Regression with fetching input file
+2026-06-08 11:35:09 - INFO - [Cloud] Downloading file from GDrive (ID: 1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs) in Linear Regression
+2026-06-08 11:35:09 - DEBUG - Starting new HTTPS connection (1): docs.google.com:443
+2026-06-08 11:35:09 - DEBUG - https://docs.google.com:443 "GET /uc?export=download&id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs HTTP/1.1" 303 0
+2026-06-08 11:35:09 - DEBUG - Starting new HTTPS connection (1): drive.usercontent.google.com:443
+2026-06-08 11:35:11 - DEBUG - https://drive.usercontent.google.com:443 "GET /download?id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs&export=download HTTP/1.1" 200 54
+2026-06-08 11:35:11 - INFO - [Cloud] File successfully downloaded and saved to: ./input/linear_regression/cloud_table.csv in Linear Regression
+2026-06-08 11:35:17 - INFO - Running Numeric Regression with fetching Google Drive file
+2026-06-08 11:35:53 - INFO - Closing program Linear Regression...
+2026-06-08 11:35:55 - INFO - Closing program...
+2026-06-08 11:36:01 - INFO - Success unpacking numeric computation package
+2026-06-08 11:36:01 - INFO - Success unpacking internal package
+2026-06-08 11:36:03 - INFO - Opening Linear Regression
+2026-06-08 11:36:14 - INFO - Running Numeric Regression with fetching input file
+2026-06-08 11:36:32 - INFO - Running Numeric Regression with fetching input file
+2026-06-08 11:36:48 - INFO - Closing program Linear Regression...
+2026-06-08 11:36:49 - INFO - Closing program...
+2026-06-08 11:36:56 - INFO - Success unpacking numeric computation package
+2026-06-08 11:36:56 - INFO - Success unpacking internal package
+2026-06-08 11:36:57 - INFO - Opening Linear Regression
+2026-06-08 11:37:08 - INFO - Running Numeric Regression with fetching input file
+2026-06-08 11:38:39 - INFO - Closing program Linear Regression...
+2026-06-08 11:38:40 - INFO - Closing program...
+2026-06-08 11:38:47 - INFO - Success unpacking numeric computation package
+2026-06-08 11:38:47 - INFO - Success unpacking internal package
+2026-06-08 11:38:49 - INFO - Opening Linear Regression
+2026-06-08 11:39:00 - INFO - [Cloud] Downloading file from GDrive (ID: 1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs) in Linear Regression
+2026-06-08 11:39:00 - DEBUG - Starting new HTTPS connection (1): docs.google.com:443
+2026-06-08 11:39:01 - DEBUG - https://docs.google.com:443 "GET /uc?export=download&id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs HTTP/1.1" 303 0
+2026-06-08 11:39:01 - DEBUG - Starting new HTTPS connection (1): drive.usercontent.google.com:443
+2026-06-08 11:39:02 - DEBUG - https://drive.usercontent.google.com:443 "GET /download?id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs&export=download HTTP/1.1" 200 54
+2026-06-08 11:39:03 - INFO - [Cloud] File successfully downloaded and saved to: ./input/linear_regression/cloud_table.csv in Linear Regression
+2026-06-08 11:39:09 - INFO - Running Numeric Regression with fetching Google Drive file
+2026-06-08 11:39:24 - INFO - Running Numeric Regression with fetching input file
+2026-06-08 11:45:30 - INFO - Closing program Linear Regression...
+2026-06-08 11:45:31 - INFO - Closing program...
+2026-06-08 11:45:38 - INFO - Success unpacking numeric computation package
+2026-06-08 11:45:38 - INFO - Success unpacking internal package
+2026-06-08 11:45:39 - INFO - Opening Linear Regression
+2026-06-08 11:45:52 - INFO - Running Numeric Regression with fetching input file
+2026-06-08 11:46:59 - INFO - Closing program Linear Regression...
+2026-06-08 11:47:00 - INFO - Closing program...
+2026-06-08 11:47:07 - INFO - Success unpacking numeric computation package
+2026-06-08 11:47:07 - INFO - Success unpacking internal package
+2026-06-08 11:47:10 - INFO - Opening Linear Regression
+2026-06-08 11:47:19 - INFO - Running Numeric Regression with fetching input file
+2026-06-08 11:55:18 - INFO - Closing program Linear Regression...
+2026-06-08 11:55:19 - INFO - Closing program...
+2026-06-08 11:55:52 - INFO - Success unpacking numeric computation package
+2026-06-08 11:55:52 - INFO - Success unpacking internal package
+2026-06-08 11:55:58 - INFO - Opening Linear Regression
+2026-06-08 11:56:08 - INFO - [Cloud] Downloading file from GDrive (ID: 1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs) in Linear Regression
+2026-06-08 11:56:08 - DEBUG - Starting new HTTPS connection (1): docs.google.com:443
+2026-06-08 11:56:09 - DEBUG - https://docs.google.com:443 "GET /uc?export=download&id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs HTTP/1.1" 303 0
+2026-06-08 11:56:09 - DEBUG - Starting new HTTPS connection (1): drive.usercontent.google.com:443
+2026-06-08 11:56:10 - DEBUG - https://drive.usercontent.google.com:443 "GET /download?id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs&export=download HTTP/1.1" 200 54
+2026-06-08 11:56:11 - INFO - [Cloud] File successfully downloaded and saved to: ./input/linear_regression/cloud_table.csv in Linear Regression
+2026-06-08 11:56:17 - INFO - Running Numeric Regression with fetching Google Drive file
+2026-06-08 11:56:55 - INFO - Closing program Linear Regression...
+2026-06-08 11:56:56 - INFO - Closing program...
+2026-06-08 11:57:02 - INFO - Success unpacking numeric computation package
+2026-06-08 11:57:02 - INFO - Success unpacking internal package
+2026-06-08 11:57:03 - INFO - Opening Linear Regression
+2026-06-08 11:57:13 - INFO - [Cloud] Downloading file from GDrive (ID: 1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs) in Linear Regression
+2026-06-08 11:57:13 - DEBUG - Starting new HTTPS connection (1): docs.google.com:443
+2026-06-08 11:57:13 - DEBUG - https://docs.google.com:443 "GET /uc?export=download&id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs HTTP/1.1" 303 0
+2026-06-08 11:57:13 - DEBUG - Starting new HTTPS connection (1): drive.usercontent.google.com:443
+2026-06-08 11:57:18 - DEBUG - https://drive.usercontent.google.com:443 "GET /download?id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs&export=download HTTP/1.1" 200 54
+2026-06-08 11:57:18 - INFO - [Cloud] File successfully downloaded and saved to: ./input/linear_regression/cloud_table.csv in Linear Regression
+2026-06-08 11:57:24 - INFO - Running Numeric Regression with fetching Google Drive file
+2026-06-08 11:57:26 - INFO - Closing program Linear Regression...
+2026-06-08 11:57:27 - INFO - Closing program...
+2026-06-08 12:01:01 - INFO - Success unpacking numeric computation package
+2026-06-08 12:01:02 - INFO - Success unpacking internal package
+2026-06-08 12:01:03 - INFO - Opening Linear Regression
+2026-06-08 12:01:38 - INFO - [Cloud] Downloading file from GDrive (ID: 1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs) in Linear Regression
+2026-06-08 12:01:38 - DEBUG - Starting new HTTPS connection (1): docs.google.com:443
+2026-06-08 12:01:39 - DEBUG - https://docs.google.com:443 "GET /uc?export=download&id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs HTTP/1.1" 303 0
+2026-06-08 12:01:39 - DEBUG - Starting new HTTPS connection (1): drive.usercontent.google.com:443
+2026-06-08 12:01:40 - DEBUG - https://drive.usercontent.google.com:443 "GET /download?id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs&export=download HTTP/1.1" 200 54
+2026-06-08 12:01:41 - INFO - [Cloud] File successfully downloaded and saved to: ./input/linear_regression/cloud_table.csv in Linear Regression
+2026-06-08 12:01:47 - INFO - Running Numeric Regression with fetching Google Drive file
+2026-06-08 12:01:48 - INFO - Closing program Linear Regression...
+2026-06-08 12:01:50 - INFO - Closing program...
+2026-06-08 12:02:02 - INFO - Success unpacking numeric computation package
+2026-06-08 12:02:02 - INFO - Success unpacking internal package
+2026-06-08 12:02:03 - INFO - Opening Linear Regression
+2026-06-08 12:02:12 - INFO - Running Numeric Regression with fetching input file
+2026-06-08 12:03:17 - INFO - Closing program Linear Regression...
+2026-06-08 12:03:19 - INFO - Closing program...
+2026-06-08 12:03:26 - INFO - Success unpacking numeric computation package
+2026-06-08 12:03:26 - INFO - Success unpacking internal package
+2026-06-08 12:03:28 - INFO - Opening Linear Regression
+2026-06-08 12:03:36 - INFO - Closing program Linear Regression...
+2026-06-08 12:03:37 - INFO - Closing program...
+2026-06-08 12:03:45 - INFO - Success unpacking numeric computation package
+2026-06-08 12:03:45 - INFO - Success unpacking internal package
+2026-06-08 12:03:46 - INFO - Opening Linear Regression
+2026-06-08 12:04:10 - INFO - Closing program Linear Regression...
+2026-06-08 12:04:13 - INFO - Opening Linear Regression
+2026-06-08 12:04:22 - INFO - Success unpacking numeric computation package
+2026-06-08 12:04:22 - INFO - Success unpacking internal package
+2026-06-08 12:04:24 - INFO - Opening Linear Regression
+2026-06-08 12:04:34 - INFO - Running Numeric Regression with fetching input file
+2026-06-08 12:04:47 - INFO - Closing program Linear Regression...
+2026-06-08 12:04:54 - INFO - Opening Linear Regression
+2026-06-08 12:05:20 - INFO - Closing program Linear Regression...
+2026-06-08 12:05:20 - INFO - Closing program...
+2026-06-08 12:05:27 - INFO - Success unpacking numeric computation package
+2026-06-08 12:05:27 - INFO - Success unpacking internal package
+2026-06-08 12:05:28 - INFO - Opening Linear Regression
+2026-06-08 12:06:08 - INFO - Closing program Linear Regression...
+2026-06-08 12:06:09 - INFO - Closing program...
+2026-06-08 12:06:15 - INFO - Success unpacking numeric computation package
+2026-06-08 12:06:16 - INFO - Success unpacking internal package
+2026-06-08 12:06:17 - INFO - Opening Linear Regression
+2026-06-08 12:07:23 - INFO - Closing program Linear Regression...
+2026-06-08 12:07:24 - INFO - Closing program...
+2026-06-08 12:08:51 - INFO - Success unpacking numeric computation package
+2026-06-08 12:08:51 - INFO - Success unpacking internal package
+2026-06-08 12:08:52 - INFO - Opening Linear Regression
+2026-06-08 12:09:02 - INFO - Closing program Linear Regression...
+2026-06-08 12:09:03 - INFO - Closing program...
+2026-06-08 12:09:20 - INFO - Success unpacking numeric computation package
+2026-06-08 12:09:21 - INFO - Success unpacking internal package
+2026-06-08 12:09:22 - INFO - Opening Linear Regression
+2026-06-08 12:10:00 - INFO - Success unpacking numeric computation package
+2026-06-08 12:10:00 - INFO - Success unpacking internal package
+2026-06-08 12:10:08 - INFO - Opening log file...
+2026-06-08 12:10:12 - INFO - Opening Linear Regression
+2026-06-08 12:10:21 - INFO - Closing program Linear Regression...
+2026-06-08 12:10:23 - INFO - Closing program...
+2026-06-08 12:14:06 - INFO - Success unpacking numeric computation package
+2026-06-08 12:14:06 - INFO - Success unpacking internal package
+2026-06-08 12:14:09 - INFO - Opening Linear Regression
+2026-06-08 12:14:15 - INFO - Opening Linear Regression
+2026-06-08 12:14:24 - INFO - Quitting Linear Regression program...
+2026-06-08 12:14:24 - INFO - Running Numeric Regression with fetching Google Drive file
+2026-06-08 12:35:54 - INFO - Success unpacking numeric computation package
+2026-06-08 12:35:54 - INFO - Success unpacking internal package
+2026-06-08 12:36:00 - INFO - Opening Linear Regression
+2026-06-08 12:37:52 - INFO - Success unpacking numeric computation package
+2026-06-08 12:37:52 - INFO - Success unpacking internal package
+2026-06-08 12:37:53 - INFO - Opening Linear Regression
+2026-06-08 12:38:45 - INFO - Success unpacking numeric computation package
+2026-06-08 12:38:45 - INFO - Success unpacking internal package
+2026-06-08 12:38:47 - INFO - Opening Linear Regression
+2026-06-08 12:41:41 - INFO - Success unpacking numeric computation package
+2026-06-08 12:41:41 - INFO - Success unpacking internal package
+2026-06-08 12:41:42 - INFO - Opening Linear Regression
+2026-06-08 12:45:53 - INFO - Success unpacking numeric computation package
+2026-06-08 12:45:53 - INFO - Success unpacking internal package
+2026-06-08 12:45:57 - INFO - Opening Linear Regression
+2026-06-08 12:46:31 - INFO - Running Numeric Regression with manual input
+2026-06-08 12:47:01 - INFO - Closing program Linear Regression...
+2026-06-08 12:47:03 - INFO - Closing program...
