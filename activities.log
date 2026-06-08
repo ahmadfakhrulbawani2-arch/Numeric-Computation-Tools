@@ -968,3 +968,4 @@
 2026-06-08 07:14:20 - DEBUG - https://drive.usercontent.google.com:443 "GET /download?id=1tlsol4C-oKm7MwVTtZ3G4LGNHQcA5Bvs&export=download HTTP/1.1" 200 54
 2026-06-08 07:14:20 - INFO - [Cloud] File successfully downloaded and saved to: ./input/linear_regression/cloud_table.csv in Linear Regression
 2026-06-08 07:14:26 - INFO - Running Numeric Regression with fetching Google Drive file
+2026-06-08 07:15:09 - INFO - Closing program Linear Regression...
