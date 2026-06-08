@@ -329,3 +329,19 @@ Final Linear Regression result:
 
 y = -288.142349x + 1754.497034
 
+Monday, 08-06-2026 | 12:46:36 WIB
+
+Calculation by manual input
+Sum X = 35
+Sum Y = 442
+Sum X*Y = 2792
+Sum X^2 = 251
+Average X = 5.833333333333333
+Average Y = 73.66666666666667
+Banyak data = 6
+Calculated a1 = -288.142349
+Calculated a1 = -288.142349
+Final Linear Regression result: 
+
+y = -288.142349x + 1754.497034
+

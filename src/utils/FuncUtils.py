@@ -88,3 +88,35 @@ class TrueLoader:
         if self.spinner:
             self.spinner.succeed(success_text)
             time.sleep(0.5)
+
+# input validator thanks Gemini
+import re
+
+class InputValidator:
+  @staticmethod
+  def is_numeric(teks: str) -> bool:
+    """Hanya menerima angka saja (0-9), tidak boleh ada huruf atau simbol."""
+    return bool(re.match(r"^\d+$", teks))
+
+  @staticmethod
+  def is_alpha(teks: str) -> bool:
+    """Hanya menerima huruf saja (a-z, A-Z), tidak boleh ada angka atau simbol."""
+    return bool(re.match(r"^[a-zA-Z]+$", teks))
+
+  @staticmethod
+  def is_alphanumeric(teks: str) -> bool:
+    """Hanya menerima kombinasi huruf dan angka, tidak boleh ada simbol/spasi."""
+    return bool(re.match(r"^[a-zA-Z0-9]+$", teks))
+
+  @staticmethod
+  def is_valid_variable(teks: str) -> bool:
+    """
+    Syarat: Diawali oleh huruf, sisanya boleh huruf atau angka.
+    Tidak boleh diawali angka dan tidak boleh ada karakter aneh/spasi.
+    """
+    return bool(re.match(r"^[a-zA-Z][a-zA-Z0-9]*$", teks))
+
+  @staticmethod
+  def is_clean_text(teks: str) -> bool:
+    """Menerima huruf, angka, dan spasi (cocok buat input nama/kalimat tanpa simbol aneh)."""
+    return bool(re.match(r"^[a-zA-Z0-9\s]+$", teks))

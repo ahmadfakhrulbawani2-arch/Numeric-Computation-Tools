@@ -44,7 +44,6 @@ class Csv_Data:
     x_data = []
     y_data = []
 
-
 class Reg_Data:
     # constructor
     def __init__(self, datas: Csv_Data):
@@ -123,6 +122,34 @@ class Reg_Data:
         print(f"y = {a1:.6f}x + {a0:.6f}")
         buffer.write(f"y = {a1:.6f}x + {a0:.6f}\n\n")
 
+def reg_processing(raw_data: Csv_Data):
+    if not isinstance(raw_data, Csv_Data):
+        log_activities(f"Unallowed data type in {PROG_NAME}", "ERROR")
+        raise TypeError("Unallowed data type")
+    else:
+        printf(f"X = {raw_data.x_data}")
+        time.sleep(0.2)
+        print(f"Y = {raw_data.y_data}")
+        print()
+        time.sleep(0.2)
+        Lazy_Loading("Calculating sum X-Y, avg X-Y, sum XY, sum X^2...", 0.5)
+        print()
+        the_data = Reg_Data(raw_data)
+        print()
+        print("=== Data calculated successfully ===")
+        print()
+        the_data._show_data()
+        print()
+        Lazy_Loading("Calculating a1...", 0.1)
+        Lazy_Loading("Calculating final expression...", 0.1)
+        print()
+        the_data._calc_expr()
+        print()
+        sys.stdout.write("\n\n\033[5A")
+        sys.stdout.flush()
+        time.sleep(0.1)
+        style.dalam_menu_kalkulasi = False
+
 
 def csv_processing(PATH):
     raw_data = Csv_Data()
@@ -153,43 +180,55 @@ def csv_processing(PATH):
                     raw_data.y_data.append(float(row[y_idx]))
                 except ValueError:
                     print(f"Skipping improper row-{row}")
-        Lazy_Loading(f"Scanning {PATH}", 0.2)
-        print()
-        time.sleep(0.2)
-        print("=== Data fetched successfully ===")
-        time.sleep(0.2)
-        print()
-        printf(f"X = {raw_data.x_data}")
-        time.sleep(0.2)
-        print(f"Y = {raw_data.y_data}")
-        print()
-        time.sleep(0.2)
-        Lazy_Loading("Calculating sum X-Y, avg X-Y, sum XY, sum X^2...", 0.5)
-        print()
-        the_data = Reg_Data(raw_data)
-        print()
-        print("=== Data calculated successfully ===")
-        print()
-        the_data._show_data()
-        print()
-        Lazy_Loading("Calculating a1...", 0.1)
-        Lazy_Loading("Calculating final expression...", 0.1)
-        print()
-        the_data._calc_expr()
-        print()
-        sys.stdout.write("\n\n\033[5A")
-        sys.stdout.flush()
-        time.sleep(0.1)
-        style.dalam_menu_kalkulasi = False
-
+            Lazy_Loading(f"Scanning {PATH}", 0.2)
+            print()
+            time.sleep(0.2)
+            print("=== Data fetched successfully ===")
+            time.sleep(0.2)
+            print()
+            reg_processing(PATH=PATH, raw_data=raw_data)
     except FileNotFoundError:
         log_activities(f"File not found in {PROG_NAME}.", "ERROR")
         raise FileNotFoundError(f"File/Path not found")
-
     return
 
 
 def input_manual():
+    print_text_gradient_angle(REGRESSION_ART, REGRESSION_COLORS)
+    time.sleep(0.2)
+    PrintIntroProg2(PROG_NAME)
+    print()
+    time.sleep(0.2)
+    inputUser: str = input(
+        f"Please input how many data you have, or {AnsiColors.BOLD}[q]{AnsiColors.RESET} to exit: "
+    ).strip()
+    if inputUser.lower() == 'q':
+        printf("User quit the program...")
+        log_activities(f"Quitting {PROG_NAME} program...")
+        return
+    
+    while not InputValidator.is_numeric(inputUser):
+        inputUser = input(f"Please input number only or {AnsiColors.BOLD}[q]{AnsiColors.RESET} to exit: ")
+        if inputUser.lower() == 'q':
+            printf("User quit the program...")
+            log_activities(f"Quitting {PROG_NAME} program...")
+            return
+    
+    byk_data = int(inputUser)
+    raw_data = Csv_Data()
+    for i in range(byk_data):
+        x_val = input(f"X{i+1}: ")
+        y_val = input(f"Y{i+1}: ")
+        
+        while not InputValidator.is_numeric(x_val) or not InputValidator.is_numeric(y_val):
+            print(f"{AnsiColors.RED}Please input number only{AnsiColors.RESET}")
+            x_val = input(f"X{i+1}: ")
+            y_val = input(f"Y{i+1}: ")
+
+        raw_data.x_data.append(int(x_val))
+        raw_data.y_data.append(int(y_val))
+
+    reg_processing(raw_data)
     return
 
 
@@ -214,8 +253,13 @@ def fetch_from_drive():
     print()
     time.sleep(0.2)
     inputUrl: str = input(
-        f"Silahkan input URL file (Google Drive text file only, all extension, {AnsiColors.BOLD}{AnsiColors.BG_WHITE} and public{AnsiColors.RESET}): "
+        f"Please input file URL (Google Drive text file only, all extension, {AnsiColors.BOLD}{AnsiColors.BG_WHITE}and public{AnsiColors.RESET}) or {AnsiColors.BOLD}[q]{AnsiColors.RESET} to exit: "
     ).strip()
+    if inputUrl.lower() == 'q':
+        printf("User quit the program...")
+        log_activities(f"Quitting {PROG_NAME} program...")
+        return
+    
     time.sleep(0.2)
     print(f"fetching data from {inputUrl}")
     time.sleep(0.2)
