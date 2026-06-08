@@ -31,7 +31,9 @@ Calculated a1 = -288.142349
 Calculated a1 = -288.142349
 Final Linear Regression result: 
 
-y = -288.142349x + 1754.497034Sunday, 07-06-2026 | 12:10:45 WIB
+y = -288.142349x + 1754.497034
+
+Sunday, 07-06-2026 | 12:10:45 WIB
 Sum X = 35.0
 Sum Y = 442.0\mSum X*Y = 2792.0
 Sum X^2 = 251.0
@@ -42,7 +44,9 @@ Calculated a1 = -288.142349
 Calculated a1 = -288.142349
 Final Linear Regression result: 
 
-y = -288.142349x + 1754.497034Sunday, 07-06-2026 | 12:11:32 WIB
+y = -288.142349x + 1754.497034
+
+Sunday, 07-06-2026 | 12:11:32 WIB
 Sum X = 35.0
 Sum Y = 442.0\mSum X*Y = 2792.0
 Sum X^2 = 251.0
@@ -53,7 +57,9 @@ Calculated a1 = -288.142349
 Calculated a1 = -288.142349
 Final Linear Regression result: 
 
-y = -288.142349x + 1754.497034Sunday, 07-06-2026 | 23:28:12 WIB
+y = -288.142349x + 1754.497034
+
+Sunday, 07-06-2026 | 23:28:12 WIB
 Calculation by input file
 Sum X = 35.0
 Sum Y = 442.0\mSum X*Y = 2792.0
@@ -65,7 +71,9 @@ Calculated a1 = -288.142349
 Calculated a1 = -288.142349
 Final Linear Regression result: 
 
-y = -288.142349x + 1754.497034Sunday, 07-06-2026 | 23:36:00 WIB
+y = -288.142349x + 1754.497034
+
+Sunday, 07-06-2026 | 23:36:00 WIB
 Calculation by cloud file
 Sum X = 35.0
 Sum Y = 472.0\mSum X*Y = 2967.0
@@ -77,7 +85,9 @@ Calculated a1 = -306.202847
 Calculated a1 = -306.202847
 Final Linear Regression result: 
 
-y = -306.202847x + 1864.849941Sunday, 07-06-2026 | 23:57:24 WIB
+y = -306.202847x + 1864.849941
+
+Sunday, 07-06-2026 | 23:57:24 WIB
 Calculation by input file
 Sum X = 35.0
 Sum Y = 442.0\mSum X*Y = 2792.0
@@ -89,7 +99,8 @@ Calculated a1 = -288.142349
 Calculated a1 = -288.142349
 Final Linear Regression result: 
 
-y = -288.142349x + 1754.497034Monday, 08-06-2026 | 11:28:32 WIB
+y = -288.142349x + 1754.497034
+Monday, 08-06-2026 | 11:28:32 WIB
 
 Calculation by cloud file
 Sum X = 35.0
@@ -231,6 +242,7 @@ Calculated a1 = -288.142349
 Final Linear Regression result: 
 
 y = -288.142349x + 1754.497034
+
 Monday, 08-06-2026 | 11:37:10 WIB
 
 Calculation by input file
@@ -245,6 +257,7 @@ Calculated a1 = -288.142349
 Final Linear Regression result: 
 
 y = -288.142349x + 1754.497034
+
 Monday, 08-06-2026 | 11:39:10 WIB
 
 Calculation by cloud file
@@ -259,6 +272,7 @@ Calculated a1 = -306.202847
 Final Linear Regression result: 
 
 y = -306.202847x + 1864.849941
+
 Monday, 08-06-2026 | 11:39:27 WIB
 
 Calculation by input file
@@ -284,3 +298,34 @@ Calculated a1 = -297.172598
 Final Linear Regression result: 
 
 y = -297.172598x + 1809.673488
+
+Monday, 08-06-2026 | 11:47:21 WIB
+
+Calculation by input file
+Sum X = 35.0
+Sum Y = 442.0\mSum X*Y = 2792.0
+Sum X^2 = 251.0
+Average X = 5.833333333333333
+Average Y = 73.66666666666667
+Banyak data = 6
+Calculated a1 = -288.142349
+Calculated a1 = -288.142349
+Final Linear Regression result: 
+
+y = -288.142349x + 1754.497034
+
+Monday, 08-06-2026 | 12:04:35 WIB
+
+Calculation by input file
+Sum X = 35.0
+Sum Y = 442.0\mSum X*Y = 2792.0
+Sum X^2 = 251.0
+Average X = 5.833333333333333
+Average Y = 73.66666666666667
+Banyak data = 6
+Calculated a1 = -288.142349
+Calculated a1 = -288.142349
+Final Linear Regression result: 
+
+y = -288.142349x + 1754.497034
+

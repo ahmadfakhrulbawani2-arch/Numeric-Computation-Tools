@@ -3,9 +3,26 @@ from halo import Halo
 from typing import List
 import math
 import os
+import sys
 
 EPSILON: float = 1e-12
 
+# replacing print(f"")
+def printf(format_string: str) -> None:
+  # 1. Ambil scope (namespace) dari tempat fungsi printf() ini dipanggil
+  frame = sys._getframe(1)
+  local_vars = frame.f_locals
+  global_vars = frame.f_globals
+  
+  # 2. Lakukan formatting manual menggunakan namespace tersebut
+  # .format_map otomatis mencocokkan teks di dalam {} dengan nama variabel yang ada
+  try:
+    # Gabungkan global dan local vars (local override global jika namanya sama)
+    context = {**global_vars, **local_vars}
+    print(format_string.format_map(context), end="\n")
+  except KeyError as e:
+    # Antisipasi kalau kamu nulis {variabel} tapi variabelnya belum di-define
+    print(f"\n[Printf Error]: Variabel {e} belum di-define!\n")
 
 def DerivativeF(coeffs: List[float]) -> List[float]:
     return [coeffs[i] * i for i in range(1, len(coeffs))]

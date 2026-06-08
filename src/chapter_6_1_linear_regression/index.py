@@ -90,7 +90,7 @@ class Reg_Data:
         buffer.write(f"Sum X = {self.sum_x}\n")
         time.sleep(0.2)
         print(f"Sum Y = {self.sum_y}")
-        buffer.write(f"Sum Y = {self.sum_y}\m")
+        buffer.write(f"Sum Y = {self.sum_y}\n")
         time.sleep(0.2)
         print(f"Sum X*Y = {self.sum_xy}")
         buffer.write(f"Sum X*Y = {self.sum_xy}\n")
@@ -121,7 +121,7 @@ class Reg_Data:
         buffer.write("Final Linear Regression result: \n\n")
         time.sleep(0.2)
         print(f"y = {a1:.6f}x + {a0:.6f}")
-        buffer.write(f"y = {a1:.6f}x + {a0:.6f}\n")
+        buffer.write(f"y = {a1:.6f}x + {a0:.6f}\n\n")
 
 
 def csv_processing(PATH):
@@ -159,7 +159,7 @@ def csv_processing(PATH):
         print("=== Data fetched successfully ===")
         time.sleep(0.2)
         print()
-        print(f"X = {raw_data.x_data}")
+        printf(f"X = {raw_data.x_data}")
         time.sleep(0.2)
         print(f"Y = {raw_data.y_data}")
         print()
@@ -239,6 +239,7 @@ def linear_regression():
         "Input manual data",
         "Fetch data from files",
         "Fetch data from Google Drive",
+        "Feth run logs",
         "Quit",
     ]
 
@@ -296,6 +297,9 @@ def linear_regression():
                         "Running Numeric Regression with fetching Google Drive file"
                     )
                     menu = "cloud file"
+                case 3:
+                    open_output(OUT_PATH, PROG_NAME)
+                    menu = "Misc"
                 case last_idx:
                     stop_jam.set()
                     clear_screen()
@@ -305,15 +309,27 @@ def linear_regression():
             
             print("")
             style.dalam_menu_kalkulasi = False
-            pilihan = (
-                input(
-                    f"\nPress {AnsiColors.BOLD}[s]{AnsiColors.RESET} to save result,\n\
+            if menu == "Misc":
+                sys.stdout.write("\n\n\033[2A")
+                sys.stdout.flush()
+                pilihan = (
+                    input(
+                        f"{AnsiColors.BOLD}[Enter or any key]{AnsiColors.RESET} to back to main menu,\n\
+or press {AnsiColors.BOLD}[q]{AnsiColors.RESET} to exit: "
+                    )
+                    .strip()
+                    .lower()
+                )
+            else:
+                pilihan = (
+                    input(
+                        f"\nPress {AnsiColors.BOLD}[s]{AnsiColors.RESET} to save result,\n\
 {AnsiColors.BOLD}[Enter or any key]{AnsiColors.RESET} to back to main menu,\n\
 or press {AnsiColors.BOLD}[q]{AnsiColors.RESET} to exit: "
+                    )
+                    .strip()
+                    .lower()
                 )
-                .strip()
-                .lower()
-            )
 
             if pilihan == "q":
                 stop_jam.set()

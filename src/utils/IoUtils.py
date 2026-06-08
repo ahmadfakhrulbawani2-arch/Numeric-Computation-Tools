@@ -1,5 +1,5 @@
 from typing import List
-from datetime import datetime
+import datetime
 import re
 import requests
 from src.utils.FuncUtils import *
@@ -202,7 +202,7 @@ def write_result(menu: str, buffer: io.StringIO, path: str, PROG_NAME: str):
     OUT_PATH = root_dir / "out" / path
     try:    
         with open(file=OUT_PATH, mode="a", encoding="utf-8") as file:
-            sekarang = datetime.now()
+            sekarang = datetime.datetime.now()
             str_now = sekarang.strftime("%A, %d-%m-%Y | %H:%M:%S WIB")
             file.write(f"{str_now}\n")
             file.write(f"\nCalculation by {menu}\n")
@@ -223,9 +223,19 @@ def write_result(menu: str, buffer: io.StringIO, path: str, PROG_NAME: str):
 
 def open_output(out_path: str, PROG_NAME: str):
     true_path = root_dir / "out" / out_path
+    print(f"=== Output file of {PROG_NAME} ===")
+    print()
+    success_run_cnt = 0
+    Lazy_Loading(f"Opening {PROG_NAME} logs...", duration=0.15)
     try:
         with open(file=true_path, mode="r", encoding="utf-8") as file:
-            file.read()
+            for line in file:
+                if line.find("Calculation by") != -1:
+                    success_run_cnt += 1
+                print(line.strip())
+                time.sleep(.0025)
+            print("=== TL;DR: ===")
+            print(f"Success run count = {success_run_cnt}")
     except FileNotFoundError:
         log_activities(f"File not found in {PROG_NAME}. Failed to write", "ERROR")
         raise FileNotFoundError(f"File/Path not found")
