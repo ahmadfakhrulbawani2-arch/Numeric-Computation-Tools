@@ -44,6 +44,7 @@ class Csv_Data:
     x_data = []
     y_data = []
 
+
 class Reg_Data:
     # constructor
     def __init__(self, datas: Csv_Data):
@@ -121,6 +122,7 @@ class Reg_Data:
         time.sleep(0.2)
         print(f"y = {a1:.6f}x + {a0:.6f}")
         buffer.write(f"y = {a1:.6f}x + {a0:.6f}\n\n")
+
 
 def reg_processing(raw_data: Csv_Data):
     if not isinstance(raw_data, Csv_Data):
@@ -202,25 +204,29 @@ def input_manual():
     inputUser: str = input(
         f"Please input how many data you have, or {AnsiColors.BOLD}[q]{AnsiColors.RESET} to exit: "
     ).strip()
-    if inputUser.lower() == 'q':
+    if inputUser.lower() == "q":
         printf("User quit the program...")
         log_activities(f"Quitting {PROG_NAME} program...")
         return
-    
+
     while not InputValidator.is_numeric(inputUser):
-        inputUser = input(f"Please input number only or {AnsiColors.BOLD}[q]{AnsiColors.RESET} to exit: ")
-        if inputUser.lower() == 'q':
+        inputUser = input(
+            f"Please input number only or {AnsiColors.BOLD}[q]{AnsiColors.RESET} to exit: "
+        )
+        if inputUser.lower() == "q":
             printf("User quit the program...")
             log_activities(f"Quitting {PROG_NAME} program...")
             return
-    
+
     byk_data = int(inputUser)
     raw_data = Csv_Data()
     for i in range(byk_data):
         x_val = input(f"X{i+1}: ")
         y_val = input(f"Y{i+1}: ")
-        
-        while not InputValidator.is_numeric(x_val) or not InputValidator.is_numeric(y_val):
+
+        while not InputValidator.is_numeric(x_val) or not InputValidator.is_numeric(
+            y_val
+        ):
             print(f"{AnsiColors.RED}Please input number only{AnsiColors.RESET}")
             x_val = input(f"X{i+1}: ")
             y_val = input(f"Y{i+1}: ")
@@ -255,11 +261,11 @@ def fetch_from_drive():
     inputUrl: str = input(
         f"Please input file URL (Google Drive text file only, all extension, {AnsiColors.BOLD}{AnsiColors.BG_WHITE}and public{AnsiColors.RESET}) or {AnsiColors.BOLD}[q]{AnsiColors.RESET} to exit: "
     ).strip()
-    if inputUrl.lower() == 'q':
+    if inputUrl.lower() == "q":
         printf("User quit the program...")
         log_activities(f"Quitting {PROG_NAME} program...")
         return
-    
+
     time.sleep(0.2)
     print(f"fetching data from {inputUrl}")
     time.sleep(0.2)
@@ -350,7 +356,7 @@ def linear_regression():
                     print(f"\n Keluar dari program {PROG_NAME}")
                     log_activities(f"Closing program {PROG_NAME}...")
                     break
-            
+
             print("")
             style.dalam_menu_kalkulasi = False
             if menu == "Misc":
