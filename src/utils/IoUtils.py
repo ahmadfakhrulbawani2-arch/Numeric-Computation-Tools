@@ -4,6 +4,7 @@ import re
 import requests
 from src.utils.FuncUtils import *
 from src.utils.Style import print_text_gradient_angle, AnsiColors
+from .Logger import log_activities
 import os
 import sys
 
@@ -58,34 +59,37 @@ def PrintIterations(iter: int, vars: List[str], *params) -> None:
 
 
 # download input.txt from cloud
-def download_from_gdrive(url: str, output_path: str = "../input/input.txt") -> bool:
+def download_from_gdrive(PROG_NAME: str, url: str, output_path: str = "../input/input.txt") -> bool:
     """
     Mengunduh file dari Google Drive menggunakan Link Share biasa
-    atau langsung menggunakan File ID.
+    atau langsung menggunakan File ID. Mendukung format .txt, .csv, dll.
     """
     # RegEx untuk mengekstrak File ID jika user memasukkan URL penuh
     match = re.search(r"/d/([a-zA-Z0-9-_]+)", url)
     file_id = match.group(1) if match else url
 
-    # URL Direct Download untuk Google Drive
-    direct_download_url = f"{url}"
+    # FIX: Gunakan URL export/download resmi dari Google Drive API
+    # Jika file berukuran sangat besar (>100MB), perlu penanganan token virus (bisa dibahas nanti kalau butuh)
+    direct_download_url = f"https://docs.google.com/uc?export=download&id={file_id}"
 
     print(f"[Cloud] Downloading file from GDrive (ID: {file_id})...")
+    log_activities(f"[Cloud] Downloading file from GDrive (ID: {file_id}) in {PROG_NAME}")
     try:
         response = requests.get(direct_download_url, stream=True)
         response.raise_for_status()
-        # Simpan file ke direktori lokal
+        
+        # Simpan file ke direktori lokal (aman untuk .txt, .csv, biner, dll karena "wb")
         with open(output_path, "wb") as f:
             for chunk in response.iter_content(chunk_size=8192):
                 if chunk:
                     f.write(chunk)
 
         print(f"[Cloud] File successfully downloaded and saved to: {output_path}")
-        # log_activities("Succesfully fetch input from cloud", "SUCCESS 200")
+        log_activities(f"[Cloud] File successfully downloaded and saved to: {output_path} in {PROG_NAME}")
         return True
     except Exception as e:
         print(f"[Error] Failed to download file: {e}")
-        # log_activities(f"Unable to fetch input from cloud. Please check your connection or the file permission. Err: {e}", "ERROR 400")
+        log_activities(f"[Error] Failed to download file: {e} in {PROG_NAME}")
         return False
 
 
@@ -144,6 +148,7 @@ def draw_menu(
     ASCII_HEADER: str,
     header_colors: List[str],
     awal_jalan=False,
+    additional_header = "",
 ) -> None:
     if awal_jalan:
         clear_screen()
@@ -152,6 +157,7 @@ def draw_menu(
         print(
             f"\n Gunakan [↑/↓] Panah untuk Navigasi, {AnsiColors.BOLD}[Enter]{AnsiColors.RESET} untuk Memilih, {AnsiColors.BOLD}[Q]{AnsiColors.RESET} untuk Keluar\n"
         )
+        sys.stdout.write(additional_header)
         print("─" * 108)
     else:
         # Mengembalikan kursor naik ke atas agar menu tertimpa dengan halus tanpa reload global

@@ -8,6 +8,7 @@ import datetime
 # MACRO VARIABLES
 IO_DIR = "linear_regression"
 IN_PATH = f"./input/{IO_DIR}/table.csv"
+IN_CLOUD_PATH = f"./input/{IO_DIR}/cloud_table.csv"
 OUT_PATH = f"./out/{IO_DIR}/result.txt"
 
 PROG_NAME = "Linear Regression"
@@ -28,7 +29,13 @@ REGRESSION_ART = rf"""
     |  _ <  __/ (_| | | |  __/\__ \__ \ | (_) | | | |
     |_| \_\___|\__, |_|  \___||___/___/_|\___/|_| |_|
                |___/                                 
+
+
 """
+
+ADDITIONAL_HEADER = f"\
+    Input directory: /input/linear_regression\n\
+    File output: {OUT_PATH}\n"
 
 buffer = io.StringIO()
 
@@ -37,6 +44,7 @@ class Csv_Data:
     y_data = []
 
 class Reg_Data:
+    # constructor
     def __init__(self, datas: Csv_Data):
         len_x = len(datas.x_data)
         len_y = len(datas.y_data)
@@ -111,14 +119,15 @@ class Reg_Data:
         buffer.write("Final Linear Regression result: \n\n")
         time.sleep(.2)
         print(f"y = {a1:.6f}x + {a0:.6f}")
-        buffer.write(f"y = {a1:.6f}x + {a0:.6f}")
+        buffer.write(f"y = {a1:.6f}x + {a0:.6f}\n")
 
-def write_result():
+def write_result(menu):
     try:
         with open(file=OUT_PATH, mode="a", encoding="utf-8") as file:
             sekarang = datetime.datetime.now()
             str_now = sekarang.strftime("%A, %d-%m-%Y | %H:%M:%S WIB")
             file.write(f"{str_now}\n")
+            file.write(f"\nCalculation by {menu}\n")
             file.write(buffer.getvalue())
             sys.stdout.write("\033[J")
             sys.stdout.write("\n\n\033[4A")
@@ -130,23 +139,13 @@ def write_result():
     except FileNotFoundError:
         log_activities(f"File not found in {PROG_NAME}. Failed to write", "ERROR")
         raise FileNotFoundError(f"File/Path not found")
+    
 
-def input_manual():
-    return
-
-
-def fetch_data_from_files():
-    print_text_gradient_angle(REGRESSION_ART, REGRESSION_COLORS)
-    PrintIntroProg("", PROG_NAME)
-    print(f"fetching data from {IN_PATH}")
-    print(f"Make sure you have put correct format or it will error")
-    print()
-
-    # pasrsing csv
+def csv_processing(PATH):
     raw_data = Csv_Data()
 
     try:
-        with open(file=IN_PATH, mode="r", encoding="utf-8") as file:
+        with open(file=PATH, mode="r", encoding="utf-8") as file:
             reader = csv.reader(file)
             header = next(reader)
             header = [h.strip().lower() for h in header]
@@ -166,8 +165,8 @@ def fetch_data_from_files():
                     raw_data.y_data.append(float(row[y_idx]))
                 except ValueError:
                     print(f"Skipping improper row-{row}")
-
-        Lazy_Loading(f"Scanning {IN_PATH}", .2)
+        Lazy_Loading(f"Scanning {PATH}", .2)
+        print()
         time.sleep(.2)
         print("=== Data fetched successfully ===")
         time.sleep(.2)
@@ -201,8 +200,44 @@ def fetch_data_from_files():
 
     return
 
+def input_manual():
+    return
+
+
+def fetch_data_from_files():
+    time.sleep(.2)
+    print_text_gradient_angle(REGRESSION_ART, REGRESSION_COLORS)
+    time.sleep(.2)
+    PrintIntroProg2(PROG_NAME)
+    time.sleep(.2)
+    print()
+    print(f"fetching data from {IN_PATH}")
+    print(f"Make sure you have put correct format or it will error")
+    print()
+    csv_processing(IN_PATH)
+    return
+
 
 def fetch_from_drive():
+    print_text_gradient_angle(REGRESSION_ART, REGRESSION_COLORS)
+    time.sleep(.2)
+    PrintIntroProg2(PROG_NAME)
+    print()
+    time.sleep(.2)
+    inputUrl: str = input(f"Silahkan input URL file (Google Drive text file only, all extension, {AnsiColors.BOLD}{AnsiColors.BG_WHITE} and public{AnsiColors.RESET}): ").strip()
+    time.sleep(.2)
+    print(f"fetching data from {inputUrl}")
+    time.sleep(.2)
+    print(f"Make sure you have put correct format or it will error")
+    print()
+    canDownload = download_from_gdrive(PROG_NAME, inputUrl, IN_CLOUD_PATH)
+
+    if not canDownload:
+        print("Sorry, we can't download/write your spesific URL path")
+        log_activities(f"Can't download file from {PROG_NAME}")
+        return 
+    
+    csv_processing(IN_CLOUD_PATH)
     return
 
 
@@ -219,12 +254,13 @@ def linear_regression():
 
     style.Clock_Widget()
     draw_menu(
-        main_menu, curr_select, "", REGRESSION_ART, REGRESSION_COLORS, awal_jalan=True
+        main_menu, curr_select, "", REGRESSION_ART, REGRESSION_COLORS, awal_jalan=True, additional_header=ADDITIONAL_HEADER
     )
 
     while True:
         len_menu = len(main_menu)
         last_idx = len_menu - 1
+        menu = ""
         style.stop_jam.clear()
         style.dalam_menu_kalkulasi = False
         style.Clock_Widget()
@@ -249,16 +285,19 @@ def linear_regression():
                 case 0:
                     input_manual()
                     log_activities("Running Numeric Regression with manual input")
+                    menu = "manual input"
                 case 1:
                     fetch_data_from_files()
                     log_activities(
                         "Running Numeric Regression with fetching input file"
                     )
+                    menu = "input file"
                 case 2:
                     fetch_from_drive()
                     log_activities(
                         "Running Numeric Regression with fetching Google Drive file"
                     )
+                    menu = "cloud file"
                 case last_idx:
                     stop_jam.set()
                     clear_screen()
@@ -268,9 +307,9 @@ def linear_regression():
 
             pilihan = (
                 input(
-f"\nTekan {AnsiColors.BOLD}[s]{AnsiColors.RESET} untuk menyimpan hasil,\n\
-{AnsiColors.BOLD}[Enter]{AnsiColors.RESET} untuk kembali ke menu,\n\
-atau ketik {AnsiColors.BOLD}[q]{AnsiColors.RESET} untuk keluar: "
+f"\nPress {AnsiColors.BOLD}[s]{AnsiColors.RESET} to save result,\n\
+{AnsiColors.BOLD}[Enter or any key]{AnsiColors.RESET} to back to main menu,\n\
+or press {AnsiColors.BOLD}[q]{AnsiColors.RESET} to exit: "
                 )
                 .strip()
                 .lower()
@@ -283,7 +322,7 @@ atau ketik {AnsiColors.BOLD}[q]{AnsiColors.RESET} untuk keluar: "
                 log_activities(f"Closing program {PROG_NAME}...")
                 break
             elif pilihan == 's':
-                write_result()
+                write_result(menu)
 
             style.dalam_menu_kalkulasi = False
             draw_menu(
@@ -293,6 +332,7 @@ atau ketik {AnsiColors.BOLD}[q]{AnsiColors.RESET} untuk keluar: "
                 REGRESSION_ART,
                 REGRESSION_COLORS,
                 awal_jalan=True,
+                additional_header=ADDITIONAL_HEADER
             )
 
 if __name__ == "__main__":
