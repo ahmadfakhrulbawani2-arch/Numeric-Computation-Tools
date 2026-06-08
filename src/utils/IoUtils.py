@@ -6,8 +6,12 @@ from src.utils.FuncUtils import *
 from src.utils.Style import print_text_gradient_angle, AnsiColors
 from .Logger import log_activities
 import os
+from pathlib import *
 import sys
+import io
 
+# class
+loader = TrueLoader()
 
 # this is to get time.now
 def GetTimeNow() -> str:
@@ -21,9 +25,11 @@ def PrintIntroProg(ascii: str = "", title: str = "Komnum26") -> None:
         f"Welcome to {title}. Please input the equation (only support up to x^0, dosen't support x^-1, etc...)"
     )
 
+
 def PrintIntroProg2(title: str = "Komnum26"):
     print(f"Welcome to {title}")
     print()
+
 
 # This return equation string
 def GetEqState(eq: List[int]) -> str:
@@ -59,7 +65,9 @@ def PrintIterations(iter: int, vars: List[str], *params) -> None:
 
 
 # download input.txt from cloud
-def download_from_gdrive(PROG_NAME: str, url: str, output_path: str = "../input/input.txt") -> bool:
+def download_from_gdrive(
+    PROG_NAME: str, url: str, output_path: str = "../input/input.txt"
+) -> bool:
     """
     Mengunduh file dari Google Drive menggunakan Link Share biasa
     atau langsung menggunakan File ID. Mendukung format .txt, .csv, dll.
@@ -72,23 +80,28 @@ def download_from_gdrive(PROG_NAME: str, url: str, output_path: str = "../input/
     # Jika file berukuran sangat besar (>100MB), perlu penanganan token virus (bisa dibahas nanti kalau butuh)
     direct_download_url = f"https://docs.google.com/uc?export=download&id={file_id}"
 
-    print(f"[Cloud] Downloading file from GDrive (ID: {file_id})...")
-    log_activities(f"[Cloud] Downloading file from GDrive (ID: {file_id}) in {PROG_NAME}")
+    loader.start(f"[Cloud] Downloading file from GDrive (ID: {file_id})...")
+    log_activities(
+        f"[Cloud] Downloading file from GDrive (ID: {file_id}) in {PROG_NAME}"
+    )
     try:
         response = requests.get(direct_download_url, stream=True)
         response.raise_for_status()
-        
+
         # Simpan file ke direktori lokal (aman untuk .txt, .csv, biner, dll karena "wb")
         with open(output_path, "wb") as f:
             for chunk in response.iter_content(chunk_size=8192):
                 if chunk:
                     f.write(chunk)
 
-        print(f"[Cloud] File successfully downloaded and saved to: {output_path}")
-        log_activities(f"[Cloud] File successfully downloaded and saved to: {output_path} in {PROG_NAME}")
+        loader.stop(f"[Cloud] File successfully downloaded and saved to: {output_path}")
+        log_activities(
+            f"[Cloud] File successfully downloaded and saved to: {output_path} in {PROG_NAME}"
+        )
         return True
     except Exception as e:
         print(f"[Error] Failed to download file: {e}")
+        loader.stop("Download aborted ❌")
         log_activities(f"[Error] Failed to download file: {e} in {PROG_NAME}")
         return False
 
@@ -148,7 +161,7 @@ def draw_menu(
     ASCII_HEADER: str,
     header_colors: List[str],
     awal_jalan=False,
-    additional_header = "",
+    additional_header="",
 ) -> None:
     if awal_jalan:
         clear_screen()
@@ -163,10 +176,56 @@ def draw_menu(
         # Mengembalikan kursor naik ke atas agar menu tertimpa dengan halus tanpa reload global
         sys.stdout.write(f"\033[{len(menu_items) + 1}A")
         sys.stdout.flush()
-
     for i, item in enumerate(menu_items):
         if i == selected_index:
             print(f"\033[K \033[92m{AnsiColors.BOLD}►   {item}\033[0m")
         else:
             print(f"\033[K \033[90m    {item}\033[0m")
     print("\033[K" + "─" * 108)
+
+def get_project_root() -> Path:
+  # Ambil PWD / CWD saat ini
+  current_dir = Path.cwd()
+  
+  # Lakukan looping naik ke atas (traverse up)
+  for path in [current_dir] + list(current_dir.parents):
+    # Cek apakah folder ini berisi penanda root project
+    if (path / '.git').exists() or (path / 'src').exists():
+      return path
+      
+  # Jika tidak ketemu penanda, kembalikan CWD sebagai fallback
+  return current_dir
+
+# WARNING, this does not support dir creation
+root_dir = get_project_root()
+def write_result(menu: str, buffer: io.StringIO, path: str, PROG_NAME: str):
+    OUT_PATH = root_dir / "out" / path
+    try:    
+        with open(file=OUT_PATH, mode="a", encoding="utf-8") as file:
+            sekarang = datetime.now()
+            str_now = sekarang.strftime("%A, %d-%m-%Y | %H:%M:%S WIB")
+            file.write(f"{str_now}\n")
+            file.write(f"\nCalculation by {menu}\n")
+            file.write(buffer.getvalue())
+            sys.stdout.write("\033[J")
+            sys.stdout.write("\n\n\033[4A")
+            sys.stdout.flush()
+            print()
+            print(
+                f"\nFile saved successfully in {AnsiColors.BG_BLACK}{AnsiColors.BOLD}{OUT_PATH}{AnsiColors.RESET}\n"
+            )
+            print("Going back to menu in 5 seconds...")
+            print()
+            time.sleep(5)
+    except FileNotFoundError:
+        log_activities(f"File not found in {PROG_NAME}. Failed to write", "ERROR")
+        raise FileNotFoundError(f"File/Path not found")
+
+def open_output(out_path: str, PROG_NAME: str):
+    true_path = root_dir / "out" / out_path
+    try:
+        with open(file=true_path, mode="r", encoding="utf-8") as file:
+            file.read()
+    except FileNotFoundError:
+        log_activities(f"File not found in {PROG_NAME}. Failed to write", "ERROR")
+        raise FileNotFoundError(f"File/Path not found")

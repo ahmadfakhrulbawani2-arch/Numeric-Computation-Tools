@@ -9,7 +9,7 @@ import datetime
 IO_DIR = "linear_regression"
 IN_PATH = f"./input/{IO_DIR}/table.csv"
 IN_CLOUD_PATH = f"./input/{IO_DIR}/cloud_table.csv"
-OUT_PATH = f"./out/{IO_DIR}/result.txt"
+OUT_PATH = f"{IO_DIR}/result.txt"
 
 PROG_NAME = "Linear Regression"
 REGRESSION_COLORS = [
@@ -39,9 +39,11 @@ ADDITIONAL_HEADER = f"\
 
 buffer = io.StringIO()
 
+
 class Csv_Data:
     x_data = []
     y_data = []
+
 
 class Reg_Data:
     # constructor
@@ -51,9 +53,9 @@ class Reg_Data:
         if len_x <= 0 or len_y <= 0 or len_x != len_y:
             print("Error, caught no data")
             log_activities("Caught no data in ", "ERROR")
-        data_x = datas.x_data 
-        data_y = datas.y_data 
-        
+        data_x = datas.x_data
+        data_y = datas.y_data
+
         self.data_amount = max(len(data_x), len(data_y))
         self.sum_x = sum(data_x)
         self.sum_y = sum(data_y)
@@ -68,12 +70,12 @@ class Reg_Data:
             return
 
         for x, y in zip(data_x, data_y):
-            self.sum_xy += (x * y)
-            self.sum_x2 += (x ** 2)
+            self.sum_xy += x * y
+            self.sum_x2 += x**2
 
     def _calc_a1(self) -> float | None:
         numerator = (self.data_amount * self.sum_xy) - (self.sum_x * self.sum_xy)
-        denumerator = (self.data_amount * self.sum_x2) - (self.sum_x ** 2)
+        denumerator = (self.data_amount * self.sum_x2) - (self.sum_x**2)
         result = 0.0
         try:
             result = numerator / denumerator
@@ -82,64 +84,45 @@ class Reg_Data:
             print("Error, caught division by zero")
             log_activities("Division by zero error", "ERROR")
             return None
-    
+
     def _show_data(self):
         print(f"Sum X = {self.sum_x}")
         buffer.write(f"Sum X = {self.sum_x}\n")
-        time.sleep(.2)
+        time.sleep(0.2)
         print(f"Sum Y = {self.sum_y}")
         buffer.write(f"Sum Y = {self.sum_y}\m")
-        time.sleep(.2)
+        time.sleep(0.2)
         print(f"Sum X*Y = {self.sum_xy}")
         buffer.write(f"Sum X*Y = {self.sum_xy}\n")
-        time.sleep(.2)
+        time.sleep(0.2)
         print(f"Sum X^2 = {self.sum_x2}")
         buffer.write(f"Sum X^2 = {self.sum_x2}\n")
-        time.sleep(.2)
+        time.sleep(0.2)
         print(f"Average X = {self.avg_x}")
         buffer.write(f"Average X = {self.avg_x}\n")
-        time.sleep(.2)
+        time.sleep(0.2)
         print(f"Average Y = {self.avg_y}")
         buffer.write(f"Average Y = {self.avg_y}\n")
-        time.sleep(.2)
+        time.sleep(0.2)
         print(f"Banyak data = {self.data_amount}")
         buffer.write(f"Banyak data = {self.data_amount}\n")
-        time.sleep(.2)
+        time.sleep(0.2)
 
     def _calc_expr(self):
         a1 = self._calc_a1()
         print(f"Calculated a1 = {a1:.6f}")
         buffer.write(f"Calculated a1 = {a1:.6f}\n")
-        time.sleep(.2)
+        time.sleep(0.2)
         a0 = self.avg_y - (a1 * self.avg_x)
         print(f"Calculated a1 = {a1:.6f}")
         buffer.write(f"Calculated a1 = {a1:.6f}\n")
-        time.sleep(.2)
+        time.sleep(0.2)
         sys.stdout.write("Final Linear Regression result: \n\n")
         buffer.write("Final Linear Regression result: \n\n")
-        time.sleep(.2)
+        time.sleep(0.2)
         print(f"y = {a1:.6f}x + {a0:.6f}")
         buffer.write(f"y = {a1:.6f}x + {a0:.6f}\n")
 
-def write_result(menu):
-    try:
-        with open(file=OUT_PATH, mode="a", encoding="utf-8") as file:
-            sekarang = datetime.datetime.now()
-            str_now = sekarang.strftime("%A, %d-%m-%Y | %H:%M:%S WIB")
-            file.write(f"{str_now}\n")
-            file.write(f"\nCalculation by {menu}\n")
-            file.write(buffer.getvalue())
-            sys.stdout.write("\033[J")
-            sys.stdout.write("\n\n\033[4A")
-            sys.stdout.flush()
-            print(f"File saved successfully in {AnsiColors.BG_BLACK}{AnsiColors.BOLD}{OUT_PATH}{AnsiColors.RESET}")
-            print("Going back to menu in 5 seconds...")
-            print()
-            time.sleep(5)
-    except FileNotFoundError:
-        log_activities(f"File not found in {PROG_NAME}. Failed to write", "ERROR")
-        raise FileNotFoundError(f"File/Path not found")
-    
 
 def csv_processing(PATH):
     raw_data = Csv_Data()
@@ -151,12 +134,17 @@ def csv_processing(PATH):
             header = [h.strip().lower() for h in header]
 
             try:
-                x_idx = header.index('x')
-                y_idx = header.index('y')
+                x_idx = header.index("x")
+                y_idx = header.index("y")
             except ValueError:
-                log_activities(f"Error: CSV file must have 'x' and 'y' column (case insensitive) in {PROG_NAME}", "ERROR")
-                raise ValueError("CSV file must have 'x' and 'y' column (case insensitive)")
-            
+                log_activities(
+                    f"Error: CSV file must have 'x' and 'y' column (case insensitive) in {PROG_NAME}",
+                    "ERROR",
+                )
+                raise ValueError(
+                    "CSV file must have 'x' and 'y' column (case insensitive)"
+                )
+
             for row in reader:
                 if not row:
                     continue
@@ -165,17 +153,17 @@ def csv_processing(PATH):
                     raw_data.y_data.append(float(row[y_idx]))
                 except ValueError:
                     print(f"Skipping improper row-{row}")
-        Lazy_Loading(f"Scanning {PATH}", .2)
+        Lazy_Loading(f"Scanning {PATH}", 0.2)
         print()
-        time.sleep(.2)
+        time.sleep(0.2)
         print("=== Data fetched successfully ===")
-        time.sleep(.2)
+        time.sleep(0.2)
         print()
         print(f"X = {raw_data.x_data}")
-        time.sleep(.2)
+        time.sleep(0.2)
         print(f"Y = {raw_data.y_data}")
         print()
-        time.sleep(.2)
+        time.sleep(0.2)
         Lazy_Loading("Calculating sum X-Y, avg X-Y, sum XY, sum X^2...", 0.5)
         print()
         the_data = Reg_Data(raw_data)
@@ -189,27 +177,28 @@ def csv_processing(PATH):
         print()
         the_data._calc_expr()
         print()
-        sys.stdout.write("\n\n\033[4A")
+        sys.stdout.write("\n\n\033[5A")
         sys.stdout.flush()
-        time.sleep(.1)
+        time.sleep(0.1)
         style.dalam_menu_kalkulasi = False
-        
+
     except FileNotFoundError:
         log_activities(f"File not found in {PROG_NAME}.", "ERROR")
         raise FileNotFoundError(f"File/Path not found")
 
     return
 
+
 def input_manual():
     return
 
 
 def fetch_data_from_files():
-    time.sleep(.2)
+    time.sleep(0.2)
     print_text_gradient_angle(REGRESSION_ART, REGRESSION_COLORS)
-    time.sleep(.2)
+    time.sleep(0.2)
     PrintIntroProg2(PROG_NAME)
-    time.sleep(.2)
+    time.sleep(0.2)
     print()
     print(f"fetching data from {IN_PATH}")
     print(f"Make sure you have put correct format or it will error")
@@ -220,14 +209,16 @@ def fetch_data_from_files():
 
 def fetch_from_drive():
     print_text_gradient_angle(REGRESSION_ART, REGRESSION_COLORS)
-    time.sleep(.2)
+    time.sleep(0.2)
     PrintIntroProg2(PROG_NAME)
     print()
-    time.sleep(.2)
-    inputUrl: str = input(f"Silahkan input URL file (Google Drive text file only, all extension, {AnsiColors.BOLD}{AnsiColors.BG_WHITE} and public{AnsiColors.RESET}): ").strip()
-    time.sleep(.2)
+    time.sleep(0.2)
+    inputUrl: str = input(
+        f"Silahkan input URL file (Google Drive text file only, all extension, {AnsiColors.BOLD}{AnsiColors.BG_WHITE} and public{AnsiColors.RESET}): "
+    ).strip()
+    time.sleep(0.2)
     print(f"fetching data from {inputUrl}")
-    time.sleep(.2)
+    time.sleep(0.2)
     print(f"Make sure you have put correct format or it will error")
     print()
     canDownload = download_from_gdrive(PROG_NAME, inputUrl, IN_CLOUD_PATH)
@@ -235,12 +226,13 @@ def fetch_from_drive():
     if not canDownload:
         print("Sorry, we can't download/write your spesific URL path")
         log_activities(f"Can't download file from {PROG_NAME}")
-        return 
-    
+        return
+
     csv_processing(IN_CLOUD_PATH)
     return
 
 
+# === Main ===
 def linear_regression():
     Lazy_Loading("Opening files...")
     main_menu = [
@@ -254,7 +246,13 @@ def linear_regression():
 
     style.Clock_Widget()
     draw_menu(
-        main_menu, curr_select, "", REGRESSION_ART, REGRESSION_COLORS, awal_jalan=True, additional_header=ADDITIONAL_HEADER
+        main_menu,
+        curr_select,
+        "",
+        REGRESSION_ART,
+        REGRESSION_COLORS,
+        awal_jalan=True,
+        additional_header=ADDITIONAL_HEADER,
     )
 
     while True:
@@ -304,10 +302,12 @@ def linear_regression():
                     print(f"\n Keluar dari program {PROG_NAME}")
                     log_activities(f"Closing program {PROG_NAME}...")
                     break
-
+            
+            print("")
+            style.dalam_menu_kalkulasi = False
             pilihan = (
                 input(
-f"\nPress {AnsiColors.BOLD}[s]{AnsiColors.RESET} to save result,\n\
+                    f"\nPress {AnsiColors.BOLD}[s]{AnsiColors.RESET} to save result,\n\
 {AnsiColors.BOLD}[Enter or any key]{AnsiColors.RESET} to back to main menu,\n\
 or press {AnsiColors.BOLD}[q]{AnsiColors.RESET} to exit: "
                 )
@@ -321,10 +321,12 @@ or press {AnsiColors.BOLD}[q]{AnsiColors.RESET} to exit: "
                 print("\nKeluar dari program. Sampai jumpa, Bre!")
                 log_activities(f"Closing program {PROG_NAME}...")
                 break
-            elif pilihan == 's':
-                write_result(menu)
+            elif pilihan == "s":
+                clear_screen()
+                write_result(menu, buffer, OUT_PATH, PROG_NAME)
 
             style.dalam_menu_kalkulasi = False
+            clear_screen()
             draw_menu(
                 main_menu,
                 curr_select,
@@ -332,8 +334,9 @@ or press {AnsiColors.BOLD}[q]{AnsiColors.RESET} to exit: "
                 REGRESSION_ART,
                 REGRESSION_COLORS,
                 awal_jalan=True,
-                additional_header=ADDITIONAL_HEADER
+                additional_header=ADDITIONAL_HEADER,
             )
+
 
 if __name__ == "__main__":
     linear_regression()

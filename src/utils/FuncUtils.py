@@ -39,14 +39,35 @@ def CalcTrueError(real_root: float, approx_root: float) -> float:
     return abs((real_root - approx_root) / real_root)
 
 
+# just for styling 
 def Lazy_Loading(texts: str, duration=1.5) -> None:
-  # os.system('cls' if os.name == 'nt' else 'clear')
-  spinner = Halo(text=texts, color='cyan', spinner='dots')
-  # Mulai muter
-  spinner.start()
-  # Simulasi proses matematika/loading (misal 3 detik)
-  time.sleep(duration)
-  # Selesai dengan status sukses (Centang Hijau)
-  spinner.succeed('Ok done...')
-  time.sleep(0.5)
-  # os.system('cls' if os.name == 'nt' else 'clear')
+    # os.system('cls' if os.name == 'nt' else 'clear')
+    spinner = Halo(text=texts, color="cyan", spinner="dots")
+    # Mulai muter
+    spinner.start()
+    # Simulasi proses matematika/loading (misal 3 detik)
+    time.sleep(duration)
+    # Selesai dengan status sukses (Centang Hijau)
+    spinner.succeed("Ok done...")
+    time.sleep(0.5)
+    # os.system('cls' if os.name == 'nt' else 'clear')
+
+# this is true loading animation
+class TrueLoader:
+    def __init__(self, color="cyan", spinner="dots"):
+        self.color = color
+        self.spinner_type = spinner
+        self.spinner = None
+
+    def start(self, text: str) -> None:
+        if self.spinner is None:
+            self.spinner = Halo(text=text, color=self.color, spinner=self.spinner_type)
+            self.spinner.start()
+        else:
+            self.spinner.text = text
+            self.spinner.start()
+
+    def stop(self, success_text: str = "Ok done...") -> None:
+        if self.spinner:
+            self.spinner.succeed(success_text)
+            time.sleep(0.5)

@@ -15,7 +15,7 @@ from src import (
     draw_menu,
     clear_screen,
     get_key,
-    linear_regression
+    linear_regression,
 )
 import src.utils.Style as style
 
