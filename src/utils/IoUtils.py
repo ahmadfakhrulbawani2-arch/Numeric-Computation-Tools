@@ -13,6 +13,7 @@ import io
 # class
 loader = TrueLoader()
 
+
 # this is to get time.now
 def GetTimeNow() -> str:
     return datetime.now().strftime("%H:%M:%S | %d-%m-%Y")
@@ -183,24 +184,28 @@ def draw_menu(
             print(f"\033[K \033[90m    {item}\033[0m")
     print("\033[K" + "─" * 108)
 
+
 def get_project_root() -> Path:
-  # Ambil PWD / CWD saat ini
-  current_dir = Path.cwd()
-  
-  # Lakukan looping naik ke atas (traverse up)
-  for path in [current_dir] + list(current_dir.parents):
-    # Cek apakah folder ini berisi penanda root project
-    if (path / '.git').exists() or (path / 'src').exists():
-      return path
-      
-  # Jika tidak ketemu penanda, kembalikan CWD sebagai fallback
-  return current_dir
+    # Ambil PWD / CWD saat ini
+    current_dir = Path.cwd()
+
+    # Lakukan looping naik ke atas (traverse up)
+    for path in [current_dir] + list(current_dir.parents):
+        # Cek apakah folder ini berisi penanda root project
+        if (path / ".git").exists() or (path / "src").exists():
+            return path
+
+    # Jika tidak ketemu penanda, kembalikan CWD sebagai fallback
+    return current_dir
+
 
 # WARNING, this does not support dir creation
 root_dir = get_project_root()
+
+
 def write_result(menu: str, buffer: io.StringIO, path: str, PROG_NAME: str):
     OUT_PATH = root_dir / "out" / path
-    try:    
+    try:
         with open(file=OUT_PATH, mode="a", encoding="utf-8") as file:
             sekarang = datetime.datetime.now()
             str_now = sekarang.strftime("%A, %d-%m-%Y | %H:%M:%S WIB")
@@ -221,6 +226,7 @@ def write_result(menu: str, buffer: io.StringIO, path: str, PROG_NAME: str):
         log_activities(f"File not found in {PROG_NAME}. Failed to write", "ERROR")
         raise FileNotFoundError(f"File/Path not found")
 
+
 def open_output(out_path: str, PROG_NAME: str):
     true_path = root_dir / "out" / out_path
     print(f"=== Output file of {PROG_NAME} ===")
@@ -233,7 +239,7 @@ def open_output(out_path: str, PROG_NAME: str):
                 if line.find("Calculation by") != -1:
                     success_run_cnt += 1
                 print(line.strip())
-                time.sleep(.0025)
+                time.sleep(0.0025)
             print("=== TL;DR: ===")
             print(f"Success run count = {success_run_cnt}")
     except FileNotFoundError:
