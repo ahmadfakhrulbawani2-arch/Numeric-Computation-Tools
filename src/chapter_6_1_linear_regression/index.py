@@ -39,8 +39,6 @@ ADDITIONAL_HEADER = f"\
     Input directory: /input/linear_regression\n\
     File output: {OUT_PATH}\n"
 
-buffer = io.StringIO()
-
 
 class Csv_Data:
     x_data = []
@@ -89,41 +87,41 @@ class Reg_Data:
 
     def _show_data(self):
         print(f"Sum X = {self.sum_x}")
-        buffer.write(f"Sum X = {self.sum_x}\n")
+        g_buffer.write(f"Sum X = {self.sum_x}\n")
         time.sleep(0.2)
         print(f"Sum Y = {self.sum_y}")
-        buffer.write(f"Sum Y = {self.sum_y}\n")
+        g_buffer.write(f"Sum Y = {self.sum_y}\n")
         time.sleep(0.2)
         print(f"Sum X*Y = {self.sum_xy}")
-        buffer.write(f"Sum X*Y = {self.sum_xy}\n")
+        g_buffer.write(f"Sum X*Y = {self.sum_xy}\n")
         time.sleep(0.2)
         print(f"Sum X^2 = {self.sum_x2}")
-        buffer.write(f"Sum X^2 = {self.sum_x2}\n")
+        g_buffer.write(f"Sum X^2 = {self.sum_x2}\n")
         time.sleep(0.2)
         print(f"Average X = {self.avg_x}")
-        buffer.write(f"Average X = {self.avg_x}\n")
+        g_buffer.write(f"Average X = {self.avg_x}\n")
         time.sleep(0.2)
         print(f"Average Y = {self.avg_y}")
-        buffer.write(f"Average Y = {self.avg_y}\n")
+        g_buffer.write(f"Average Y = {self.avg_y}\n")
         time.sleep(0.2)
         print(f"Banyak data = {self.data_amount}")
-        buffer.write(f"Banyak data = {self.data_amount}\n")
+        g_buffer.write(f"Banyak data = {self.data_amount}\n")
         time.sleep(0.2)
 
     def _calc_expr(self):
         a1 = self._calc_a1()
         print(f"Calculated a1 = {a1:.6f}")
-        buffer.write(f"Calculated a1 = {a1:.6f}\n")
+        g_buffer.write(f"Calculated a1 = {a1:.6f}\n")
         time.sleep(0.2)
         a0 = self.avg_y - (a1 * self.avg_x)
         print(f"Calculated a1 = {a1:.6f}")
-        buffer.write(f"Calculated a1 = {a1:.6f}\n")
+        g_buffer.write(f"Calculated a1 = {a1:.6f}\n")
         time.sleep(0.2)
         sys.stdout.write("Final Linear Regression result: \n\n")
-        buffer.write("Final Linear Regression result: \n\n")
+        g_buffer.write("Final Linear Regression result: \n\n")
         time.sleep(0.2)
         print(f"y = {a1:.6f}x + {a0:.6f}")
-        buffer.write(f"y = {a1:.6f}x + {a0:.6f}\n\n")
+        g_buffer.write(f"y = {a1:.6f}x + {a0:.6f}\n\n")
 
 
 def reg_processing(raw_data: Csv_Data):
@@ -391,7 +389,7 @@ or press {AnsiColors.BOLD}[q]{AnsiColors.RESET} to exit: "
                 break
             elif pilihan == "s":
                 clear_screen()
-                write_result(menu, buffer, OUT_PATH, PROG_NAME)
+                write_result(menu, OUT_PATH, PROG_NAME)
 
             style.dalam_menu_kalkulasi = False
             clear_screen()

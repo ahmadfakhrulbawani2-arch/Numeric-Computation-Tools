@@ -20,6 +20,7 @@ g_buffer = io.StringIO()
 # LEGACY (Develop with a lot of care)
 # =============================================================================
 
+
 # this is to get time.now
 def GetTimeNow() -> str:
     return datetime.now().strftime("%H:%M:%S | %d-%m-%Y")
@@ -71,15 +72,18 @@ def PrintIterations(iter: int, vars: List[str], *params) -> None:
     log: str = f"[{GetTimeNow()}] Iteration-{iter}: {evals_str}"
     print(log)
 
+
 # =============================================================================
 # CLOUD
 # =============================================================================
+
 
 # download input.txt from cloud
 def download_from_gdrive(
     PROG_NAME: str, url: str, output_path: str = "../input/input.txt"
 ) -> bool:
     from .FuncUtils import TrueLoader
+
     """
     Mengunduh file dari Google Drive menggunakan Link Share biasa
     atau langsung menggunakan File ID. Mendukung format .txt, .csv, dll.
@@ -117,6 +121,7 @@ def download_from_gdrive(
         loader.stop("Download aborted ❌")
         log_activities(f"[Error] Failed to download file: {e} in {PROG_NAME}")
         return False
+
 
 # =============================================================================
 # stdin-stdout directional
@@ -220,6 +225,7 @@ root_dir = get_project_root()
 # ./out
 # =============================================================================
 
+
 # writing result
 def write_result(menu: str, path: str, PROG_NAME: str):
     OUT_PATH = root_dir / "out" / path
@@ -243,7 +249,8 @@ def write_result(menu: str, path: str, PROG_NAME: str):
     except FileNotFoundError:
         log_activities(f"File not found in {PROG_NAME}. Failed to write", "ERROR")
         raise FileNotFoundError(f"File/Path not found")
-    
+
+
 def delete_output(path: str, PROG_NAME: str):
     OUT_PATH = root_dir / "out" / path
     nil = ""
@@ -264,10 +271,11 @@ def delete_output(path: str, PROG_NAME: str):
         log_activities(f"File not found in {PROG_NAME}. Failed to cleaning", "ERROR")
         raise FileNotFoundError(f"File/Path not found")
 
+
 # opening file output
 def open_output(out_path: str, PROG_NAME: str):
     from .FuncUtils import Lazy_Loading
-    
+
     true_path = root_dir / "out" / out_path
     print(f"=== Output file of {PROG_NAME} ===")
     print()
@@ -290,6 +298,7 @@ def open_output(out_path: str, PROG_NAME: str):
 # =============================================================================
 # stdout only
 # =============================================================================
+
 
 # print matrix 2d obe with same variable like a0, a1, a2, ...
 def Print_2d_obe_Matrix(matrix: List[List[int]], prog_name: str, variable: str) -> None:

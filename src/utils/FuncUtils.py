@@ -136,6 +136,7 @@ def iterateGaussJordan(
     matrix: List[List[float]], prog_name: str, var_symbol: str
 ) -> List[List[float]]:
     from .IoUtils import Print_2d_obe_Matrix, g_buffer
+
     swap = 0  # hitung berapa kali tukar baris
     row = len(matrix)
     col = len(matrix[0])
@@ -157,7 +158,9 @@ def iterateGaussJordan(
                     print(
                         f"Iterasi ke-{step}: Tukar baris ke-{j+1} dengan baris ke-{i+1} (Pivot awal bernilai 0)"
                     )
-                    g_buffer.writelines(f"Iterasi ke-{step}: Tukar baris ke-{j+1} dengan baris ke-{i+1} (Pivot awal bernilai 0)")
+                    g_buffer.writelines(
+                        f"Iterasi ke-{step}: Tukar baris ke-{j+1} dengan baris ke-{i+1} (Pivot awal bernilai 0)"
+                    )
                     M[j], M[i] = M[i], M[j]  # menukar baris
                     Print_2d_obe_Matrix(M, prog_name, var_symbol)
                     print()
@@ -189,7 +192,9 @@ def iterateGaussJordan(
         # Kita pakai abs(pivot - 1.0) > TOLERANCE karena float tidak bisa di-compare langsung keras '!='
         if abs(pivot - 1.0) > TOLERANCE:
             print(f"Iterasi ke-{step}: Normalisasi baris ke-{j+1} / ({pivot:.2f})")
-            g_buffer.writelines(f"Iterasi ke-{step}: Normalisasi baris ke-{j+1} / ({pivot:.2f})")
+            g_buffer.writelines(
+                f"Iterasi ke-{step}: Normalisasi baris ke-{j+1} / ({pivot:.2f})"
+            )
             print()
             g_buffer.writelines(" ")
             # Ambil nilai pivot asli sebelum diubah di dalam loop kolom
@@ -209,7 +214,9 @@ def iterateGaussJordan(
             print(
                 f"Iterasi ke-{step}: Baris ke-{r+1} - ({pengali:.2f}) * Baris ke-{j+1}"
             )
-            g_buffer.writelines(f"Iterasi ke-{step}: Baris ke-{r+1} - ({pengali:.2f}) * Baris ke-{j+1}")
+            g_buffer.writelines(
+                f"Iterasi ke-{step}: Baris ke-{r+1} - ({pengali:.2f}) * Baris ke-{j+1}"
+            )
             print()
             g_buffer.writelines(" ")
             for c in range(col):
@@ -242,7 +249,9 @@ def iterateGaussJordan(
             print(
                 f"Iterasi ke-{step}: Baris ke-{r+1} - ({pengali:.2f}) * Baris ke-{j+1}"
             )
-            g_buffer.writelines(f"Iterasi ke-{step}: Baris ke-{r+1} - ({pengali:.2f}) * Baris ke-{j+1}")
+            g_buffer.writelines(
+                f"Iterasi ke-{step}: Baris ke-{r+1} - ({pengali:.2f}) * Baris ke-{j+1}"
+            )
             print(" ")
             g_buffer.writelines(" ")
             for c in range(col):
