@@ -1,17 +1,20 @@
+# SPDX-License-Identifier: MIT
+
 from src.utils import *
 import src.utils.Style as style
 import csv
 import sys
 import io
 import datetime
+import time  # Ditambahkan karena ada fungsi time.sleep()
 
 # MACRO VARIABLES
-IO_DIR = "linear_regression"
-IN_PATH = f"./input/{IO_DIR}/table.csv"
+IO_DIR = "polynomial_regression"
+IN_PATH = f"./input/{IO_DIR}/main_table.csv"
 IN_CLOUD_PATH = f"./input/{IO_DIR}/cloud_table.csv"
 OUT_PATH = f"{IO_DIR}/result.txt"
 
-PROG_NAME = "Linear Regression"
+PROG_NAME = "Polynomial Regression"
 REGRESSION_COLORS = [
     (255, 255, 255),
     (128, 128, 128),
@@ -23,10 +26,10 @@ REGRESSION_ART = rf"""
     | |   | | '_ \ / _ \/ _` | '__|                  
     | |___| | | | |  __/ (_| | |                     
     |_____|_|_| |_|\___|\__,_|_|                     
-     ____                              _
+     ____                               _
     |  _ \ ___  __ _ _ __ ___  ___ ___(_) ___  _ __  
     | |_) / _ \/ _` | '__/ _ \/ __/ __| |/ _ \| '_ \ 
-    |  _ <  __/ (_| | | |  __/\__ \__ \ | (_) | | | |
+    |  _ <  __/ (_| | |  __/\__ \__ \ | (_) | | | | |
     |_| \_\___|\__, |_|  \___||___/___/_|\___/|_| |_|
                |___/                                 
 
@@ -34,128 +37,176 @@ REGRESSION_ART = rf"""
 """
 
 ADDITIONAL_HEADER = f"\
-    Input directory: /input/linear_regression\n\
+    Input directory: {IN_PATH}\n\
     File output: {OUT_PATH}\n"
 
 buffer = io.StringIO()
 
-
+ERR_TOLERANCE = 0.0001
 class Csv_Data:
-    x_data = []
-    y_data = []
+    def __init__(self):
+        self.x_data = []
+        self.y_data = []
 
-
+# ================================================
+# CAUTION: SET MAX ORDER SO IT IS NOT EXCEED TIME LIMIT
+# ================================================
 class Reg_Data:
+    # ================================================
     # constructor
-    def __init__(self, datas: Csv_Data):
-        len_x = len(datas.x_data)
-        len_y = len(datas.y_data)
-        if len_x <= 0 or len_y <= 0 or len_x != len_y:
-            print("Error, caught no data")
-            log_activities("Caught no data in ", "ERROR")
-        data_x = datas.x_data
-        data_y = datas.y_data
-
-        self.data_amount = max(len(data_x), len(data_y))
-        self.sum_x = sum(data_x)
-        self.sum_y = sum(data_y)
-        self.sum_xy = 0
-        self.sum_x2 = 0
-        try:
-            self.avg_x = self.sum_x / self.data_amount
-            self.avg_y = self.sum_y / self.data_amount
-        except ZeroDivisionError:
-            print("Error, caught division by zero")
-            log_activities("Division by zero error", "ERROR")
+    # ================================================
+    def __init__(self, datas: Csv_Data, _order: int):
+        _len_x = len(datas.x_data)
+        _len_y = len(datas.y_data)
+        if _len_x <= 0 or _len_y <= 0:
+            print("Error, caught no data is valid")
+            log_activities(f"Caught no data in {PROG_NAME}", "ERROR")
             return
 
-        for x, y in zip(data_x, data_y):
-            self.sum_xy += x * y
-            self.sum_x2 += x**2
+        _data_x = datas.x_data
+        _data_y = datas.y_data
 
-    def _calc_a1(self) -> float | None:
-        numerator = (self.data_amount * self.sum_xy) - (self.sum_x * self.sum_xy)
-        denumerator = (self.data_amount * self.sum_x2) - (self.sum_x**2)
-        result = 0.0
+        # attributes
+        self.data_amount = min(len(_data_x), len(_data_y))
+        self.data_x = _data_x[:self.data_amount]
+        self.data_y = _data_y[:self.data_amount]
+        self.order = _order
+        
+        # --- FIX 1: Alokasikan ukuran list default 0 biar gak IndexError ---
+        self.x_sigma_by_order: List[float] = [0.0] * ((2 * _order) + 1)
+        self.xy_sigma_by_order: List[float] = [0.0] * (_order + 1)
+        
+        self.x_sigma_by_order[0] = float(self.data_amount)
+        self.__generate_sigma_arr_data()
+        
+        self.sigma_obe_arr_data: List[List[float]] = []
+        self.__generate_2d_obe_arr_data()
+        self.results_coeffs: List[float] = []
+
+    # ================================================
+    # private
+    # ================================================
+    def __generate_sigma_arr_data(self):
+        r = self.order
+        n = self.data_amount
+
+        # --- FIX 2: Perbaikan logika loop pemangkatan X agar pas dengan indeks row+col ---
+        for i in range(1, (2 * r) + 1):
+            for x in self.data_x:
+                _curr_x = x ** i
+                self.x_sigma_by_order[i] += _curr_x
+        
+        # --- FIX 3: Membawa n ke range(n) agar bisa di-loop ---
+        for i in range(r + 1): 
+            for j in range(n):
+                _cur_x = self.data_x[j] ** i
+                _curr_y = self.data_y[j]
+                self.xy_sigma_by_order[i] += _cur_x * _curr_y
+    
+    def __generate_2d_obe_arr_data(self):
+        r = self.order
+        x_sum_data = self.x_sigma_by_order
+        xy_sum_data = self.xy_sigma_by_order
+
+        # generate left and right part
+        for row in range(r+1):
+            _curr_row = []
+            for col in range(r+1):
+                _curr_row.append(x_sum_data[row+col])
+            _curr_row.append(xy_sum_data[row])
+            self.sigma_obe_arr_data.append(_curr_row)
+
+    def __ngelakoni_obe(self) -> None:
         try:
-            result = numerator / denumerator
-            return result
-        except ZeroDivisionError:
-            print("Error, caught division by zero")
-            log_activities("Division by zero error", "ERROR")
-            return None
+            res = iterateGaussJordan(self.sigma_obe_arr_data, PROG_NAME, "a")
+            self.results_coeffs = [row[-1] for row in res]
+            print("\n === Didapatkan koefisien akhir ===")
+            for i, a in enumerate(self.results_coeffs):
+                print(f"a{i} = {a:.4f}")
+                time.sleep(.2)
+        except (ValueError, ZeroDivisionError) as err:
+            log_activities(f"{err} in {PROG_NAME}", "ERROR")
+            self.results_coeffs = []
+            return 
 
+    # ================================================
+    # public
+    # ================================================
     def _show_data(self):
-        print(f"Sum X = {self.sum_x}")
-        buffer.write(f"Sum X = {self.sum_x}\n")
-        time.sleep(0.2)
-        print(f"Sum Y = {self.sum_y}")
-        buffer.write(f"Sum Y = {self.sum_y}\n")
-        time.sleep(0.2)
-        print(f"Sum X*Y = {self.sum_xy}")
-        buffer.write(f"Sum X*Y = {self.sum_xy}\n")
-        time.sleep(0.2)
-        print(f"Sum X^2 = {self.sum_x2}")
-        buffer.write(f"Sum X^2 = {self.sum_x2}\n")
-        time.sleep(0.2)
-        print(f"Average X = {self.avg_x}")
-        buffer.write(f"Average X = {self.avg_x}\n")
-        time.sleep(0.2)
-        print(f"Average Y = {self.avg_y}")
-        buffer.write(f"Average Y = {self.avg_y}\n")
-        time.sleep(0.2)
-        print(f"Banyak data = {self.data_amount}")
-        buffer.write(f"Banyak data = {self.data_amount}\n")
-        time.sleep(0.2)
+        Lazy_Loading("Calculating all X sum and XY sum...", .5)
+        for i, x in enumerate(self.x_sigma_by_order):
+            print(f"sigma X ^ {i} = {x}")
+            time.sleep(.2)
+        
+        Lazy_Loading("Building OBE array...", .2)
+        Print_2d_obe_Matrix(self.sigma_obe_arr_data, PROG_NAME, "a")
 
     def _calc_expr(self):
-        a1 = self._calc_a1()
-        print(f"Calculated a1 = {a1:.6f}")
-        buffer.write(f"Calculated a1 = {a1:.6f}\n")
-        time.sleep(0.2)
-        a0 = self.avg_y - (a1 * self.avg_x)
-        print(f"Calculated a1 = {a1:.6f}")
-        buffer.write(f"Calculated a1 = {a1:.6f}\n")
-        time.sleep(0.2)
-        sys.stdout.write("Final Linear Regression result: \n\n")
-        buffer.write("Final Linear Regression result: \n\n")
-        time.sleep(0.2)
-        print(f"y = {a1:.6f}x + {a0:.6f}")
-        buffer.write(f"y = {a1:.6f}x + {a0:.6f}\n\n")
+        Lazy_Loading("Initializing OBE Gauss...", .2)
+        self.__ngelakoni_obe()
+        
+        if not self.results_coeffs:
+            print("[ERROR] Gagal menghitung persamaan fungsi karena matriks bermasalah.")
+            return
+
+        print(f"Hasil akhir: ")
+        sys.stdout.write("    y = ")
+        for i, coef in enumerate(self.results_coeffs):
+            if i == 0:
+                sys.stdout.write(f"{coef:.4f} ")
+            elif i == 1:
+                sys.stdout.write(f"{coef:+.4f}x ")
+            else:
+                sys.stdout.write(f"{coef:+.4f}x^{i} ")
+
+
+# --- HELPER AMBIL INPUT ORDER DARI USER ---
+def hitung_max_order_valid(banyak_data: int) -> int:
+    """Membatasi order regresi agar tidak melebihi (jumlah data - 1)"""
+    print(f"\n[INFO] Jumlah data valid saat ini: {banyak_data}")
+    input_ord = input(f"Masukkan order polinomial yang diinginkan (Max Ordo: {banyak_data - 1}): ").strip()
+    
+    while not InputValidator.is_numeric(input_ord) or int(input_ord) < 1 or int(input_ord) >= banyak_data:
+        print(f"{AnsiColors.RED}Ordo harus berupa angka, minimal 1, dan tidak boleh melebihi/sama dengan jumlah data!{AnsiColors.RESET}")
+        input_ord = input(f"Masukkan kembali order polinomial: ").strip()
+        
+    return int(input_ord)
 
 
 def reg_processing(raw_data: Csv_Data):
     if not isinstance(raw_data, Csv_Data):
         log_activities(f"Unallowed data type in {PROG_NAME}", "ERROR")
         raise TypeError("Unallowed data type")
-    else:
-        printf(f"X = {raw_data.x_data}")
-        time.sleep(0.2)
-        print(f"Y = {raw_data.y_data}")
-        print()
-        time.sleep(0.2)
-        Lazy_Loading("Calculating sum X-Y, avg X-Y, sum XY, sum X^2...", 0.5)
-        print()
-        the_data = Reg_Data(raw_data)
-        print()
-        print("=== Data calculated successfully ===")
-        print()
-        the_data._show_data()
-        print()
-        Lazy_Loading("Calculating a1...", 0.1)
-        Lazy_Loading("Calculating final expression...", 0.1)
-        print()
-        the_data._calc_expr()
-        print()
-        sys.stdout.write("\n\n\033[5A")
-        sys.stdout.flush()
-        time.sleep(0.1)
-        style.dalam_menu_kalkulasi = False
+    
+    total_data = min(len(raw_data.x_data), len(raw_data.y_data))
+    if total_data < 2:
+        print(f"{AnsiColors.RED}Data terlalu sedikit untuk melakukan regresi! Minimal butuh 2 pasang data.{AnsiColors.RESET}")
+        return
+
+    print(f"X = {raw_data.x_data}")
+    time.sleep(0.2)
+    print(f"Y = {raw_data.y_data}")
+    print()
+    time.sleep(0.2)
+    
+    # --- FIX 4: Mengambil input order secara dinamis sebelum inisialisasi Reg_Data ---
+    pilihan_order = hitung_max_order_valid(total_data)
+    
+    print()
+    the_data = Reg_Data(raw_data, pilihan_order)
+    print()
+    the_data._show_data()
+    print()
+    the_data._calc_expr()
+    print()
+    sys.stdout.write("\n\n\033[5A")
+    sys.stdout.flush()
+    time.sleep(0.1)
+    style.dalam_menu_kalkulasi = False
 
 
 def csv_processing(PATH):
     raw_data = Csv_Data()
-
     try:
         with open(file=PATH, mode="r", encoding="utf-8") as file:
             reader = csv.reader(file)
@@ -175,20 +226,23 @@ def csv_processing(PATH):
                 )
 
             for row in reader:
-                if not row:
+                if not row or len(row) <= max(x_idx, y_idx):
                     continue
                 try:
                     raw_data.x_data.append(float(row[x_idx]))
                     raw_data.y_data.append(float(row[y_idx]))
                 except ValueError:
                     print(f"Skipping improper row-{row}")
+            
             Lazy_Loading(f"Scanning {PATH}", 0.2)
             print()
             time.sleep(0.2)
             print("=== Data fetched successfully ===")
             time.sleep(0.2)
             print()
-            reg_processing(PATH=PATH, raw_data=raw_data)
+            # --- FIX 5: Pemanggilan reg_processing diperbaiki parameter pass-nya ---
+            reg_processing(raw_data)
+            
     except FileNotFoundError:
         log_activities(f"File not found in {PROG_NAME}.", "ERROR")
         raise FileNotFoundError(f"File/Path not found")
@@ -205,34 +259,32 @@ def input_manual():
         f"Please input how many data you have, or {AnsiColors.BOLD}[q]{AnsiColors.RESET} to exit: "
     ).strip()
     if inputUser.lower() == "q":
-        printf("User quit the program...")
+        print("User quit the program...")
         log_activities(f"Quitting {PROG_NAME} program...")
         return
 
-    while not InputValidator.is_numeric(inputUser):
-        inputUser = input(
-            f"Please input number only or {AnsiColors.BOLD}[q]{AnsiColors.RESET} to exit: "
-        )
+    while not InputValidator.is_numeric(inputUser) or int(inputUser) < 2:
         if inputUser.lower() == "q":
-            printf("User quit the program...")
+            print("User quit the program...")
             log_activities(f"Quitting {PROG_NAME} program...")
             return
+        inputUser = input(
+            f"Please input number only (minimal 2 data) or {AnsiColors.BOLD}[q]{AnsiColors.RESET} to exit: "
+        )
 
     byk_data = int(inputUser)
     raw_data = Csv_Data()
     for i in range(byk_data):
-        x_val = input(f"X{i+1}: ")
-        y_val = input(f"Y{i+1}: ")
+        x_val = input(f"X{i+1}: ").strip()
+        y_val = input(f"Y{i+1}: ").strip()
 
-        while not InputValidator.is_numeric(x_val) or not InputValidator.is_numeric(
-            y_val
-        ):
+        while not InputValidator.is_numeric(x_val) or not InputValidator.is_numeric(y_val):
             print(f"{AnsiColors.RED}Please input number only{AnsiColors.RESET}")
-            x_val = input(f"X{i+1}: ")
-            y_val = input(f"Y{i+1}: ")
+            x_val = input(f"X{i+1}: ").strip()
+            y_val = input(f"Y{i+1}: ").strip()
 
-        raw_data.x_data.append(int(x_val))
-        raw_data.y_data.append(int(y_val))
+        raw_data.x_data.append(float(x_val))
+        raw_data.y_data.append(float(y_val))
 
     reg_processing(raw_data)
     return
@@ -262,7 +314,7 @@ def fetch_from_drive():
         f"Please input file URL (Google Drive text file only, all extension, {AnsiColors.BOLD}{AnsiColors.BG_WHITE}and public{AnsiColors.RESET}) or {AnsiColors.BOLD}[q]{AnsiColors.RESET} to exit: "
     ).strip()
     if inputUrl.lower() == "q":
-        printf("User quit the program...")
+        print("User quit the program...")
         log_activities(f"Quitting {PROG_NAME} program...")
         return
 
@@ -283,7 +335,7 @@ def fetch_from_drive():
 
 
 # === Main ===
-def linear_regression():
+def polynomial_regression():
     Lazy_Loading("Opening files...")
     main_menu = [
         "Input manual data",
@@ -333,25 +385,25 @@ def linear_regression():
             match curr_select:
                 case 0:
                     input_manual()
-                    log_activities("Running Numeric Regression with manual input")
+                    log_activities("Running Polynomial Regression with manual input")
                     menu = "manual input"
                 case 1:
                     fetch_data_from_files()
                     log_activities(
-                        "Running Numeric Regression with fetching input file"
+                        "Running Polynomial Regression with fetching input file"
                     )
                     menu = "input file"
                 case 2:
                     fetch_from_drive()
                     log_activities(
-                        "Running Numeric Regression with fetching Google Drive file"
+                        "Running Polynomial Regression with fetching Google Drive file"
                     )
                     menu = "cloud file"
                 case 3:
                     open_output(OUT_PATH, PROG_NAME)
                     menu = "Misc"
                 case last_idx:
-                    stop_jam.set()
+                    style.stop_jam.set()
                     clear_screen()
                     print(f"\n Keluar dari program {PROG_NAME}")
                     log_activities(f"Closing program {PROG_NAME}...")
@@ -382,7 +434,7 @@ or press {AnsiColors.BOLD}[q]{AnsiColors.RESET} to exit: "
                 )
 
             if pilihan == "q":
-                stop_jam.set()
+                style.stop_jam.set()
                 clear_screen()
                 print("\nKeluar dari program. Sampai jumpa, Bre!")
                 log_activities(f"Closing program {PROG_NAME}...")
@@ -405,4 +457,4 @@ or press {AnsiColors.BOLD}[q]{AnsiColors.RESET} to exit: "
 
 
 if __name__ == "__main__":
-    linear_regression()
+    polynomial_regression()

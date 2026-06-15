@@ -1256,3 +1256,30 @@
 2026-06-08 12:46:31 - INFO - Running Numeric Regression with manual input
 2026-06-08 12:47:01 - INFO - Closing program Linear Regression...
 2026-06-08 12:47:03 - INFO - Closing program...
+2026-06-15 14:08:23 - INFO - Success unpacking numeric computation package
+2026-06-15 14:08:24 - INFO - Success unpacking internal package
+2026-06-15 14:08:33 - INFO - Opening log file...
+2026-06-15 14:08:45 - INFO - Closing program...
+2026-06-15 14:09:42 - INFO - Success unpacking numeric computation package
+2026-06-15 14:09:42 - INFO - Success unpacking internal package
+2026-06-15 14:09:48 - INFO - Closing program...
+2026-06-15 14:12:04 - INFO - Success unpacking numeric computation package
+2026-06-15 14:12:04 - INFO - Success unpacking internal package
+2026-06-15 14:12:34 - INFO - Success unpacking numeric computation package
+2026-06-15 14:12:34 - INFO - Success unpacking internal package
+2026-06-15 14:12:36 - INFO - Opening Polynomial Regression
+2026-06-15 14:12:49 - ERROR - File not found in Polynomial Regression.
+2026-06-15 14:13:45 - INFO - Success unpacking numeric computation package
+2026-06-15 14:13:45 - INFO - Success unpacking internal package
+2026-06-15 14:13:47 - INFO - Opening Polynomial Regression
+2026-06-15 14:13:52 - ERROR - File not found in Polynomial Regression.
+2026-06-15 14:14:55 - INFO - Success unpacking numeric computation package
+2026-06-15 14:14:55 - INFO - Success unpacking internal package
+2026-06-15 14:14:57 - INFO - Opening Polynomial Regression
+2026-06-15 14:16:52 - INFO - Success unpacking numeric computation package
+2026-06-15 14:16:52 - INFO - Success unpacking internal package
+2026-06-15 14:17:02 - INFO - Opening Polynomial Regression
+2026-06-15 14:18:40 - INFO - Success unpacking numeric computation package
+2026-06-15 14:18:40 - INFO - Success unpacking internal package
+2026-06-15 14:18:43 - INFO - Opening Polynomial Regression
+2026-06-15 14:19:27 - INFO - Running Polynomial Regression with fetching input file
