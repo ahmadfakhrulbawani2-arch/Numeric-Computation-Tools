@@ -11,7 +11,7 @@ import sys
 import io
 
 # class
-loader = TrueLoader()
+# loader = TrueLoader()
 
 
 # this is to get time.now
@@ -73,6 +73,7 @@ def download_from_gdrive(
     Mengunduh file dari Google Drive menggunakan Link Share biasa
     atau langsung menggunakan File ID. Mendukung format .txt, .csv, dll.
     """
+    loader = TrueLoader() # pindah untuk menangani name konflik
     # RegEx untuk mengekstrak File ID jika user memasukkan URL penuh
     match = re.search(r"/d/([a-zA-Z0-9-_]+)", url)
     file_id = match.group(1) if match else url
