@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 from src.utils import *
 import src.utils.Style as style
 import csv
@@ -50,13 +52,13 @@ class Reg_Data:
     def __init__(self, datas: Csv_Data):
         len_x = len(datas.x_data)
         len_y = len(datas.y_data)
-        if len_x <= 0 or len_y <= 0 or len_x != len_y:
+        if len_x <= 0 or len_y <= 0:
             print("Error, caught no data")
-            log_activities("Caught no data in ", "ERROR")
+            log_activities(f"Caught no data in {PROG_NAME}", "ERROR")
         data_x = datas.x_data
         data_y = datas.y_data
 
-        self.data_amount = max(len(data_x), len(data_y))
+        self.data_amount = min(len(data_x), len(data_y))
         self.sum_x = sum(data_x)
         self.sum_y = sum(data_y)
         self.sum_xy = 0

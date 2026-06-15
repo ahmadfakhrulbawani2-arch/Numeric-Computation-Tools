@@ -11,7 +11,7 @@ import sys
 import io
 
 # class
-loader = TrueLoader()
+# loader = TrueLoader()
 
 
 # this is to get time.now
@@ -26,7 +26,7 @@ def PrintIntroProg(ascii: str = "", title: str = "Komnum26") -> None:
         f"Welcome to {title}. Please input the equation (only support up to x^0, dosen't support x^-1, etc...)"
     )
 
-
+# this print intro style 2
 def PrintIntroProg2(title: str = "Komnum26"):
     print(f"Welcome to {title}")
     print()
@@ -73,6 +73,7 @@ def download_from_gdrive(
     Mengunduh file dari Google Drive menggunakan Link Share biasa
     atau langsung menggunakan File ID. Mendukung format .txt, .csv, dll.
     """
+    loader = TrueLoader() # pindah untuk menangani name konflik
     # RegEx untuk mengekstrak File ID jika user memasukkan URL penuh
     match = re.search(r"/d/([a-zA-Z0-9-_]+)", url)
     file_id = match.group(1) if match else url
@@ -202,7 +203,7 @@ def get_project_root() -> Path:
 # WARNING, this does not support dir creation
 root_dir = get_project_root()
 
-
+# writing result
 def write_result(menu: str, buffer: io.StringIO, path: str, PROG_NAME: str):
     OUT_PATH = root_dir / "out" / path
     try:
@@ -226,7 +227,7 @@ def write_result(menu: str, buffer: io.StringIO, path: str, PROG_NAME: str):
         log_activities(f"File not found in {PROG_NAME}. Failed to write", "ERROR")
         raise FileNotFoundError(f"File/Path not found")
 
-
+# opening file output
 def open_output(out_path: str, PROG_NAME: str):
     true_path = root_dir / "out" / out_path
     print(f"=== Output file of {PROG_NAME} ===")
@@ -245,3 +246,12 @@ def open_output(out_path: str, PROG_NAME: str):
     except FileNotFoundError:
         log_activities(f"File not found in {PROG_NAME}. Failed to write", "ERROR")
         raise FileNotFoundError(f"File/Path not found")
+
+# print matrix 2d obe with same variable like a0, a1, a2, ...
+def Print_2d_obe_Matrix(matrix: List[List[int]], prog_name: str, variable: str) -> None:
+    print(f"\n === Matrix {prog_name} ===")
+    for row in matrix:
+        left_part = ", ".join(f"{val:.2f}{variable}{i}" for i, val in enumerate(row[:-1]))
+        right_part = f"{row[-1]:.2f}"
+        print(f"    [ {left_part} | {right_part} ]")
+        time.sleep(.2)
