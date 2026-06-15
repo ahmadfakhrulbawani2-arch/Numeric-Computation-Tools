@@ -1,10 +1,10 @@
 import time
 from halo import Halo
 from typing import List
-from .IoUtils import Print_2d_obe_Matrix
 import math
 import os
 import sys
+import io
 
 EPSILON: float = 1e-12
 
@@ -127,30 +127,41 @@ class InputValidator:
         """Menerima huruf, angka, dan spasi (cocok buat input nama/kalimat tanpa simbol aneh)."""
         return bool(re.match(r"^[a-zA-Z0-9\s]+$", teks))
 
+
 # calculating using Operasi Baris Elementer
 from typing import List
 
-def iterateGaussJordan(matrix: List[List[float]], prog_name: str, var_symbol: str) -> List[List[float]]:
-    swap = 0        # hitung berapa kali tukar baris
+
+def iterateGaussJordan(
+    matrix: List[List[float]], prog_name: str, var_symbol: str
+) -> List[List[float]]:
+    from .IoUtils import Print_2d_obe_Matrix, g_buffer
+
+    swap = 0  # hitung berapa kali tukar baris
     row = len(matrix)
     col = len(matrix[0])
-    M = [r[:] for r in matrix]      # copy matrix ke M agar data awal aman
+    M = [r[:] for r in matrix]  # copy matrix ke M agar data awal aman
     step = 1
-    TOLERANCE = 1e-12               # Batas toleransi presisi komputer untuk angka 0
+    TOLERANCE = 1e-12  # Batas toleransi presisi komputer untuk angka 0
 
     # ========================================================
     # TAHAP 1: ELIMINASI MAJU & NORMALISASI 1 UTAMA
     # ========================================================
-    for j in range(row): 
+    for j in range(row):
         pivot = M[j][j]
-        
+
         # Jika pivot mendekati nol, cari baris di bawahnya untuk ditukar
         if abs(pivot) < TOLERANCE:
             found_new_pivot = False
-            for i in range(j + 1, row): 
+            for i in range(j + 1, row):
                 if abs(M[i][j]) > TOLERANCE:
-                    print(f"Iterasi ke-{step}: Tukar baris ke-{j+1} dengan baris ke-{i+1} (Pivot awal bernilai 0)")
-                    M[j], M[i] = M[i], M[j] # menukar baris
+                    print(
+                        f"Iterasi ke-{step}: Tukar baris ke-{j+1} dengan baris ke-{i+1} (Pivot awal bernilai 0)"
+                    )
+                    g_buffer.writelines(
+                        f"Iterasi ke-{step}: Tukar baris ke-{j+1} dengan baris ke-{i+1} (Pivot awal bernilai 0)"
+                    )
+                    M[j], M[i] = M[i], M[j]  # menukar baris
                     Print_2d_obe_Matrix(M, prog_name, var_symbol)
                     print()
                     step += 1
@@ -158,20 +169,22 @@ def iterateGaussJordan(matrix: List[List[float]], prog_name: str, var_symbol: st
                     pivot = M[j][j]
                     found_new_pivot = True
                     break
-            
+
             # --- ERROR HANDLING CRITICAL 1 ---
-            # Jika setelah di-loop ke bawah tetap tidak ada angka != 0, 
+            # Jika setelah di-loop ke bawah tetap tidak ada angka != 0,
             # artinya SPL ini singular (tidak punya solusi unik / solusi tak hingga)
             if not found_new_pivot:
                 error_msg = f"Matriks Singular terdeteksi di kolom {j+1}. Pivot bernilai 0 dan tidak ada baris pembanding."
                 print(f"\n[ERROR] {error_msg}")
                 # log_activities(f"Gauss-Jordan Failed: {error_msg} in {prog_name}", "ERROR")
                 raise ValueError(error_msg)
-        
+
         # --- ERROR HANDLING CRITICAL 2 ---
         # Double check untuk mengamankan proses pembagian berikutnya
         if abs(pivot) < TOLERANCE:
-            error_msg = f"Pembagian dengan nol terdeteksi pada elemen diagonal M[{j}][{j}]."
+            error_msg = (
+                f"Pembagian dengan nol terdeteksi pada elemen diagonal M[{j}][{j}]."
+            )
             print(f"\n[ERROR] {error_msg}")
             raise ZeroDivisionError(error_msg)
 
@@ -179,10 +192,14 @@ def iterateGaussJordan(matrix: List[List[float]], prog_name: str, var_symbol: st
         # Kita pakai abs(pivot - 1.0) > TOLERANCE karena float tidak bisa di-compare langsung keras '!='
         if abs(pivot - 1.0) > TOLERANCE:
             print(f"Iterasi ke-{step}: Normalisasi baris ke-{j+1} / ({pivot:.2f})")
+            g_buffer.writelines(
+                f"Iterasi ke-{step}: Normalisasi baris ke-{j+1} / ({pivot:.2f})"
+            )
             print()
+            g_buffer.writelines(" ")
             # Ambil nilai pivot asli sebelum diubah di dalam loop kolom
-            current_pivot = pivot 
-            for c in range(col): 
+            current_pivot = pivot
+            for c in range(col):
                 M[j][c] /= current_pivot
             Print_2d_obe_Matrix(M, prog_name, var_symbol)
             print()
@@ -190,12 +207,18 @@ def iterateGaussJordan(matrix: List[List[float]], prog_name: str, var_symbol: st
 
         # Eliminasi ke semua baris di bawahnya
         for r in range(j + 1, row):
-            if r == j or abs(M[r][j]) < TOLERANCE: 
-                continue 
+            if r == j or abs(M[r][j]) < TOLERANCE:
+                continue
 
             pengali = M[r][j]
-            print(f"Iterasi ke-{step}: Baris ke-{r+1} - ({pengali:.2f}) * Baris ke-{j+1}")
+            print(
+                f"Iterasi ke-{step}: Baris ke-{r+1} - ({pengali:.2f}) * Baris ke-{j+1}"
+            )
+            g_buffer.writelines(
+                f"Iterasi ke-{step}: Baris ke-{r+1} - ({pengali:.2f}) * Baris ke-{j+1}"
+            )
             print()
+            g_buffer.writelines(" ")
             for c in range(col):
                 M[r][c] -= pengali * M[j][c]
 
@@ -208,30 +231,41 @@ def iterateGaussJordan(matrix: List[List[float]], prog_name: str, var_symbol: st
     # ========================================================
     for j in range(row - 1, -1, -1):
         pivot = M[j][j]
-        
+
         # --- ERROR HANDLING CRITICAL 3 ---
         # Memastikan saat proses mundur, 1 utama tidak rusak atau malah bernilai 0
         if abs(pivot) < TOLERANCE:
-            error_msg = f"Matriks rusak di tahap substitusi mundur pada diagonal [{j}][{j}]."
+            error_msg = (
+                f"Matriks rusak di tahap substitusi mundur pada diagonal [{j}][{j}]."
+            )
             print(f"\n[ERROR] {error_msg}")
             raise ValueError(error_msg)
 
         for r in range(j - 1, -1, -1):
-            if r == j or abs(M[r][j]) < TOLERANCE: 
-                continue 
+            if r == j or abs(M[r][j]) < TOLERANCE:
+                continue
 
             pengali = M[r][j]
-            print(f"Iterasi ke-{step}: Baris ke-{r+1} - ({pengali:.2f}) * Baris ke-{j+1}")
-            print()
+            print(
+                f"Iterasi ke-{step}: Baris ke-{r+1} - ({pengali:.2f}) * Baris ke-{j+1}"
+            )
+            g_buffer.writelines(
+                f"Iterasi ke-{step}: Baris ke-{r+1} - ({pengali:.2f}) * Baris ke-{j+1}"
+            )
+            print(" ")
+            g_buffer.writelines(" ")
             for c in range(col):
                 M[r][c] -= pengali * M[j][c]
 
             Print_2d_obe_Matrix(M, prog_name, var_symbol)
             print()
             step += 1
-    
+
     print("Matrix diagonal akhir:")
+    g_buffer.writelines("Matrix diagonal akhir:")
     print()
+    g_buffer.writelines(" ")
     Print_2d_obe_Matrix(M, prog_name, var_symbol)
     print()
+    g_buffer.writelines(" ")
     return M

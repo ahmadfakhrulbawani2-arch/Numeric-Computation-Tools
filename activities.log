@@ -1283,3 +1283,136 @@
 2026-06-15 14:18:40 - INFO - Success unpacking internal package
 2026-06-15 14:18:43 - INFO - Opening Polynomial Regression
 2026-06-15 14:19:27 - INFO - Running Polynomial Regression with fetching input file
+2026-06-15 17:38:04 - INFO - Success unpacking numeric computation package
+2026-06-15 17:38:06 - INFO - Success unpacking internal package
+2026-06-15 17:38:09 - INFO - Opening Polynomial Regression
+2026-06-15 17:42:36 - INFO - Success unpacking numeric computation package
+2026-06-15 17:42:37 - INFO - Success unpacking internal package
+2026-06-15 17:42:38 - INFO - Opening Polynomial Regression
+2026-06-15 17:47:16 - INFO - Closing program Polynomial Regression...
+2026-06-15 17:47:21 - INFO - Closing program...
+2026-06-15 17:47:30 - INFO - Success unpacking numeric computation package
+2026-06-15 17:47:31 - INFO - Success unpacking internal package
+2026-06-15 17:47:36 - INFO - Opening Polynomial Regression
+2026-06-15 17:54:17 - INFO - Success unpacking numeric computation package
+2026-06-15 17:54:17 - INFO - Success unpacking internal package
+2026-06-15 17:54:18 - INFO - Opening Polynomial Regression
+2026-06-15 17:54:27 - INFO - Closing program Polynomial Regression...
+2026-06-15 17:54:28 - INFO - Closing program...
+2026-06-15 17:54:35 - INFO - Success unpacking numeric computation package
+2026-06-15 17:54:35 - INFO - Success unpacking internal package
+2026-06-15 17:54:36 - INFO - Opening Polynomial Regression
+2026-06-15 17:55:44 - INFO - Success unpacking numeric computation package
+2026-06-15 17:55:45 - INFO - Success unpacking internal package
+2026-06-15 17:55:47 - INFO - Opening Polynomial Regression
+2026-06-15 17:57:57 - INFO - Success unpacking numeric computation package
+2026-06-15 17:57:57 - INFO - Success unpacking internal package
+2026-06-15 17:57:59 - INFO - Opening Polynomial Regression
+2026-06-15 17:58:19 - INFO - Running Polynomial Regression with fetching input file
+2026-06-15 18:10:44 - INFO - Closing program Polynomial Regression...
+2026-06-15 18:10:46 - INFO - Closing program...
+2026-06-15 18:13:06 - INFO - Success unpacking numeric computation package
+2026-06-15 18:13:06 - INFO - Success unpacking internal package
+2026-06-15 18:13:10 - INFO - Opening Polynomial Regression
+2026-06-15 18:13:29 - INFO - Running Polynomial Regression with fetching input file
+2026-06-15 18:14:34 - INFO - Running Polynomial Regression with fetching input file
+2026-06-15 18:18:41 - INFO - Closing program Polynomial Regression...
+2026-06-15 18:18:41 - INFO - Closing program...
+2026-06-15 18:18:51 - INFO - Success unpacking numeric computation package
+2026-06-15 18:18:51 - INFO - Success unpacking internal package
+2026-06-15 18:18:53 - INFO - Opening Polynomial Regression
+2026-06-15 18:20:29 - INFO - Success unpacking numeric computation package
+2026-06-15 18:20:29 - INFO - Success unpacking internal package
+2026-06-15 18:20:31 - INFO - Opening Polynomial Regression
+2026-06-15 18:21:27 - INFO - Success unpacking numeric computation package
+2026-06-15 18:21:27 - INFO - Success unpacking internal package
+2026-06-15 18:21:29 - INFO - Opening Polynomial Regression
+2026-06-15 18:21:57 - INFO - Running Polynomial Regression with fetching input file
+2026-06-15 18:22:30 - INFO - Closing program Polynomial Regression...
+2026-06-15 18:22:32 - INFO - Closing program...
+2026-06-15 18:25:23 - INFO - Success unpacking numeric computation package
+2026-06-15 18:25:23 - INFO - Success unpacking internal package
+2026-06-15 18:25:24 - INFO - Opening Polynomial Regression
+2026-06-15 18:26:05 - INFO - Running Polynomial Regression with fetching input file
+2026-06-15 18:27:27 - INFO - Closing program Polynomial Regression...
+2026-06-15 18:27:28 - INFO - Closing program...
+2026-06-15 18:27:35 - INFO - Success unpacking numeric computation package
+2026-06-15 18:27:35 - INFO - Success unpacking internal package
+2026-06-15 18:27:36 - INFO - Opening Polynomial Regression
+2026-06-15 18:28:21 - INFO - Running Polynomial Regression with fetching input file
+2026-06-15 18:28:56 - INFO - Closing program Polynomial Regression...
+2026-06-15 18:28:57 - INFO - Closing program...
+2026-06-15 18:32:56 - INFO - Success unpacking numeric computation package
+2026-06-15 18:32:57 - INFO - Success unpacking internal package
+2026-06-15 18:32:58 - INFO - Opening Polynomial Regression
+2026-06-15 18:36:10 - INFO - Success unpacking numeric computation package
+2026-06-15 18:36:10 - INFO - Success unpacking internal package
+2026-06-15 18:36:16 - INFO - Opening Polynomial Regression
+2026-06-15 18:41:48 - INFO - Success unpacking numeric computation package
+2026-06-15 18:41:48 - INFO - Success unpacking internal package
+2026-06-15 18:41:50 - INFO - Opening Polynomial Regression
+2026-06-15 18:42:52 - INFO - Success unpacking numeric computation package
+2026-06-15 18:42:52 - INFO - Success unpacking internal package
+2026-06-15 18:42:53 - INFO - Opening Polynomial Regression
+2026-06-15 18:43:34 - INFO - Running Polynomial Regression with fetching input file
+2026-06-15 18:43:53 - INFO - Closing program Polynomial Regression...
+2026-06-15 18:43:54 - INFO - Closing program...
+2026-06-15 18:44:37 - INFO - Success unpacking numeric computation package
+2026-06-15 18:44:38 - INFO - Success unpacking internal package
+2026-06-15 18:44:40 - INFO - Opening Bisection Method
+2026-06-15 18:44:42 - INFO - Running bisection method
+2026-06-15 18:44:55 - INFO - Successfully get root: 1.999999
+2026-06-15 18:45:08 - INFO - Closing program...
+2026-06-15 18:45:34 - INFO - Success unpacking numeric computation package
+2026-06-15 18:45:34 - INFO - Success unpacking internal package
+2026-06-15 18:45:36 - INFO - Opening Bisection Method
+2026-06-15 18:45:38 - INFO - Running bisection method
+2026-06-15 18:45:46 - INFO - Successfully get root: 1.999999
+2026-06-15 18:45:52 - ERROR - Can't get root
+2026-06-15 18:46:13 - INFO - Closing program...
+2026-06-15 18:46:20 - INFO - Success unpacking numeric computation package
+2026-06-15 18:46:20 - INFO - Success unpacking internal package
+2026-06-15 18:46:20 - INFO - Opening Bisection Method
+2026-06-15 18:46:22 - INFO - Running bisection method
+2026-06-15 18:46:26 - ERROR - Can't get root
+2026-06-15 18:46:30 - INFO - Closing program...
+2026-06-15 18:46:44 - INFO - Success unpacking numeric computation package
+2026-06-15 18:46:45 - INFO - Success unpacking internal package
+2026-06-15 18:46:46 - INFO - Opening Polynomial Regression
+2026-06-15 18:46:49 - INFO - Closing program Polynomial Regression...
+2026-06-15 18:46:52 - INFO - Closing program...
+2026-06-15 19:00:51 - INFO - Success unpacking numeric computation package
+2026-06-15 19:00:51 - INFO - Success unpacking internal package
+2026-06-15 19:00:55 - INFO - Opening Polynomial Regression
+2026-06-15 19:01:14 - INFO - Closing program Polynomial Regression...
+2026-06-15 19:01:15 - INFO - Closing program...
+2026-06-15 19:02:06 - INFO - Success unpacking numeric computation package
+2026-06-15 19:02:06 - INFO - Success unpacking internal package
+2026-06-15 19:02:08 - INFO - Opening Polynomial Regression
+2026-06-15 19:02:32 - INFO - Running Polynomial Regression with fetching input file
+2026-06-15 19:03:24 - INFO - Success unpacking numeric computation package
+2026-06-15 19:03:24 - INFO - Success unpacking internal package
+2026-06-15 19:03:30 - INFO - Opening Polynomial Regression
+2026-06-15 19:04:15 - INFO - Running Polynomial Regression with fetching input file
+2026-06-15 19:06:02 - INFO - Closing program Polynomial Regression...
+2026-06-15 19:06:04 - INFO - Closing program...
+2026-06-15 19:10:55 - INFO - Success unpacking numeric computation package
+2026-06-15 19:10:56 - INFO - Success unpacking internal package
+2026-06-15 19:10:58 - INFO - Opening Polynomial Regression
+2026-06-15 19:11:08 - INFO - [Cloud] Downloading file from GDrive (ID: 11ahkLkaSaUkeFC4om_WyEWiUqkz7XPab) in Polynomial Regression
+2026-06-15 19:11:08 - DEBUG - Starting new HTTPS connection (1): docs.google.com:443
+2026-06-15 19:11:09 - DEBUG - https://docs.google.com:443 "GET /uc?export=download&id=11ahkLkaSaUkeFC4om_WyEWiUqkz7XPab HTTP/1.1" 303 0
+2026-06-15 19:11:09 - DEBUG - Starting new HTTPS connection (1): drive.usercontent.google.com:443
+2026-06-15 19:11:10 - DEBUG - https://drive.usercontent.google.com:443 "GET /download?id=11ahkLkaSaUkeFC4om_WyEWiUqkz7XPab&export=download HTTP/1.1" 200 603
+2026-06-15 19:11:11 - INFO - [Cloud] File successfully downloaded and saved to: ./input/polynomial_regression/cloud_table.csv in Polynomial Regression
+2026-06-15 19:16:10 - INFO - Running Polynomial Regression with fetching Google Drive file
+2026-06-15 19:16:18 - ERROR - File not found in Polynomial Regression. Failed to write
+2026-06-15 19:17:32 - INFO - Success unpacking numeric computation package
+2026-06-15 19:17:33 - INFO - Success unpacking internal package
+2026-06-15 19:17:35 - INFO - Opening Polynomial Regression
+2026-06-15 19:17:53 - INFO - Running Polynomial Regression with fetching input file
+2026-06-15 19:18:15 - INFO - Closing program Polynomial Regression...
+2026-06-15 19:18:16 - INFO - Closing program...
+2026-06-15 19:18:24 - INFO - Success unpacking numeric computation package
+2026-06-15 19:18:24 - INFO - Success unpacking internal package
+2026-06-15 19:18:25 - INFO - Opening Polynomial Regression

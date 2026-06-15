@@ -1,8 +1,8 @@
 from typing import List
 import datetime
+import time
 import re
 import requests
-from src.utils.FuncUtils import *
 from src.utils.Style import print_text_gradient_angle, AnsiColors
 from .Logger import log_activities
 import os
@@ -12,6 +12,13 @@ import io
 
 # class
 # loader = TrueLoader()
+
+g_buffer = io.StringIO()
+
+
+# =============================================================================
+# LEGACY (Develop with a lot of care)
+# =============================================================================
 
 
 # this is to get time.now
@@ -25,6 +32,7 @@ def PrintIntroProg(ascii: str = "", title: str = "Komnum26") -> None:
     print(
         f"Welcome to {title}. Please input the equation (only support up to x^0, dosen't support x^-1, etc...)"
     )
+
 
 # this print intro style 2
 def PrintIntroProg2(title: str = "Komnum26"):
@@ -65,15 +73,22 @@ def PrintIterations(iter: int, vars: List[str], *params) -> None:
     print(log)
 
 
+# =============================================================================
+# CLOUD
+# =============================================================================
+
+
 # download input.txt from cloud
 def download_from_gdrive(
     PROG_NAME: str, url: str, output_path: str = "../input/input.txt"
 ) -> bool:
+    from .FuncUtils import TrueLoader
+
     """
     Mengunduh file dari Google Drive menggunakan Link Share biasa
     atau langsung menggunakan File ID. Mendukung format .txt, .csv, dll.
     """
-    loader = TrueLoader() # pindah untuk menangani name konflik
+    loader = TrueLoader()  # pindah untuk menangani name konflik
     # RegEx untuk mengekstrak File ID jika user memasukkan URL penuh
     match = re.search(r"/d/([a-zA-Z0-9-_]+)", url)
     file_id = match.group(1) if match else url
@@ -108,6 +123,9 @@ def download_from_gdrive(
         return False
 
 
+# =============================================================================
+# stdin-stdout directional
+# =============================================================================
 # Setup pembaca input keyboard cross-platform
 if os.name == "nt":
     import msvcrt
@@ -203,8 +221,13 @@ def get_project_root() -> Path:
 # WARNING, this does not support dir creation
 root_dir = get_project_root()
 
+# =============================================================================
+# ./out
+# =============================================================================
+
+
 # writing result
-def write_result(menu: str, buffer: io.StringIO, path: str, PROG_NAME: str):
+def write_result(menu: str, path: str, PROG_NAME: str):
     OUT_PATH = root_dir / "out" / path
     try:
         with open(file=OUT_PATH, mode="a", encoding="utf-8") as file:
@@ -212,7 +235,7 @@ def write_result(menu: str, buffer: io.StringIO, path: str, PROG_NAME: str):
             str_now = sekarang.strftime("%A, %d-%m-%Y | %H:%M:%S WIB")
             file.write(f"{str_now}\n")
             file.write(f"\nCalculation by {menu}\n")
-            file.write(buffer.getvalue())
+            file.write(g_buffer.getvalue())
             sys.stdout.write("\033[J")
             sys.stdout.write("\n\n\033[4A")
             sys.stdout.flush()
@@ -227,8 +250,32 @@ def write_result(menu: str, buffer: io.StringIO, path: str, PROG_NAME: str):
         log_activities(f"File not found in {PROG_NAME}. Failed to write", "ERROR")
         raise FileNotFoundError(f"File/Path not found")
 
+
+def delete_output(path: str, PROG_NAME: str):
+    OUT_PATH = root_dir / "out" / path
+    nil = ""
+    try:
+        with open(file=OUT_PATH, mode="w", encoding="utf-8") as file:
+            file.write(nil)
+            sys.stdout.write("\033[J")
+            sys.stdout.write("\n\n\033[4A")
+            sys.stdout.flush()
+            print()
+            print(
+                f"\nFile cleaned successfully in {AnsiColors.BG_BLACK}{AnsiColors.BOLD}{OUT_PATH}{AnsiColors.RESET}\n"
+            )
+            print("Going back to menu in 5 seconds...")
+            print()
+            time.sleep(5)
+    except FileNotFoundError:
+        log_activities(f"File not found in {PROG_NAME}. Failed to cleaning", "ERROR")
+        raise FileNotFoundError(f"File/Path not found")
+
+
 # opening file output
 def open_output(out_path: str, PROG_NAME: str):
+    from .FuncUtils import Lazy_Loading
+
     true_path = root_dir / "out" / out_path
     print(f"=== Output file of {PROG_NAME} ===")
     print()
@@ -247,11 +294,21 @@ def open_output(out_path: str, PROG_NAME: str):
         log_activities(f"File not found in {PROG_NAME}. Failed to write", "ERROR")
         raise FileNotFoundError(f"File/Path not found")
 
+
+# =============================================================================
+# stdout only
+# =============================================================================
+
+
 # print matrix 2d obe with same variable like a0, a1, a2, ...
 def Print_2d_obe_Matrix(matrix: List[List[int]], prog_name: str, variable: str) -> None:
-    print(f"\n === Matrix {prog_name} ===")
+    print(f"\n === Matrix {prog_name} ===\n")
+    g_buffer.write(f"\n\n === Matrix {prog_name} ===\n\n")
     for row in matrix:
-        left_part = ", ".join(f"{val:.2f}{variable}{i}" for i, val in enumerate(row[:-1]))
+        left_part = ", ".join(
+            f"{val:.2f}{variable}{i}" for i, val in enumerate(row[:-1])
+        )
         right_part = f"{row[-1]:.2f}"
         print(f"    [ {left_part} | {right_part} ]")
-        time.sleep(.2)
+        g_buffer.write(f"    [ {left_part} | {right_part} ]\n\n")
+        time.sleep(0.2)
