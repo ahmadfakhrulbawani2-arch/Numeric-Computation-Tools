@@ -1,0 +1,118 @@
+Monday, 15-06-2026 | 19:17:54 WIB
+
+Calculation by input file
+sigma X ^ 0 = 5.0sigma X ^ 1 = 35.0sigma X ^ 2 = 255.0sigma X ^ 3 = 1925.0sigma X ^ 4 = 14979.0
+
+ === Matrix Polynomial Regression ===
+
+    [ 5.00a0, 35.00a1, 255.00a2 | 740.00 ]
+
+    [ 35.00a0, 255.00a1, 1925.00a2 | 5530.00 ]
+
+    [ 255.00a0, 1925.00a1, 14979.00a2 | 42668.00 ]
+
+Iterasi ke-1: Normalisasi baris ke-1 / (5.00) 
+
+ === Matrix Polynomial Regression ===
+
+    [ 1.00a0, 7.00a1, 51.00a2 | 148.00 ]
+
+    [ 35.00a0, 255.00a1, 1925.00a2 | 5530.00 ]
+
+    [ 255.00a0, 1925.00a1, 14979.00a2 | 42668.00 ]
+
+Iterasi ke-2: Baris ke-2 - (35.00) * Baris ke-1 
+
+ === Matrix Polynomial Regression ===
+
+    [ 1.00a0, 7.00a1, 51.00a2 | 148.00 ]
+
+    [ 0.00a0, 10.00a1, 140.00a2 | 350.00 ]
+
+    [ 255.00a0, 1925.00a1, 14979.00a2 | 42668.00 ]
+
+Iterasi ke-3: Baris ke-3 - (255.00) * Baris ke-1 
+
+ === Matrix Polynomial Regression ===
+
+    [ 1.00a0, 7.00a1, 51.00a2 | 148.00 ]
+
+    [ 0.00a0, 10.00a1, 140.00a2 | 350.00 ]
+
+    [ 0.00a0, 140.00a1, 1974.00a2 | 4928.00 ]
+
+Iterasi ke-4: Normalisasi baris ke-2 / (10.00) 
+
+ === Matrix Polynomial Regression ===
+
+    [ 1.00a0, 7.00a1, 51.00a2 | 148.00 ]
+
+    [ 0.00a0, 1.00a1, 14.00a2 | 35.00 ]
+
+    [ 0.00a0, 140.00a1, 1974.00a2 | 4928.00 ]
+
+Iterasi ke-5: Baris ke-3 - (140.00) * Baris ke-2 
+
+ === Matrix Polynomial Regression ===
+
+    [ 1.00a0, 7.00a1, 51.00a2 | 148.00 ]
+
+    [ 0.00a0, 1.00a1, 14.00a2 | 35.00 ]
+
+    [ 0.00a0, 0.00a1, 14.00a2 | 28.00 ]
+
+Iterasi ke-6: Normalisasi baris ke-3 / (14.00) 
+
+ === Matrix Polynomial Regression ===
+
+    [ 1.00a0, 7.00a1, 51.00a2 | 148.00 ]
+
+    [ 0.00a0, 1.00a1, 14.00a2 | 35.00 ]
+
+    [ 0.00a0, 0.00a1, 1.00a2 | 2.00 ]
+
+Iterasi ke-7: Baris ke-2 - (14.00) * Baris ke-3 
+
+ === Matrix Polynomial Regression ===
+
+    [ 1.00a0, 7.00a1, 51.00a2 | 148.00 ]
+
+    [ 0.00a0, 1.00a1, 0.00a2 | 7.00 ]
+
+    [ 0.00a0, 0.00a1, 1.00a2 | 2.00 ]
+
+Iterasi ke-8: Baris ke-1 - (51.00) * Baris ke-3 
+
+ === Matrix Polynomial Regression ===
+
+    [ 1.00a0, 7.00a1, 0.00a2 | 46.00 ]
+
+    [ 0.00a0, 1.00a1, 0.00a2 | 7.00 ]
+
+    [ 0.00a0, 0.00a1, 1.00a2 | 2.00 ]
+
+Iterasi ke-9: Baris ke-1 - (7.00) * Baris ke-2 
+
+ === Matrix Polynomial Regression ===
+
+    [ 1.00a0, 0.00a1, 0.00a2 | -3.00 ]
+
+    [ 0.00a0, 1.00a1, 0.00a2 | 7.00 ]
+
+    [ 0.00a0, 0.00a1, 1.00a2 | 2.00 ]
+
+Matrix diagonal akhir: 
+
+ === Matrix Polynomial Regression ===
+
+    [ 1.00a0, 0.00a1, 0.00a2 | -3.00 ]
+
+    [ 0.00a0, 1.00a1, 0.00a2 | 7.00 ]
+
+    [ 0.00a0, 0.00a1, 1.00a2 | 2.00 ]
+
+ 
+ === Didapatkan koefisien akhir ===
+Hasil akhir: 
+    y = - 3.0000 + 7.0000x + 2.0000x^2 
+
