@@ -124,6 +124,9 @@ def run_bisection():
         ).strip()
         if user_input.lower() == "q":
             clock_widget.stop_jam.set()
+            sys.stdout.write("\033[J")
+            sys.stdout.write("\n\n\033[2A")
+            sys.stdout.flush()
             print("Exiting program...")
             break
 
