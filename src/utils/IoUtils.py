@@ -173,7 +173,7 @@ else:
 def clear_screen():
     os.system("cls" if os.name == "nt" else "clear")
 
-
+# LEGACY: Single set of menus
 def draw_menu(
     menu_items: List[str],
     selected_index: int,
@@ -202,6 +202,50 @@ def draw_menu(
         else:
             print(f"\033[K \033[90m    {item}\033[0m")
     print("\033[K" + "─" * 108)
+
+# NEW: more set of menu, should always in form of 2d arr
+def multiset_draw_menu(
+    menu_items: List[List[str]],
+    selected_index: int,
+    STATS: str,
+    ASCII_HEADER: str,
+    header_colors: List[str],
+    awal_jalan=False,
+    additional_header="",
+) -> None: 
+    len_menu = sum(len(items) for items in menu_items)
+    if awal_jalan:
+        clear_screen()
+        print(STATS)
+        print_text_gradient_angle(ASCII_HEADER, header_colors, 0)
+        print(
+            f"\n Gunakan [↑/↓] Panah untuk Navigasi, {AnsiColors.BOLD}[Enter]{AnsiColors.RESET} untuk Memilih, {AnsiColors.BOLD}[Q]{AnsiColors.RESET} untuk Keluar\n"
+        )
+        sys.stdout.write(additional_header)
+        print("─" * 108)
+    else:
+        # Mengembalikan kursor naik ke atas agar menu tertimpa dengan halus tanpa reload global
+        sys.stdout.write(f"\033[{len(menu_items) + 1}A")
+        sys.stdout.flush()
+    for i, menu in enumerate(menu_items):
+        for j, item in enumerate(menu):
+            if j == 0:
+                # jika ingin single set menu item
+                if "this-is-item" in item:
+                    clean_item = item.replace("this-is-item", "").strip()
+                    if i+j == selected_index:
+                        if i+j == selected_index:
+                            print(f"\033[K \033[92m{AnsiColors.BOLD}►   {clean_item}\033[0m")
+                        else:
+                            print(f"\033[K \033[90m    {clean_item}\033[0m")
+                else: 
+                    print(item, end=": \n")
+                    selected_index += 1
+            else:
+                if i+j == selected_index:
+                    print(f"    \033[K \033[92m{AnsiColors.BOLD}►   {item}\033[0m")
+                else:
+                    print(f"    \033[K \033[90m    {item}\033[0m")
 
 
 def get_project_root() -> Path:
