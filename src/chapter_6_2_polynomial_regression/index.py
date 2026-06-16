@@ -41,8 +41,6 @@ ADDITIONAL_HEADER = f"\
     Input directory: {IN_PATH}\n\
     File output: {OUT_PATH}\n"
 
-ERR_TOLERANCE = 0.0001
-
 
 class Csv_Data:
     def __init__(self):

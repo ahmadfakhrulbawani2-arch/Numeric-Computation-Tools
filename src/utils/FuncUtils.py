@@ -142,7 +142,8 @@ def iterateGaussJordan(
     col = len(matrix[0])
     M = [r[:] for r in matrix]  # copy matrix ke M agar data awal aman
     step = 1
-    TOLERANCE = 1e-12  # Batas toleransi presisi komputer untuk angka 0
+    # TOLERANCE = 1e-12  # Batas toleransi presisi komputer untuk angka 0
+    # using EPSILON ABOVE
 
     # ========================================================
     # TAHAP 1: ELIMINASI MAJU & NORMALISASI 1 UTAMA
@@ -151,10 +152,10 @@ def iterateGaussJordan(
         pivot = M[j][j]
 
         # Jika pivot mendekati nol, cari baris di bawahnya untuk ditukar
-        if abs(pivot) < TOLERANCE:
+        if abs(pivot) < EPSILON:
             found_new_pivot = False
             for i in range(j + 1, row):
-                if abs(M[i][j]) > TOLERANCE:
+                if abs(M[i][j]) > EPSILON:
                     print(
                         f"Iterasi ke-{step}: Tukar baris ke-{j+1} dengan baris ke-{i+1} (Pivot awal bernilai 0)"
                     )
@@ -181,7 +182,7 @@ def iterateGaussJordan(
 
         # --- ERROR HANDLING CRITICAL 2 ---
         # Double check untuk mengamankan proses pembagian berikutnya
-        if abs(pivot) < TOLERANCE:
+        if abs(pivot) < EPSILON:
             error_msg = (
                 f"Pembagian dengan nol terdeteksi pada elemen diagonal M[{j}][{j}]."
             )
@@ -189,8 +190,8 @@ def iterateGaussJordan(
             raise ZeroDivisionError(error_msg)
 
         # Normalisasi pivot menjadi 1 utama
-        # Kita pakai abs(pivot - 1.0) > TOLERANCE karena float tidak bisa di-compare langsung keras '!='
-        if abs(pivot - 1.0) > TOLERANCE:
+        # Kita pakai abs(pivot - 1.0) > EPSILON karena float tidak bisa di-compare langsung keras '!='
+        if abs(pivot - 1.0) > EPSILON:
             print(f"Iterasi ke-{step}: Normalisasi baris ke-{j+1} / ({pivot:.2f})")
             g_buffer.writelines(
                 f"Iterasi ke-{step}: Normalisasi baris ke-{j+1} / ({pivot:.2f})"
@@ -207,7 +208,7 @@ def iterateGaussJordan(
 
         # Eliminasi ke semua baris di bawahnya
         for r in range(j + 1, row):
-            if r == j or abs(M[r][j]) < TOLERANCE:
+            if r == j or abs(M[r][j]) < EPSILON:
                 continue
 
             pengali = M[r][j]
@@ -234,7 +235,7 @@ def iterateGaussJordan(
 
         # --- ERROR HANDLING CRITICAL 3 ---
         # Memastikan saat proses mundur, 1 utama tidak rusak atau malah bernilai 0
-        if abs(pivot) < TOLERANCE:
+        if abs(pivot) < EPSILON:
             error_msg = (
                 f"Matriks rusak di tahap substitusi mundur pada diagonal [{j}][{j}]."
             )
@@ -242,7 +243,7 @@ def iterateGaussJordan(
             raise ValueError(error_msg)
 
         for r in range(j - 1, -1, -1):
-            if r == j or abs(M[r][j]) < TOLERANCE:
+            if r == j or abs(M[r][j]) < EPSILON:
                 continue
 
             pengali = M[r][j]
