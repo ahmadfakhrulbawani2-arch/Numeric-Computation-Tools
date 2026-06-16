@@ -1416,3 +1416,80 @@
 2026-06-15 19:18:24 - INFO - Success unpacking numeric computation package
 2026-06-15 19:18:24 - INFO - Success unpacking internal package
 2026-06-15 19:18:25 - INFO - Opening Polynomial Regression
+2026-06-16 11:36:53 - INFO - Success unpacking numeric computation package
+2026-06-16 11:36:54 - INFO - Success unpacking internal package
+2026-06-16 11:36:57 - INFO - Gauss-Seidel Method
+2026-06-16 11:37:22 - INFO - Success unpacking numeric computation package
+2026-06-16 11:37:22 - INFO - Success unpacking internal package
+2026-06-16 11:37:26 - INFO - Gauss-Seidel Method
+2026-06-16 11:38:24 - INFO - Success unpacking numeric computation package
+2026-06-16 11:38:24 - INFO - Success unpacking internal package
+2026-06-16 11:38:26 - INFO - Gauss-Seidel Method
+2026-06-16 11:39:02 - INFO - Gauss-Seidel Method
+2026-06-16 11:39:23 - INFO - Closing program...
+2026-06-16 11:41:57 - INFO - Success unpacking numeric computation package
+2026-06-16 11:41:57 - INFO - Success unpacking internal package
+2026-06-16 11:41:59 - INFO - Gauss-Seidel Method
+2026-06-16 11:42:41 - INFO - Success unpacking numeric computation package
+2026-06-16 11:42:41 - INFO - Success unpacking internal package
+2026-06-16 11:42:44 - INFO - Gauss-Seidel Method
+2026-06-16 11:44:07 - INFO - Closing program...
+2026-06-16 11:44:14 - INFO - Success unpacking numeric computation package
+2026-06-16 11:44:14 - INFO - Success unpacking internal package
+2026-06-16 11:44:16 - INFO - Gauss-Seidel Method
+2026-06-16 11:46:14 - INFO - Success unpacking numeric computation package
+2026-06-16 11:46:14 - INFO - Success unpacking internal package
+2026-06-16 11:46:15 - INFO - Gauss-Seidel Method
+2026-06-16 11:48:21 - INFO - Closing program Gauss-Seidel Method
+2026-06-16 11:48:26 - INFO - Gauss-Seidel Method
+2026-06-16 11:48:50 - INFO - Success unpacking numeric computation package
+2026-06-16 11:48:50 - INFO - Success unpacking internal package
+2026-06-16 11:48:52 - INFO - Gauss-Seidel Method
+2026-06-16 11:49:09 - INFO - Closing program Gauss-Seidel Method
+2026-06-16 11:49:13 - INFO - Closing program...
+2026-06-16 11:49:20 - INFO - Success unpacking numeric computation package
+2026-06-16 11:49:20 - INFO - Success unpacking internal package
+2026-06-16 11:49:22 - INFO - Gauss-Seidel Method
+2026-06-16 11:49:50 - INFO - Closing program Gauss-Seidel Method
+2026-06-16 11:49:53 - INFO - Closing program...
+2026-06-16 11:49:59 - INFO - Success unpacking numeric computation package
+2026-06-16 11:49:59 - INFO - Success unpacking internal package
+2026-06-16 11:50:01 - INFO - Gauss-Seidel Method
+2026-06-16 11:50:52 - INFO - Success unpacking numeric computation package
+2026-06-16 11:50:52 - INFO - Success unpacking internal package
+2026-06-16 11:50:53 - INFO - Gauss-Seidel Method
+2026-06-16 11:52:26 - INFO - Closing program Gauss-Seidel Method
+2026-06-16 11:52:28 - INFO - Closing program...
+2026-06-16 11:52:35 - INFO - Success unpacking numeric computation package
+2026-06-16 11:52:35 - INFO - Success unpacking internal package
+2026-06-16 11:52:36 - INFO - Gauss-Seidel Method
+2026-06-16 11:53:27 - INFO - Closing program Gauss-Seidel Method
+2026-06-16 11:55:21 - INFO - Success unpacking numeric computation package
+2026-06-16 11:55:21 - INFO - Success unpacking internal package
+2026-06-16 11:55:22 - INFO - Gauss-Seidel Method
+2026-06-16 11:55:28 - INFO - Closing program Gauss-Seidel Method
+2026-06-16 11:55:29 - INFO - Closing program...
+2026-06-16 11:56:44 - INFO - Success unpacking numeric computation package
+2026-06-16 11:56:44 - INFO - Success unpacking internal package
+2026-06-16 11:56:46 - INFO - Gauss-Seidel Method
+2026-06-16 11:58:14 - INFO - Closing program Gauss-Seidel Method
+2026-06-16 11:58:16 - INFO - Closing program...
+2026-06-16 11:58:22 - INFO - Success unpacking numeric computation package
+2026-06-16 11:58:22 - INFO - Success unpacking internal package
+2026-06-16 11:58:27 - INFO - Opening log file...
+2026-06-16 11:58:32 - INFO - Closing program...
+2026-06-16 11:58:39 - INFO - Success unpacking numeric computation package
+2026-06-16 11:58:39 - INFO - Success unpacking internal package
+2026-06-16 11:58:40 - INFO - Gauss-Seidel Method
+2026-06-16 11:59:06 - INFO - Closing program Gauss-Seidel Method
+2026-06-16 11:59:10 - INFO - Closing program...
+2026-06-16 11:59:17 - INFO - Success unpacking numeric computation package
+2026-06-16 11:59:17 - INFO - Success unpacking internal package
+2026-06-16 11:59:19 - INFO - Gauss-Seidel Method
+2026-06-16 11:59:30 - INFO - Closing program Gauss-Seidel Method
+2026-06-16 11:59:32 - INFO - Closing program...
+2026-06-16 11:59:43 - INFO - Success unpacking numeric computation package
+2026-06-16 11:59:43 - INFO - Success unpacking internal package
+2026-06-16 11:59:44 - INFO - Opening Polynomial Regression
+2026-06-16 11:59:49 - INFO - Gauss-Seidel Method
+2026-06-16 11:59:53 - INFO - Running Gauss-Seidel Methodfor Regression by manual input

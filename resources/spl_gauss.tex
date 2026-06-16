@@ -1,0 +1,115 @@
+\documentclass[12pt, lettersize, journal]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[indonesian]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\geometry{legalpaper, margin=1in}
+
+% Konfigurasi Kode Program (Tab 2 Spasi)
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+\title{\textbf{Metode Numerik: Penyelesaian SPL secara Iteratif (Gauss-Seidel)}}
+\author{Catatan Kuliah Komputasi Numerik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Pendahuluan}
+Berbeda dengan metode eliminasi langsung, metode **Iterasi Gauss-Seidel** menyelesaikan Sistem Persamaan Linear (SPL) secara aproksimasi berulang. Metode ini sangat efisien untuk SPL berukuran besar dengan matriks koefisien yang dominan secara diagonal (\textit{diagonally dominant}).
+
+Kita memulai proses dengan menentukan tebakan awal untuk semua variabel, yang umumnya diinisialisasi dengan nilai nol:
+\begin{equation}
+    x_1^{(0)} = 0, \quad x_2^{(0)} = 0, \quad \dots, \quad x_n^{(0)} = 0
+\end{equation}
+
+\section{Algoritma dan Formulasi Matematika}
+Untuk SPL dengan $n$ persamaan, kita mengisolasi setiap variabel $x_i$ pada persamaan ke-$i$. Rumus umum untuk iterasi ke-$(k+1)$ adalah:
+
+\begin{equation}
+    x_i^{(k+1)} = \frac{b_i - \sum_{j=1}^{i-1} a_{ij}x_j^{(k+1)} - \sum_{j=i+1}^{n} a_{ij}x_j^{(k)}}{a_{ii}}
+\end{equation}
+
+\subsection{Karakteristik Substitusi Balik Berulang}
+Kunci utama Gauss-Seidel yang membedakannya dengan metode Jacobi adalah **penggunaan langsung nilai terbaru**. Begitu nilai $x_1^{(k+1)}$ didapatkan dari baris pertama, nilai baru tersebut langsung dipakai untuk menghitung $x_2^{(k+1)}$ di baris kedua pada iterasi yang sama. Proses ini terus berulang secara iteratif sampai selisih nilai antar-iterasi lebih kecil dari toleransi error yang ditentukan ($\epsilon$).
+
+\section{Analisis Kasus Khusus ($m < n$)}
+Jika jumlah persamaan lebih sedikit daripada jumlah variabel ($m < n$), metode iteratif seperti Gauss-Seidel akan menghadapi masalah serius:
+\begin{itemize}
+    \item \textbf{Matrix Underdetermined:} Kita tidak memiliki cukup persamaan untuk mengisolasi setiap variabel di sisi kiri rumus iterasi.
+    \item \textbf{Divergensi:} Karena adanya variabel bebas yang tidak terikat oleh baris pivot, nilai iterasi kemungkinan besar akan terus membesar tanpa batas (\textit{diverge}) atau terjebak dalam lingkaran iterasi tak hingga tanpa pernah konvergen ke solusi manapun.
+\end{itemize}
+
+\section{Implementasi Code (Python)}
+Berikut adalah implementasi metode Gauss-Seidel dengan tebakan awal nol dan ukuran tabulasi 2 spasi:
+
+\begin{lstlisting}[language=Python, caption=Implementasi Iterasi Gauss-Seidel]
+import numpy as np
+
+def gauss_seidel(A, B, x_awal, tol=1e-5, max_iter=100):
+  A = A.astype(float)
+  B = B.astype(float)
+  x = x_awal.copy().astype(float)
+  n = len(B)
+  
+  for k in range(max_iter):
+    x_lama = x.copy()
+    
+    for i in range(n):
+      # Hitung sigma untuk variabel yang sudah diupdate dan belum
+      sigma = 0.0
+      for j in range(n):
+        if j != i:
+          sigma += A[i][j] * x[j]
+          
+      # Ambil nilai terbaru langsung (Back Substitution internal)
+      x[i] = (B[i] - sigma) / A[i][i]
+      
+    # Cek konvergensi menggunakan norm
+    if np.linalg.norm(x - x_lama, ord=np.inf) < tol:
+      print(f"Konvergen pada iterasi ke-{k+1}")
+      return x
+      
+  print("Metode tidak konvergen dalam batas maksimum iterasi")
+  return x
+
+# Contoh Kasus
+A = np.array([[4, 1, -1], [2, 7, 1], [1, -3, 12]])
+B = np.array([3, 19, 31])
+# Tebakan awal semua variabel = 0
+tebakan_awal = np.array([0, 0, 0])
+
+solusi = gauss_seidel(A, B, tebakan_awal)
+print("Solusi:", solusi)
+\end{lstlisting}
+
+\end{document}

@@ -174,6 +174,7 @@ def clear_screen():
     os.system("cls" if os.name == "nt" else "clear")
 
 
+# LEGACY: Single set of menus
 def draw_menu(
     menu_items: List[str],
     selected_index: int,
@@ -202,6 +203,91 @@ def draw_menu(
         else:
             print(f"\033[K \033[90m    {item}\033[0m")
     print("\033[K" + "─" * 108)
+
+
+# NEW: more set of menu, should always in form of 2d arr
+from typing import List
+import sys
+
+from typing import List
+import sys
+
+from typing import List
+import sys
+
+from typing import List
+import sys
+
+
+def multiset_draw_menu(
+    menu_items: List[List[str]],
+    selected_index: int,
+    STATS: str,
+    ASCII_HEADER: str,
+    header_colors: List[str],
+    awal_jalan=False,
+    additional_header="",
+) -> None:
+
+    # 1. Hitung total baris yang SEBENARNYA dicetak di terminal
+    total_baris_dicetak = 0
+    for menu in menu_items:
+        for j, item in enumerate(menu):
+            if j == 0 and "this-is-item" not in item:
+                total_baris_dicetak += (
+                    1  # DISESUAIKAN: Header biasa cuma makan 1 baris (teks:\n)
+                )
+            else:
+                total_baris_dicetak += 1  # Item biasa makan 1 baris
+
+    if awal_jalan:
+        clear_screen()
+        print(STATS)
+        print_text_gradient_angle(ASCII_HEADER, header_colors, 0)
+        print(
+            f"\n Gunakan [↑/↓] Panah untuk Navigasi, {AnsiColors.BOLD}[Enter]{AnsiColors.RESET} untuk Memilih, {AnsiColors.BOLD}[Q]{AnsiColors.RESET} untuk Keluar\n"
+        )
+        sys.stdout.write(additional_header)
+        print(f"\n{AnsiColors.RED}*Red colors means danger zone, use it wisely{AnsiColors.RESET}")
+        print("─" * 108)
+    else:
+        # 2. Kembalikan kursor naik ke atas tepat di baris awal menu mulai digambar
+        # Sekarang nilai total_baris_dicetak sudah 100% pas dengan jumlah \n di bawah
+        sys.stdout.write(f"\033[{total_baris_dicetak}A")
+        sys.stdout.flush()
+
+    # Variabel pembantu untuk mencocokkan indeks pilihan secara linier global
+    global_index = 0
+
+    for i, menu in enumerate(menu_items):
+        for j, item in enumerate(menu):
+            if j == 0:
+                if "this-is-item" in item:
+                    clean_item = item.replace("this-is-item", "").strip()
+                    if global_index == selected_index:
+                        sys.stdout.write(
+                            f"\033[K\033[92m{AnsiColors.BOLD}►   {clean_item}\033[0m\n"
+                        )
+                    else:
+                        sys.stdout.write(f"\033[K\033[90m    {clean_item}\033[0m\n")
+                    global_index += 1
+                else:
+                    # Hanya mencetak 1 baris (ditandai dengan satu '\n' di ujung)
+                    sys.stdout.write(f"\033[K{item}:\n")
+            else:
+                # Item menu biasa (mencetak 1 baris)
+                putihan = item.replace(AnsiColors.RED, "").strip()
+                putihan = putihan.replace(AnsiColors.RESET, "").strip()
+                if global_index == selected_index:
+                    sys.stdout.write(
+                        f"\033[K    \033[92m{AnsiColors.BOLD}►   {putihan}\033[0m\n"
+                    )
+                else:
+                    sys.stdout.write(f"\033[K    \033[90m    {item}\033[0m\n")
+                global_index += 1
+
+    # Flush semua output sekaligus agar sinkron dan mulus di layar
+    sys.stdout.flush()
 
 
 def get_project_root() -> Path:

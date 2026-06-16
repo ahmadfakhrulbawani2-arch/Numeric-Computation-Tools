@@ -24,6 +24,7 @@ from src.regula_falsi.index import run_regulaFalsi
 from src.secant_method.index import run_secand
 from src.chapter_6_1_linear_regression.index import linear_regression
 from src.chapter_6_2_polynomial_regression.index import polynomial_regression
+from src.chapter_7_1_spl_gauss.index import Main_Gauss_Seidel
 from src.utils import *
 
 log_activities("Success unpacking internal package")
