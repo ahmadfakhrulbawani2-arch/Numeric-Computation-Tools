@@ -19,6 +19,7 @@ from src import (
     get_key,
     linear_regression,
     polynomial_regression,
+    Main_Gauss_Seidel,
 )
 import src.utils.Style as style
 
@@ -67,7 +68,7 @@ STATS = rf"""
 
 """
 
-JUMLAH_MENU = 10
+JUMLAH_MENU = 11
 
 
 # --- ALUR UTAMA ---
@@ -82,6 +83,7 @@ if __name__ == "__main__":
         "Chapter-4.2 Factorization Method",
         "Chapter-6.1 Linear Regression",
         "Chapter-6.2 Polynomial Regression",
+        "Chapter-7.1 Gauss-Seidel Method",
         "Open program history",
         "Quit",
     ]
@@ -159,6 +161,10 @@ if __name__ == "__main__":
                 print(f"=== [MENU 8: Polynomial Regression Method] ===")
                 log_activities("Opening Polynomial Regression")
                 polynomial_regression()
+            elif current_select == 8:
+                print(f"=== [MENU 9: Gauss-Seidel Method] ===")
+                log_activities("Gauss-Seidel Method")
+                Main_Gauss_Seidel()
             elif current_select == JUMLAH_MENU - 2:
                 Lazy_Loading("Opening log file...")
                 log_activities("Opening log file...")
