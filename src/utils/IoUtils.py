@@ -173,6 +173,7 @@ else:
 def clear_screen():
     os.system("cls" if os.name == "nt" else "clear")
 
+
 # LEGACY: Single set of menus
 def draw_menu(
     menu_items: List[str],
@@ -203,7 +204,21 @@ def draw_menu(
             print(f"\033[K \033[90m    {item}\033[0m")
     print("\033[K" + "─" * 108)
 
+
 # NEW: more set of menu, should always in form of 2d arr
+from typing import List
+import sys
+
+from typing import List
+import sys
+
+from typing import List
+import sys
+
+from typing import List
+import sys
+
+
 def multiset_draw_menu(
     menu_items: List[List[str]],
     selected_index: int,
@@ -212,8 +227,19 @@ def multiset_draw_menu(
     header_colors: List[str],
     awal_jalan=False,
     additional_header="",
-) -> None: 
-    len_menu = sum(len(items) for items in menu_items)
+) -> None:
+
+    # 1. Hitung total baris yang SEBENARNYA dicetak di terminal
+    total_baris_dicetak = 0
+    for menu in menu_items:
+        for j, item in enumerate(menu):
+            if j == 0 and "this-is-item" not in item:
+                total_baris_dicetak += (
+                    1  # DISESUAIKAN: Header biasa cuma makan 1 baris (teks:\n)
+                )
+            else:
+                total_baris_dicetak += 1  # Item biasa makan 1 baris
+
     if awal_jalan:
         clear_screen()
         print(STATS)
@@ -224,28 +250,41 @@ def multiset_draw_menu(
         sys.stdout.write(additional_header)
         print("─" * 108)
     else:
-        # Mengembalikan kursor naik ke atas agar menu tertimpa dengan halus tanpa reload global
-        sys.stdout.write(f"\033[{len(menu_items) + 1}A")
+        # 2. Kembalikan kursor naik ke atas tepat di baris awal menu mulai digambar
+        # Sekarang nilai total_baris_dicetak sudah 100% pas dengan jumlah \n di bawah
+        sys.stdout.write(f"\033[{total_baris_dicetak}A")
         sys.stdout.flush()
+
+    # Variabel pembantu untuk mencocokkan indeks pilihan secara linier global
+    global_index = 0
+
     for i, menu in enumerate(menu_items):
         for j, item in enumerate(menu):
             if j == 0:
-                # jika ingin single set menu item
                 if "this-is-item" in item:
                     clean_item = item.replace("this-is-item", "").strip()
-                    if i+j == selected_index:
-                        if i+j == selected_index:
-                            print(f"\033[K \033[92m{AnsiColors.BOLD}►   {clean_item}\033[0m")
-                        else:
-                            print(f"\033[K \033[90m    {clean_item}\033[0m")
-                else: 
-                    print(item, end=": \n")
-                    selected_index += 1
-            else:
-                if i+j == selected_index:
-                    print(f"    \033[K \033[92m{AnsiColors.BOLD}►   {item}\033[0m")
+                    if global_index == selected_index:
+                        sys.stdout.write(
+                            f"\033[K\033[92m{AnsiColors.BOLD}►   {clean_item}\033[0m\n"
+                        )
+                    else:
+                        sys.stdout.write(f"\033[K\033[90m    {clean_item}\033[0m\n")
+                    global_index += 1
                 else:
-                    print(f"    \033[K \033[90m    {item}\033[0m")
+                    # Hanya mencetak 1 baris (ditandai dengan satu '\n' di ujung)
+                    sys.stdout.write(f"\033[K{item}:\n")
+            else:
+                # Item menu biasa (mencetak 1 baris)
+                if global_index == selected_index:
+                    sys.stdout.write(
+                        f"\033[K    \033[92m{AnsiColors.BOLD}►   {item}\033[0m\n"
+                    )
+                else:
+                    sys.stdout.write(f"\033[K    \033[90m    {item}\033[0m\n")
+                global_index += 1
+
+    # Flush semua output sekaligus agar sinkron dan mulus di layar
+    sys.stdout.flush()
 
 
 def get_project_root() -> Path:
