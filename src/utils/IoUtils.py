@@ -248,6 +248,7 @@ def multiset_draw_menu(
             f"\n Gunakan [↑/↓] Panah untuk Navigasi, {AnsiColors.BOLD}[Enter]{AnsiColors.RESET} untuk Memilih, {AnsiColors.BOLD}[Q]{AnsiColors.RESET} untuk Keluar\n"
         )
         sys.stdout.write(additional_header)
+        print(f"\n{AnsiColors.RED}*Red colors means danger zone, use it wisely{AnsiColors.RESET}")
         print("─" * 108)
     else:
         # 2. Kembalikan kursor naik ke atas tepat di baris awal menu mulai digambar
@@ -275,9 +276,11 @@ def multiset_draw_menu(
                     sys.stdout.write(f"\033[K{item}:\n")
             else:
                 # Item menu biasa (mencetak 1 baris)
+                putihan = item.replace(AnsiColors.RED, "").strip()
+                putihan = putihan.replace(AnsiColors.RESET, "").strip()
                 if global_index == selected_index:
                     sys.stdout.write(
-                        f"\033[K    \033[92m{AnsiColors.BOLD}►   {item}\033[0m\n"
+                        f"\033[K    \033[92m{AnsiColors.BOLD}►   {putihan}\033[0m\n"
                     )
                 else:
                     sys.stdout.write(f"\033[K    \033[90m    {item}\033[0m\n")
