@@ -23,7 +23,7 @@ import time  # Ditambahkan karena ada fungsi time.sleep()
 
 class META_DATA:
     # MACRO VARIABLES
-    IO_DIR = "spl_gauss"
+    IO_DIR = "reg_gauss"
     IN_PATH = f"./input/{IO_DIR}/main_table.csv"
     IN_CLOUD_PATH = f"./input/{IO_DIR}/cloud_table.csv"
     OUT_PATH = f"{IO_DIR}/result.txt"
@@ -120,7 +120,7 @@ class Prog_Data:
     g_xy_dataset = XY_Dataset()
     g_eq_dataset = Eq_Dataset()
     byk_data = 0
-    max_iter = 150
+    max_iter = 50
 
 # ======================================================================
 # CAUTION: SET MAX ORDER SO IT IS NOT EXCEED TIME LIMIT
@@ -200,7 +200,7 @@ class Reg_Data:
     def __ngelakoni_gauss_seidel(self) -> None:
         try:
             res = iterateGaussSeidel(self.sigma_obe_arr_data, META_DATA.PROG_NAME, "a", Prog_Data.max_iter)
-            self.results_coeffs = [row[-1] for row in res]
+            self.results_coeffs = res
             print("\n === Didapatkan koefisien akhir ===\n")
             g_buffer.write("\n === Didapatkan koefisien akhir ===\n")
             for i, a in enumerate(self.results_coeffs):
@@ -262,7 +262,7 @@ class Regression_Gaus_Seidel:
 
 
     # --- HELPER AMBIL INPUT ORDER DARI USER ---
-    def __hitung_max_order_valid(banyak_data: int) -> int:
+    def __hitung_max_order_valid(self, banyak_data: int) -> int:
         print(f"\n[INFO] Valid data count: {banyak_data}")
         style.dalam_menu_kalkulasi = False
         sys.stdout.write("\033[J")
@@ -602,15 +602,18 @@ def Main_Gauss_Seidel():
             elif curr_select < 6 and curr_select >= 3:
                 META_DATA.PROG_NAME += " for Linear Equation"
 
+            io = Program_IO()
+            reg = Regression_Gaus_Seidel()
+
             match curr_select:
                 case 0:
-                    Program_IO._manually_input()
-                    Regression_Gaus_Seidel.main()
+                    io._manually_input()
+                    reg.main()
                     log = Log_Err_Msg(META_DATA.PROG_NAME, "manual input", "", "")
                     log_activities(log.run_program_msg)
                 case 1:
-                    Program_IO._fetch_from_file()
-                    Regression_Gaus_Seidel.main()
+                    io._fetch_from_file()
+                    reg.main()
                     log = Log_Err_Msg(META_DATA.PROG_NAME, "fetch from file", "", "")
                     log_activities(log.run_program_msg)
                 case 2:
