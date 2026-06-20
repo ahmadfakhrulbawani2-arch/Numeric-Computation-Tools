@@ -374,7 +374,7 @@ def fetch_from_drive():
 
     if not canDownload:
         print("Sorry, we can't download/write your spesific URL path")
-        log_activities(f"Can't download file from {PROG_NAME}")
+        log_activities(f"Can't download file from {PROG_NAME}", "ERROR")
         return
 
     csv_processing(IN_CLOUD_PATH)
@@ -506,6 +506,7 @@ or press {AnsiColors.BOLD}[q]{AnsiColors.RESET} to exit: "
                 awal_jalan=True,
                 additional_header=ADDITIONAL_HEADER,
             )
+            
 
 
 if __name__ == "__main__":

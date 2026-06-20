@@ -1,4 +1,12 @@
 # SPDX-License-Identifier: MIT
+# ======================================================================
+# Code format convention:
+# _function_name, one _ means public function
+# __function_name, two _ means private function
+# Always use snake case!
+# Combine snake case and Pascal case for class and struct
+# Always use OOP!
+# ======================================================================
 
 from src.utils import *
 import src.utils.Style as style
@@ -61,15 +69,18 @@ class XY_Dataset:
         self.x_data = []
         self.y_data = []
 
-
 class Eq_Dataset:
     def __init__(self):
         self.eq_cnt: int = 1
         self.equations: List[List[int]] = [[]]
 
+class Prog_Data:
+    EXIT_W_SAVE = 1
+    g_xy_dataset = XY_Dataset()
+    g_eq_dataset = Eq_Dataset()
+    byk_data = 0
 
-g_xy_dataset = XY_Dataset()
-g_xy_dataset = Eq_Dataset()
+
 
 # ======================================================================
 # CAUTION: SET MAX ORDER SO IT IS NOT EXCEED TIME LIMIT
@@ -101,18 +112,147 @@ class Gauss_Seidel_Iterate:
 
 
 class Program_IO:
-    def _fetch_from_gdrive():
-        print("Test fetch from gdrive")
+    def __init__(self):
+        self.log = Log_Err_Msg(META_DATA.PROG_NAME, "", "", "")
 
-    def _fetch_from_file():
-        print("Test fetch from file")
+    def __csv_processing(self,PATH):
+        try:
+            with open(file=PATH, mode="r", encoding="utf-8") as file:
+                reader = csv.reader(file)
+                header = next(reader)
+                header = [h.strip().lower() for h in header]
 
-    def _manually_input():
-        print("Test manual input")
+                try:
+                    x_idx = header.index("x")
+                    y_idx = header.index("y")
+                except ValueError as e:
+                    log_activities(self.log.csv_invalid, "ERROR")
+                    raise ValueError(e)
+                for row in reader:
+                    if not row or len(row) <= max(x_idx, y_idx):
+                        continue
+                    try:
+                        Prog_Data.g_xy_dataset.x_data.append(float(row[x_idx]))
+                        Prog_Data.g_xy_dataset.y_data.append(float(row[y_idx]))
+                    except ValueError:
+                        print(f"Skipping improper row-{row}")
 
+                Lazy_Loading(f"Scanning {PATH}", 0.2)
+                print()
+                time.sleep(0.2)
+                print("=== Data fetched successfully ===")
+                time.sleep(0.2)
+                print()
+        except FileNotFoundError as e:
+            log_activities(self.log.file_not_found_msg, "ERROR")
+            raise FileNotFoundError(e)
+
+    def _fetch_from_gdrive(self):
+        print_text_gradient_angle(META_DATA.REGRESSION_ART, META_DATA.REGRESSION_COLORS)
+        time.sleep(0.2)
+        PrintIntroProg2(META_DATA.PROG_NAME)
+        print()
+        time.sleep(0.2)
+        style.dalam_menu_kalkulasi = False
+        sys.stdout.write("\n\n\033[2A")
+        sys.stdout.flush()
+        input_url: str = input(
+            f"Please input file URL (Google Drive text file only, all extension, {AnsiColors.BOLD}{AnsiColors.BG_WHITE}and public{AnsiColors.RESET}) or {AnsiColors.BOLD}[q]{AnsiColors.RESET} to exit: "
+        ).strip()
+        if input_url.lower() == "q":
+            Prog_Data.EXIT_W_SAVE = 0
+            log_activities(self.log.closing_sub_prog_msg)
+            return
+    
+        style.dalam_menu_kalkulasi = True
+        sys.stdout.write("\n\n\033[2A")
+        sys.stdout.flush()
+        time.sleep(.2)
+        print(f"fetching data from {input_url}")
+        time.sleep(0.2)
+        print(f"Make sure you have put correct format or it will error")
+        print()
+        can_download = download_from_gdrive(META_DATA.PROG_NAME, input_url, META_DATA.IN_CLOUD_PATH)
+
+        if not can_download:
+            log_activities(self.log.failed_download, "ERROR")
+            return
+
+        self.__csv_processing(META_DATA.IN_CLOUD_PATH)
+        return
+
+    def _fetch_from_file(self):
+        time.sleep(.2)
+        print_text_gradient_angle(META_DATA.REGRESSION_ART, META_DATA.REGRESSION_COLORS)
+        time.sleep(0.2)
+        PrintIntroProg2(META_DATA.PROG_NAME)
+        print()
+        time.sleep(0.2)
+        print()
+        print(f"fetching data from {META_DATA.IN_PATH}")
+        print(f"Make sure you have put correct format or it will error")
+        print()
+        self.__csv_processing(META_DATA.IN_PATH)
+        return
+
+
+    def _manually_input(self):
+        self.log = Log_Err_Msg(META_DATA.PROG_NAME, "manual input", "", "")
+        print_text_gradient_angle(META_DATA.REGRESSION_ART, META_DATA.REGRESSION_COLORS)
+        time.sleep(0.2)
+        PrintIntroProg2(META_DATA.PROG_NAME)
+        print()
+        time.sleep(0.2)
+        # i want to show the clock
+        style.dalam_menu_kalkulasi = False
+        sys.stdout.write("\n\n\033[2A")
+        sys.stdout.flush()
+        input_user: str = input(
+            f"Please input how many data you have, or {AnsiColors.BOLD}[q]{AnsiColors.RESET} to exit: "
+        ).strip()
+        if input_user.lower() == "q":
+            Prog_Data.EXIT_W_SAVE = 0
+            log_activities(self.log.closing_sub_prog_msg)
+            return
+        
+        while not InputValidator.is_numeric(input_user) or int(input_user) < 2:
+            if input_user.lower() == "q":
+                Prog_Data.EXIT_W_SAVE = 0
+                log_activities(self.log.closing_sub_prog_msg)
+                return
+            
+            sys.stdout.write("\033[J")
+            sys.stdout.write("\n\n\033[2A")
+            input_user = input(
+                f"Please input number only (minimal 2 data) or {AnsiColors.BOLD}[q]{AnsiColors.RESET} to exit: "
+            )
+
+        Prog_Data.byk_data = int(input_user)
+        for i in range(Prog_Data.byk_data):
+            sys.stdout.write("\033[J")
+            sys.stdout.write("\n\n\033[2A")
+            x_val = input(f"X{i+1}: ").strip()
+            sys.stdout.write("\033[J")
+            sys.stdout.write("\n\n\033[2A")
+            y_val = input(f"Y{i+1}: ").strip()
+            while not InputValidator.is_numeric(x_val) or not InputValidator.is_numeric(y_val):
+                sys.stdout.write("\033[J")
+                sys.stdout.write("\n\n\033[2A")
+                print(f"{AnsiColors.RED}Please input number only{AnsiColors.RESET}")
+                sys.stdout.write("\033[J")
+                sys.stdout.write("\n\n\033[2A")
+                x_val = input(f"X{i+1}: ").strip()
+                sys.stdout.write("\033[J")
+                sys.stdout.write("\n\n\033[2A")
+                y_val = input(f"Y{i+1}: ").strip()
+            Prog_Data.g_xy_dataset.x_data.append(float(x_val))
+            Prog_Data.g_xy_dataset.y_data.append(float(y_val))
+        # always turn off the clock
+        style.dalam_menu_kalkulasi = True
+        return
 
 # ======================================================================
-# This will be main function
+# This will be file manager function
 # ======================================================================
 class Manage_Log_File:
     def _open_regression():
@@ -143,14 +283,16 @@ class Log_Err_Msg:
 
         # Deklarasi template pesan di dalam dictionary
         self._templates = {
-            "run_program_msg": "Running {progname} by {input_method}",
-            "file_not_found_msg": "Error: {progname} cannot find the log file",
-            "closing_main_prog_msg": "Closing program {progname}",
-            "no_data_err_msg": "Caught no data in {progname}",
-            "custom_err_msg": "{err_msg} in {progname}",
-            "bad_data_type_msg": "Unallowed data type in {progname}",
-            "csv_err_msg": "CSV Error: {custom_msg} in {progname}",
-            "closing_sub_prog_msg": "Quitting {progname} program...",
+            "run_program_msg": "Running {progname} by {input_method}", # in every program star
+            "file_not_found_msg": "Error: {progname} cannot find the log file", # file not found err
+            "closing_main_prog_msg": "Closing program {progname}", # for closing main program
+            "no_data_err_msg": "Caught no data in {progname}", # if no data in prog_data
+            "custom_err_msg": "{err_msg} in {progname}", # also custom err
+            "bad_data_type_msg": "Unallowed data type in {progname}", # data type mismatch
+            "csv_err_msg": "CSV Error: {custom_msg} in {progname}", # other csv err
+            "closing_sub_prog_msg": "Quitting {progname} by {input_method}...", # closing sub prog
+            "csv_invalid": "Error: CSV format is not valid by {input_method} in {progname}", # invalid csv
+            "download_failed": "Error: Failed to download by {input_method} in {progname}", # failed download
         }
 
     def __getattribute__(self, name):
@@ -177,6 +319,7 @@ class Log_Err_Msg:
 
 
 def Main_Gauss_Seidel():
+    Prog_Data.EXIT_W_SAVE = 1
     print()
     Lazy_Loading("Opening files...")
     # first item in each menu is the header
@@ -263,9 +406,9 @@ def Main_Gauss_Seidel():
 
             # ubah progname sesuaikan konteks
             if curr_select < 3:
-                META_DATA.PROG_NAME += "for Regression"
+                META_DATA.PROG_NAME += " for Regression"
             elif curr_select < 6 and curr_select >= 3:
-                META_DATA.PROG_NAME += "for Linear Equation"
+                META_DATA.PROG_NAME += " for Linear Equation"
 
             match curr_select:
                 case 0:
@@ -323,6 +466,7 @@ def Main_Gauss_Seidel():
                         META_DATA.PROG_NAME, "Manage Log File", "merging log file", ""
                     )
                     log_activities(log.run_program_msg)
+                    Prog_Data.EXIT_W_SAVE = 0
                 case 9:
                     Manage_Log_File._del_regression()
                     log = Log_Err_Msg(
@@ -332,6 +476,7 @@ def Main_Gauss_Seidel():
                         "",
                     )
                     log_activities(log.run_program_msg)
+                    Prog_Data.EXIT_W_SAVE = 0
                 case 10:
                     Manage_Log_File._del_linear_eq()
                     log = Log_Err_Msg(
@@ -341,13 +486,61 @@ def Main_Gauss_Seidel():
                         "",
                     )
                     log_activities(log.run_program_msg)
+                    Prog_Data.EXIT_W_SAVE = 0
                 case last_idx:
                     style.stop_jam.set()
                     clear_screen()
                     print(f"\n Keluar dari program {META_DATA.PROG_NAME}")
                     log = Log_Err_Msg(META_DATA.PROG_NAME, "", "", "")
                     log_activities(log.closing_main_prog_msg)
+                    Prog_Data.EXIT_W_SAVE = 0
                     break
+
+            print("")
+            style.dalam_menu_kalkulasi = False
+            if Prog_Data.EXIT_W_SAVE == 0:
+                sys.stdout.write("\n\n\033[2A")
+                sys.stdout.flush()
+                pilihan = (
+                    input(
+                        f"{AnsiColors.BOLD}[Enter or any key]{AnsiColors.RESET} to back to main menu,\n\
+or press {AnsiColors.BOLD}[q]{AnsiColors.RESET} to exit: "
+                    )
+                    .strip()
+                    .lower()
+                )
+            else:
+                pilihan = (
+                    input(
+                        f"\nPress {AnsiColors.BOLD}[s]{AnsiColors.RESET} to save result,\n\
+{AnsiColors.BOLD}[Enter or any key]{AnsiColors.RESET} to back to main menu,\n\
+or press {AnsiColors.BOLD}[q]{AnsiColors.RESET} to exit: "
+                    )
+                    .strip()
+                    .lower()
+                )
+
+            if pilihan == "q":
+                style.stop_jam.set()
+                clear_screen()
+                print("\nKeluar dari program. Sampai jumpa, Bre!")
+                log_activities(f"Closing program {META_DATA.PROG_NAME}...")
+                break
+            elif pilihan == "s":
+                clear_screen()
+                write_result(menu, META_DATA.OUT_PATH, META_DATA.PROG_NAME)
+
+            style.dalam_menu_kalkulasi = False
+            clear_screen()
+            multiset_draw_menu(
+                main_menu,
+                curr_select,
+                "",
+                META_DATA.REGRESSION_ART,
+                META_DATA.REGRESSION_COLORS,
+                awal_jalan=True,
+                additional_header=META_DATA.ADDITIONAL_HEADER,
+            )
     return
 
 
