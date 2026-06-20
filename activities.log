@@ -1530,3 +1530,40 @@
 2026-06-20 11:07:35 - INFO - Gauss-Seidel Method
 2026-06-20 11:08:31 - INFO - Running Gauss-Seidel Method for Regression by fetch from file
 2026-06-20 11:08:37 - ERROR - File not found in Gauss-Seidel Method for Regression. Failed to write
+2026-06-20 11:34:44 - INFO - Success unpacking numeric computation package
+2026-06-20 11:34:45 - INFO - Success unpacking internal package
+2026-06-20 11:34:46 - INFO - Gauss-Seidel Method
+2026-06-20 11:36:17 - INFO - Success unpacking numeric computation package
+2026-06-20 11:36:17 - INFO - Success unpacking internal package
+2026-06-20 11:36:20 - INFO - Gauss-Seidel Method
+2026-06-20 11:36:49 - INFO - Success unpacking numeric computation package
+2026-06-20 11:36:50 - INFO - Success unpacking internal package
+2026-06-20 11:36:59 - INFO - Gauss-Seidel Method
+2026-06-20 11:37:18 - INFO - [Cloud] Downloading file from GDrive (ID: 1FLWkSeRKiUH2d1gIXuTDf5RgkjYlEbd0) in Gauss-Seidel Method for Regression
+2026-06-20 11:37:18 - DEBUG - Starting new HTTPS connection (1): docs.google.com:443
+2026-06-20 11:37:19 - DEBUG - https://docs.google.com:443 "GET /uc?export=download&id=1FLWkSeRKiUH2d1gIXuTDf5RgkjYlEbd0 HTTP/1.1" 303 0
+2026-06-20 11:37:19 - DEBUG - Starting new HTTPS connection (1): drive.usercontent.google.com:443
+2026-06-20 11:37:21 - DEBUG - https://drive.usercontent.google.com:443 "GET /download?id=1FLWkSeRKiUH2d1gIXuTDf5RgkjYlEbd0&export=download HTTP/1.1" 200 49
+2026-06-20 11:37:21 - INFO - [Cloud] File successfully downloaded and saved to: ./input/reg_gauss/cloud_table.csv in Gauss-Seidel Method for Regression
+2026-06-20 11:43:37 - INFO - Success unpacking numeric computation package
+2026-06-20 11:43:37 - INFO - Success unpacking internal package
+2026-06-20 11:43:39 - INFO - Gauss-Seidel Method
+2026-06-20 11:43:48 - INFO - [Cloud] Downloading file from GDrive (ID: 1FLWkSeRKiUH2d1gIXuTDf5RgkjYlEbd0) in Gauss-Seidel Method for Regression
+2026-06-20 11:43:48 - DEBUG - Starting new HTTPS connection (1): docs.google.com:443
+2026-06-20 11:43:48 - DEBUG - https://docs.google.com:443 "GET /uc?export=download&id=1FLWkSeRKiUH2d1gIXuTDf5RgkjYlEbd0 HTTP/1.1" 303 0
+2026-06-20 11:43:48 - DEBUG - Starting new HTTPS connection (1): drive.usercontent.google.com:443
+2026-06-20 11:43:50 - DEBUG - https://drive.usercontent.google.com:443 "GET /download?id=1FLWkSeRKiUH2d1gIXuTDf5RgkjYlEbd0&export=download HTTP/1.1" 200 49
+2026-06-20 11:43:51 - INFO - [Cloud] File successfully downloaded and saved to: ./input/reg_gauss/cloud_table.csv in Gauss-Seidel Method for Regression
+2026-06-20 11:45:04 - INFO - Running Gauss-Seidel Method for Regression by fetch from google drive
+2026-06-20 11:48:05 - INFO - Success unpacking numeric computation package
+2026-06-20 11:48:05 - INFO - Success unpacking internal package
+2026-06-20 11:48:07 - INFO - Gauss-Seidel Method
+2026-06-20 11:48:15 - INFO - [Cloud] Downloading file from GDrive (ID: 1FLWkSeRKiUH2d1gIXuTDf5RgkjYlEbd0) in Gauss-Seidel Method for Regression
+2026-06-20 11:48:15 - DEBUG - Starting new HTTPS connection (1): docs.google.com:443
+2026-06-20 11:48:15 - DEBUG - https://docs.google.com:443 "GET /uc?export=download&id=1FLWkSeRKiUH2d1gIXuTDf5RgkjYlEbd0 HTTP/1.1" 303 0
+2026-06-20 11:48:15 - DEBUG - Starting new HTTPS connection (1): drive.usercontent.google.com:443
+2026-06-20 11:48:17 - DEBUG - https://drive.usercontent.google.com:443 "GET /download?id=1FLWkSeRKiUH2d1gIXuTDf5RgkjYlEbd0&export=download HTTP/1.1" 200 49
+2026-06-20 11:48:18 - INFO - [Cloud] File successfully downloaded and saved to: ./input/reg_gauss/cloud_table.csv in Gauss-Seidel Method for Regression
+2026-06-20 11:50:32 - INFO - Running Gauss-Seidel Method for Regression by fetch from google drive
+2026-06-20 11:50:50 - INFO - Closing program Gauss-Seidel Method
+2026-06-20 11:50:57 - INFO - Opening log file...
