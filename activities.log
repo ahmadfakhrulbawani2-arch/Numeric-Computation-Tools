@@ -1493,3 +1493,40 @@
 2026-06-16 11:59:44 - INFO - Opening Polynomial Regression
 2026-06-16 11:59:49 - INFO - Gauss-Seidel Method
 2026-06-16 11:59:53 - INFO - Running Gauss-Seidel Methodfor Regression by manual input
+2026-06-19 21:57:00 - INFO - Success unpacking numeric computation package
+2026-06-19 21:57:01 - INFO - Success unpacking internal package
+2026-06-19 21:57:04 - INFO - Opening Polynomial Regression
+2026-06-19 21:57:14 - INFO - Quitting Polynomial Regression program...
+2026-06-19 21:57:14 - INFO - Running Polynomial Regression with manual input
+2026-06-19 21:57:43 - INFO - Success unpacking numeric computation package
+2026-06-19 21:57:44 - INFO - Success unpacking internal package
+2026-06-19 21:57:57 - INFO - Opening Polynomial Regression
+2026-06-19 21:58:06 - INFO - Quitting Polynomial Regression program...
+2026-06-19 21:58:06 - INFO - Running Polynomial Regression with fetching Google Drive file
+2026-06-19 21:58:19 - INFO - Quitting Polynomial Regression program...
+2026-06-19 21:58:19 - INFO - Running Polynomial Regression with fetching Google Drive file
+2026-06-19 21:58:20 - INFO - Closing program Polynomial Regression...
+2026-06-19 21:58:22 - INFO - Closing program...
+2026-06-20 10:48:01 - INFO - Success unpacking numeric computation package
+2026-06-20 10:48:02 - INFO - Success unpacking internal package
+2026-06-20 10:48:05 - INFO - Gauss-Seidel Method
+2026-06-20 10:53:48 - INFO - Success unpacking numeric computation package
+2026-06-20 10:53:49 - INFO - Success unpacking internal package
+2026-06-20 10:53:50 - INFO - Gauss-Seidel Method
+2026-06-20 10:55:09 - INFO - Success unpacking numeric computation package
+2026-06-20 10:55:09 - INFO - Success unpacking internal package
+2026-06-20 10:55:10 - INFO - Gauss-Seidel Method
+2026-06-20 10:57:49 - INFO - Success unpacking numeric computation package
+2026-06-20 10:57:49 - INFO - Success unpacking internal package
+2026-06-20 10:57:50 - INFO - Gauss-Seidel Method
+2026-06-20 11:00:18 - INFO - Success unpacking numeric computation package
+2026-06-20 11:00:18 - INFO - Success unpacking internal package
+2026-06-20 11:00:20 - INFO - Gauss-Seidel Method
+2026-06-20 11:06:59 - INFO - Success unpacking numeric computation package
+2026-06-20 11:06:59 - INFO - Success unpacking internal package
+2026-06-20 11:07:03 - INFO - Gauss-Seidel Method
+2026-06-20 11:07:33 - INFO - Success unpacking numeric computation package
+2026-06-20 11:07:33 - INFO - Success unpacking internal package
+2026-06-20 11:07:35 - INFO - Gauss-Seidel Method
+2026-06-20 11:08:31 - INFO - Running Gauss-Seidel Method for Regression by fetch from file
+2026-06-20 11:08:37 - ERROR - File not found in Gauss-Seidel Method for Regression. Failed to write

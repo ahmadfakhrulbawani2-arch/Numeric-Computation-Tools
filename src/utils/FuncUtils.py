@@ -133,7 +133,7 @@ from typing import List
 
 
 def iterateGaussJordan(
-    matrix: List[List[float]], prog_name: str, var_symbol: str
+    matrix: List[List[float]], prog_name: str, var_symbol: str, max_iterations=200
 ) -> List[List[float]]:
     from .IoUtils import Print_2d_obe_Matrix, g_buffer
 
@@ -226,6 +226,15 @@ def iterateGaussJordan(
             Print_2d_obe_Matrix(M, prog_name, var_symbol)
             print()
             step += 1
+            if step >= max_iterations:
+                print("Matrix diagonal akhir:")
+                g_buffer.writelines("Matrix diagonal akhir:")
+                print()
+                g_buffer.writelines(" ")
+                Print_2d_obe_Matrix(M, prog_name, var_symbol)
+                print()
+                g_buffer.writelines(" ")
+                return M
 
     # ========================================================
     # TAHAP 2: ELIMINASI MUNDUR (MENGNOLKAN BAGIAN ATAS DIAGONAL)
@@ -261,6 +270,15 @@ def iterateGaussJordan(
             Print_2d_obe_Matrix(M, prog_name, var_symbol)
             print()
             step += 1
+            if step >= max_iterations:
+                print("Matrix diagonal akhir:")
+                g_buffer.writelines("Matrix diagonal akhir:")
+                print()
+                g_buffer.writelines(" ")
+                Print_2d_obe_Matrix(M, prog_name, var_symbol)
+                print()
+                g_buffer.writelines(" ")
+                return M
 
     print("Matrix diagonal akhir:")
     g_buffer.writelines("Matrix diagonal akhir:")
@@ -270,3 +288,98 @@ def iterateGaussJordan(
     print()
     g_buffer.writelines(" ")
     return M
+
+# calculate using Gauss Seidel
+def iterateGaussSeidel(
+    matrix: List[List[float]], prog_name: str, var_symbol: str, max_iterations=200
+) -> List[float]:
+    from .IoUtils import Print_2d_obe_Matrix, g_buffer
+
+    row = len(matrix)
+    col = len(matrix[0])
+    
+    # --- CRITICAL ERROR HANDLING 1 ---
+    if col != row + 1:
+        error_msg = f"Matrix must be size n x (n+1) for Gauss-Seidel. Detected {row}x{col}."
+        print(f"\n[ERROR] {error_msg}")
+        raise ValueError(error_msg)
+        
+    # --- DIAGONAL DOMINANCE CHECK ---
+    is_sdd = True
+    for i in range(row):
+        diagonal = abs(matrix[i][i])
+        sum_row = sum(abs(matrix[i][j]) for j in range(row) if i != j)
+        if diagonal <= sum_row:
+            is_sdd = False
+            
+    if not is_sdd:
+        warning_msg = "Warning: Matrix is not diagonally dominant. Gauss-Seidel may fail to converge (diverge)."
+        print(f"\n[WARNING] {warning_msg}\n")
+        g_buffer.writelines(f"[WARNING] {warning_msg}\n")
+
+    # M will serve as our working matrix layout, X holds the answers
+    M = [r[:] for r in matrix]
+    X = [0.0] * row
+    step = 1
+    
+    print("=== GAUSS-SEIDEL ITERATION STAGE ===")
+    g_buffer.writelines("=== GAUSS-SEIDEL ITERATION STAGE ===\n")
+    
+    # Main Iteration Loop
+    for k in range(max_iterations):
+        X_old = X[:]  # Copy old values to check convergence
+        
+        # Calculate each variable x_i for this iteration step
+        for i in range(row):
+            sigma = matrix[i][-1] 
+            
+            # --- CRITICAL ERROR HANDLING 2 ---
+            if abs(matrix[i][i]) < EPSILON:
+                error_msg = f"Division by zero detected on main diagonal M[{i}][{i}]."
+                print(f"\n[ERROR] {error_msg}")
+                raise ZeroDivisionError(error_msg)
+                
+            for j in range(row):
+                if i != j:
+                    sigma -= matrix[i][j] * X[j]
+            
+            X[i] = sigma / matrix[i][i]
+        
+        # Update the constants column in our tracking matrix M with the latest X values 
+        # so Print_2d_obe_Matrix displays the updated state
+        for i in range(row):
+            M[i][-1] = X[i]
+
+        # Display current iteration snapshot exactly like OBE steps
+        print(f"Iteration step-{step}: Matrix current state")
+        g_buffer.writelines(f"Iteration step-{step}: Matrix current state\n")
+        
+        Print_2d_obe_Matrix(M, prog_name, var_symbol)
+        print()
+        g_buffer.writelines(" ")
+        
+        # Calculate maximum absolute relative error using global EPSILON
+        error = max(abs(X[i] - X_old[i]) for i in range(row))
+        if error < EPSILON:
+            success_msg = f"Convergence reached at iteration {step} with error: {error:.2e}"
+            print(f"=== {success_msg} ===")
+            g_buffer.writelines(f"=== {success_msg} ===\n")
+            
+            print("Matrix final solution:")
+            g_buffer.writelines("Matrix final solution:\n")
+            Print_2d_obe_Matrix(M, prog_name, var_symbol)
+            print()
+            return X
+            
+        step += 1
+        
+    # --- CRITICAL ERROR HANDLING 3 ---
+    fail_msg = f"Maximum iteration limit ({max_iterations}) reached without convergence."
+    print(f"\n[ERROR] {fail_msg}")
+    g_buffer.writelines(f"\n[ERROR] {fail_msg}\n")
+    
+    print("Matrix final solution (Non-converged):")
+    g_buffer.writelines("Matrix final solution (Non-converged):\n")
+    Print_2d_obe_Matrix(M, prog_name, var_symbol)
+    print()
+    return X
