@@ -120,12 +120,12 @@ class Prog_Data:
     g_xy_dataset = XY_Dataset()
     g_eq_dataset = Eq_Dataset()
     byk_data = 0
+    max_iter = 150
 
 # ======================================================================
 # CAUTION: SET MAX ORDER SO IT IS NOT EXCEED TIME LIMIT
 # ======================================================================
 MAX_ORDO = 10
-
 
 # ======================================================================
 # This will be polynomial regression using gauss-seidel
@@ -197,9 +197,9 @@ class Reg_Data:
             _curr_row.append(xy_sum_data[row])
             self.sigma_obe_arr_data.append(_curr_row)
 
-    def __ngelakoni_obe(self) -> None:
+    def __ngelakoni_gauss_seidel(self) -> None:
         try:
-            res = iterateGaussJordan(self.sigma_obe_arr_data, META_DATA.PROG_NAME, "a")
+            res = iterateGaussSeidel(self.sigma_obe_arr_data, META_DATA.PROG_NAME, "a", Prog_Data.max_iter)
             self.results_coeffs = [row[-1] for row in res]
             print("\n === Didapatkan koefisien akhir ===\n")
             g_buffer.write("\n === Didapatkan koefisien akhir ===\n")
@@ -229,7 +229,7 @@ class Reg_Data:
     def _calc_expr(self):
         Lazy_Loading("Initializing OBE Gauss...", 0.2)
         print()
-        self.__ngelakoni_obe()
+        self.__ngelakoni_gauss_seidel()
 
         if not self.results_coeffs:
             print(
