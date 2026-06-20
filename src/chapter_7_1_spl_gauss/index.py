@@ -323,6 +323,9 @@ class Regression_Gaus_Seidel:
             return
         
         # show data
+        sys.stdout.write("\033[J")
+        sys.stdout.write("\n\n\033[2A")
+        sys.stdout.flush()
         print(f"X = {data_set.x_data}")
         time.sleep(0.2)
         print(f"Y = {data_set.y_data}")

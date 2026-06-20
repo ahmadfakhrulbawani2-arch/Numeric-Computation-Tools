@@ -1743,3 +1743,1136 @@ Matrix final solution (Non-converged):
 Hasil akhir: 
     y = - 2.5877 + 3.0724x + 0.3663x^2 + 0.0254x^3 + 0.0013x^4 + 0.0000x^5 
 
+Saturday, 20-06-2026 | 11:59:15 WIB
+
+Calculation by 
+sigma X ^ 0 = 8.0sigma X ^ 1 = 36.0sigma X ^ 2 = 204.0sigma X ^ 3 = 1296.0sigma X ^ 4 = 8772.0
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | 212.00 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 1332.00 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 8976.00 ]
+
+[WARNING] Warning: Matrix is not diagonally dominant. Gauss-Seidel may fail to converge (diverge).
+=== GAUSS-SEIDEL ITERATION STAGE ===
+Iteration step-1: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | 26.50 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 1.85 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.13 ]
+
+ Iteration step-2: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | 14.76 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 3.08 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.23 ]
+
+ Iteration step-3: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | 6.91 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 3.88 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.29 ]
+
+ Iteration step-4: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | 1.66 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 4.40 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.33 ]
+
+ Iteration step-5: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -1.83 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 4.72 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.37 ]
+
+ Iteration step-6: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -4.14 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 4.92 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.39 ]
+
+ Iteration step-7: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -5.65 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 5.04 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.41 ]
+
+ Iteration step-8: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -6.64 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 5.09 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.43 ]
+
+ Iteration step-9: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -7.26 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 5.11 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.44 ]
+
+ Iteration step-10: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -7.64 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 5.10 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.45 ]
+
+ Iteration step-11: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -7.86 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 5.07 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.46 ]
+
+ Iteration step-12: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -7.97 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 5.03 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.46 ]
+
+ Iteration step-13: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -8.01 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 4.99 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.47 ]
+
+ Iteration step-14: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -8.00 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 4.94 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.48 ]
+
+ Iteration step-15: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -7.95 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 4.89 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.49 ]
+
+ Iteration step-16: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -7.89 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 4.83 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.49 ]
+
+ Iteration step-17: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -7.81 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 4.78 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.50 ]
+
+ Iteration step-18: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -7.73 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 4.72 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.51 ]
+
+ Iteration step-19: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -7.64 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 4.67 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.51 ]
+
+ Iteration step-20: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -7.54 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 4.61 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.52 ]
+
+ Iteration step-21: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -7.44 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 4.56 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.52 ]
+
+ Iteration step-22: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -7.35 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 4.50 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.53 ]
+
+ Iteration step-23: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -7.25 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 4.45 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.53 ]
+
+ Iteration step-24: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -7.15 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 4.40 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.54 ]
+
+ Iteration step-25: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -7.05 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 4.34 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.55 ]
+
+ Iteration step-26: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -6.96 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 4.29 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.55 ]
+
+ Iteration step-27: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -6.86 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 4.24 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.56 ]
+
+ Iteration step-28: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -6.77 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 4.19 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.56 ]
+
+ Iteration step-29: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -6.68 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 4.14 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.57 ]
+
+ Iteration step-30: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -6.58 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 4.09 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.57 ]
+
+ Iteration step-31: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -6.49 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 4.04 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.58 ]
+
+ Iteration step-32: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -6.40 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 3.99 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.58 ]
+
+ Iteration step-33: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -6.31 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 3.94 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.59 ]
+
+ Iteration step-34: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -6.22 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 3.89 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.59 ]
+
+ Iteration step-35: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -6.14 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 3.85 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.60 ]
+
+ Iteration step-36: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -6.05 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 3.80 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.60 ]
+
+ Iteration step-37: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -5.97 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 3.76 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.61 ]
+
+ Iteration step-38: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -5.88 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 3.71 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.61 ]
+
+ Iteration step-39: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -5.80 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 3.67 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.62 ]
+
+ Iteration step-40: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -5.72 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 3.62 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.62 ]
+
+ Iteration step-41: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -5.64 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 3.58 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.63 ]
+
+ Iteration step-42: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -5.56 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 3.53 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.63 ]
+
+ Iteration step-43: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -5.48 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 3.49 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.63 ]
+
+ Iteration step-44: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -5.40 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 3.45 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.64 ]
+
+ Iteration step-45: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -5.32 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 3.41 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.64 ]
+
+ Iteration step-46: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -5.25 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 3.37 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.65 ]
+
+ Iteration step-47: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -5.17 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 3.33 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.65 ]
+
+ Iteration step-48: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -5.10 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 3.29 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.66 ]
+
+ Iteration step-49: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -5.02 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 3.25 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.66 ]
+
+ Iteration step-50: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -4.95 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 3.21 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.66 ]
+
+ Iteration step-51: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -4.88 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 3.17 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.67 ]
+
+ Iteration step-52: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -4.81 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 3.13 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.67 ]
+
+ Iteration step-53: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -4.74 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 3.09 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.68 ]
+
+ Iteration step-54: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -4.67 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 3.06 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.68 ]
+
+ Iteration step-55: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -4.60 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 3.02 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.68 ]
+
+ Iteration step-56: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -4.53 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 2.98 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.69 ]
+
+ Iteration step-57: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -4.47 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 2.95 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.69 ]
+
+ Iteration step-58: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -4.40 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 2.91 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.70 ]
+
+ Iteration step-59: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -4.33 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 2.88 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.70 ]
+
+ Iteration step-60: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -4.27 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 2.84 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.70 ]
+
+ Iteration step-61: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -4.21 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 2.81 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.71 ]
+
+ Iteration step-62: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -4.14 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 2.77 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.71 ]
+
+ Iteration step-63: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -4.08 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 2.74 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.71 ]
+
+ Iteration step-64: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -4.02 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 2.71 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.72 ]
+
+ Iteration step-65: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -3.96 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 2.67 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.72 ]
+
+ Iteration step-66: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -3.90 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 2.64 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.72 ]
+
+ Iteration step-67: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -3.84 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 2.61 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.73 ]
+
+ Iteration step-68: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -3.78 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 2.58 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.73 ]
+
+ Iteration step-69: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -3.73 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 2.55 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.73 ]
+
+ Iteration step-70: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -3.67 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 2.52 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.74 ]
+
+ Iteration step-71: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -3.61 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 2.49 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.74 ]
+
+ Iteration step-72: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -3.56 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 2.46 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.74 ]
+
+ Iteration step-73: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -3.50 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 2.43 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.75 ]
+
+ Iteration step-74: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -3.45 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 2.40 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.75 ]
+
+ Iteration step-75: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -3.39 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 2.37 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.75 ]
+
+ Iteration step-76: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -3.34 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 2.34 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.76 ]
+
+ Iteration step-77: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -3.29 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 2.31 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.76 ]
+
+ Iteration step-78: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -3.24 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 2.28 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.76 ]
+
+ Iteration step-79: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -3.19 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 2.26 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.76 ]
+
+ Iteration step-80: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -3.13 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 2.23 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.77 ]
+
+ Iteration step-81: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -3.09 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 2.20 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.77 ]
+
+ Iteration step-82: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -3.04 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 2.18 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.77 ]
+
+ Iteration step-83: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -2.99 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 2.15 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.78 ]
+
+ Iteration step-84: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -2.94 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 2.12 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.78 ]
+
+ Iteration step-85: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -2.89 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 2.10 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.78 ]
+
+ Iteration step-86: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -2.84 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 2.07 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.78 ]
+
+ Iteration step-87: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -2.80 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 2.05 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.79 ]
+
+ Iteration step-88: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -2.75 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 2.02 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.79 ]
+
+ Iteration step-89: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -2.71 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 2.00 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.79 ]
+
+ Iteration step-90: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -2.66 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 1.97 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.79 ]
+
+ Iteration step-91: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -2.62 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 1.95 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.80 ]
+
+ Iteration step-92: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -2.57 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 1.93 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.80 ]
+
+ Iteration step-93: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -2.53 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 1.90 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.80 ]
+
+ Iteration step-94: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -2.49 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 1.88 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.80 ]
+
+ Iteration step-95: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -2.45 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 1.86 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.81 ]
+
+ Iteration step-96: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -2.41 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 1.84 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.81 ]
+
+ Iteration step-97: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -2.36 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 1.81 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.81 ]
+
+ Iteration step-98: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -2.32 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 1.79 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.81 ]
+
+ Iteration step-99: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -2.28 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 1.77 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.81 ]
+
+ Iteration step-100: Matrix current state
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -2.24 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 1.75 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.82 ]
+
+ 
+[ERROR] Maximum iteration limit (100) reached without convergence.
+Matrix final solution (Non-converged):
+
+
+ === Matrix Gauss-Seidel Method for Regression ===
+
+    [ 8.00a0, 36.00a1, 204.00a2 | -2.24 ]
+
+    [ 36.00a0, 204.00a1, 1296.00a2 | 1.75 ]
+
+    [ 204.00a0, 1296.00a1, 8772.00a2 | 0.82 ]
+
+
+ === Didapatkan koefisien akhir ===
+Hasil akhir: 
+    y = - 2.2442 + 1.7489x + 0.8171x^2 
+

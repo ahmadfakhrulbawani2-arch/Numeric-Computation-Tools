@@ -1567,3 +1567,13 @@
 2026-06-20 11:50:32 - INFO - Running Gauss-Seidel Method for Regression by fetch from google drive
 2026-06-20 11:50:50 - INFO - Closing program Gauss-Seidel Method
 2026-06-20 11:50:57 - INFO - Opening log file...
+2026-06-20 11:54:06 - INFO - Closing program...
+2026-06-20 11:54:13 - INFO - Success unpacking numeric computation package
+2026-06-20 11:54:14 - INFO - Success unpacking internal package
+2026-06-20 11:54:15 - INFO - Gauss-Seidel Method
+2026-06-20 11:57:20 - INFO - Success unpacking numeric computation package
+2026-06-20 11:57:20 - INFO - Success unpacking internal package
+2026-06-20 11:57:21 - INFO - Gauss-Seidel Method
+2026-06-20 11:59:12 - INFO - Running Gauss-Seidel Method for Regression by manual input
+2026-06-20 11:59:40 - INFO - Closing program Gauss-Seidel Method
+2026-06-20 11:59:41 - INFO - Closing program...
