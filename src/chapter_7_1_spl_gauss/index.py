@@ -344,7 +344,6 @@ class Gauss_Seidel_Iterate:
 # This will be fetch from drive, file, and manual
 # ======================================================================
 
-
 class Program_IO:
     def __init__(self):
         self.log = Log_Err_Msg(META_DATA.PROG_NAME, "", "", "")
