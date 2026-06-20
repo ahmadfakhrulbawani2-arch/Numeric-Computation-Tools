@@ -20,6 +20,7 @@ REGRESSION_COLORS = [
     (0, 230, 118),  # Spring Green / Data Points
     (18, 18, 24),  # Deep Obsidian / Background
 ]
+
 REGRESSION_ART = rf"""
 
  ____       _                             _       _ 
@@ -52,7 +53,7 @@ class Csv_Data:
 # CAUTION: SET MAX ORDER SO IT IS NOT EXCEED TIME LIMIT
 # ================================================
 MAX_ORDO = 10
-
+MAX_ITER = 200
 
 class Reg_Data:
     # ================================================
@@ -121,7 +122,7 @@ class Reg_Data:
 
     def __ngelakoni_obe(self) -> None:
         try:
-            res = iterateGaussJordan(self.sigma_obe_arr_data, PROG_NAME, "a")
+            res = iterateGaussJordan(self.sigma_obe_arr_data, PROG_NAME, "a", MAX_ITER)
             self.results_coeffs = [row[-1] for row in res]
             print("\n === Didapatkan koefisien akhir ===\n")
             g_buffer.write("\n === Didapatkan koefisien akhir ===\n")

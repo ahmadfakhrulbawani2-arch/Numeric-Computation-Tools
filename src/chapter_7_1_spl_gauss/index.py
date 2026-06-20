@@ -57,6 +57,47 @@ class META_DATA:
 
     MAX_ITERATIONS = 0
 
+# ======================================================================
+# This will be centered log message and err msg
+# ======================================================================
+class Log_Err_Msg:
+    def __init__(self, _progname, _input_method, _err, _custom_msg):
+        self.progname = _progname
+        self.input_method = _input_method
+        self.err_msg = _err
+        self.custom_msg = _custom_msg
+
+        # Deklarasi template pesan di dalam dictionary
+        self._templates = {
+            "run_program_msg": "Running {progname} by {input_method}", # in every program star
+            "file_not_found_msg": "Error: {progname} cannot find the log file", # file not found err
+            "closing_main_prog_msg": "Closing program {progname}", # for closing main program
+            "no_data_err_msg": "Caught no data in {progname} or data not enough", # if no data in prog_data or not enough data
+            "custom_err_msg": "{err_msg} in {progname}", # also custom err
+            "bad_data_type_msg": "Unallowed data type in {progname}", # data type mismatch
+            "csv_err_msg": "CSV Error: {custom_msg} in {progname}", # other csv err
+            "closing_sub_prog_msg": "Quitting {progname} by {input_method}...", # closing sub prog
+            "csv_invalid": "Error: CSV format is not valid by {input_method} in {progname}", # invalid csv
+            "download_failed": "Error: Failed to download by {input_method} in {progname}", # failed download
+        }
+
+    def __getattribute__(self, name):
+        # Ambil dictionary _templates terlebih dahulu dengan aman
+        templates = object.__getattribute__(self, "_templates")
+
+        # Jika atribut yang dicari ada di dalam daftar template kita
+        if name in templates:
+            template_string = templates[name]
+            # Isi template secara dinamis memakai property milik self saat ini
+            return template_string.format(
+                progname=object.__getattribute__(self, "progname"),
+                input_method=object.__getattribute__(self, "input_method"),
+                err_msg=object.__getattribute__(self, "err_msg"),
+                custom_msg=object.__getattribute__(self, "custom_msg"),
+            )
+
+        return object.__getattribute__(self, name)
+
 
 # ======================================================================
 # This will be data structure
@@ -80,8 +121,6 @@ class Prog_Data:
     g_eq_dataset = Eq_Dataset()
     byk_data = 0
 
-
-
 # ======================================================================
 # CAUTION: SET MAX ORDER SO IT IS NOT EXCEED TIME LIMIT
 # ======================================================================
@@ -91,10 +130,205 @@ MAX_ORDO = 10
 # ======================================================================
 # This will be polynomial regression using gauss-seidel
 # ======================================================================
-class Regression_Gaus_Seidel:
-    def main():
-        print("Test reg gauss seidel main")
+class Reg_Data:
+    # ================================================
+    # constructor
+    # ================================================
+    def __init__(self, _order: int):
+        self.log = Log_Err_Msg(META_DATA.PROG_NAME, "", "", "")
+        datas = Prog_Data.g_xy_dataset
+        _len_x = len(datas.x_data)
+        _len_y = len(datas.y_data)
+        if _len_x <= 2 or _len_y <= 2:
+            print(self.log.no_data_err_msg)
+            log_activities(self.log.no_data_err_msg, "ERROR")
+            return
 
+        _data_x = datas.x_data
+        _data_y = datas.y_data
+
+        # attributes
+        self.data_amount = min(len(_data_x), len(_data_y))
+        self.data_x = _data_x[: self.data_amount]
+        self.data_y = _data_y[: self.data_amount]
+        self.order = _order
+
+        # --- FIX 1: Alokasikan ukuran list default 0 biar gak IndexError ---
+        self.x_sigma_by_order: List[float] = [0.0] * ((2 * _order) + 1)
+        self.xy_sigma_by_order: List[float] = [0.0] * (_order + 1)
+
+        self.x_sigma_by_order[0] = float(self.data_amount)
+        self.__generate_sigma_arr_data()
+
+        self.sigma_obe_arr_data: List[List[float]] = []
+        self.__generate_2d_obe_arr_data()
+        self.results_coeffs: List[float] = []
+
+    # ================================================
+    # private
+    # ================================================
+    def __generate_sigma_arr_data(self):
+        r = self.order
+        n = self.data_amount
+
+        # --- FIX 2: Perbaikan logika loop pemangkatan X agar pas dengan indeks row+col ---
+        for i in range(1, (2 * r) + 1):
+            for x in self.data_x:
+                _curr_x = x**i
+                self.x_sigma_by_order[i] += _curr_x
+
+        # --- FIX 3: Membawa n ke range(n) agar bisa di-loop ---
+        for i in range(r + 1):
+            for j in range(n):
+                _cur_x = self.data_x[j] ** i
+                _curr_y = self.data_y[j]
+                self.xy_sigma_by_order[i] += _cur_x * _curr_y
+
+    def __generate_2d_obe_arr_data(self):
+        r = self.order
+        x_sum_data = self.x_sigma_by_order
+        xy_sum_data = self.xy_sigma_by_order
+
+        # generate left and right part
+        for row in range(r + 1):
+            _curr_row = []
+            for col in range(r + 1):
+                _curr_row.append(x_sum_data[row + col])
+            _curr_row.append(xy_sum_data[row])
+            self.sigma_obe_arr_data.append(_curr_row)
+
+    def __ngelakoni_obe(self) -> None:
+        try:
+            res = iterateGaussJordan(self.sigma_obe_arr_data, META_DATA.PROG_NAME, "a")
+            self.results_coeffs = [row[-1] for row in res]
+            print("\n === Didapatkan koefisien akhir ===\n")
+            g_buffer.write("\n === Didapatkan koefisien akhir ===\n")
+            for i, a in enumerate(self.results_coeffs):
+                print(f"a{i} = {a:.4f}")
+                time.sleep(0.2)
+        except (ValueError, ZeroDivisionError) as err:
+            log_activities(f"{err} in {META_DATA.PROG_NAME}", "ERROR")
+            self.results_coeffs = []
+            return
+
+    # ================================================
+    # public
+    # ================================================
+    def _show_data(self):
+        Lazy_Loading("Calculating all X sum and XY sum...", 0.5)
+        print()
+        for i, x in enumerate(self.x_sigma_by_order):
+            print(f"sigma X^{i} = {x}")
+            g_buffer.write(f"sigma X ^ {i} = {x}")
+            time.sleep(0.2)
+
+        print()
+        Lazy_Loading("Building OBE array...", 0.2)
+        Print_2d_obe_Matrix(self.sigma_obe_arr_data, META_DATA.PROG_NAME, "a")
+
+    def _calc_expr(self):
+        Lazy_Loading("Initializing OBE Gauss...", 0.2)
+        print()
+        self.__ngelakoni_obe()
+
+        if not self.results_coeffs:
+            print(
+                "[ERROR] Gagal menghitung persamaan fungsi karena matriks bermasalah."
+            )
+            return
+
+        print(f"Hasil akhir: ")
+        g_buffer.write(f"Hasil akhir: \n")
+        sys.stdout.write("    y = ")
+        g_buffer.write("    y = ")
+        for i, coef in enumerate(self.results_coeffs):
+            sign = "+ " if coef >= 0 else "- "
+            _coef = abs(coef)
+            if i == 0:
+                sys.stdout.write(f"{sign}{_coef:.4f} ")
+                g_buffer.write(f"{sign}{_coef:.4f} ")
+            elif i == 1:
+                sys.stdout.write(f"{sign}{_coef:.4f}x ")
+                g_buffer.write(f"{sign}{_coef:.4f}x ")
+            else:
+                sys.stdout.write(f"{sign}{_coef:.4f}x^{i} ")
+                g_buffer.write(f"{sign}{_coef:.4f}x^{i} ")
+        sys.stdout.write("\n\n")
+        g_buffer.write(f"\n\n")
+
+class Regression_Gaus_Seidel:
+    def __init__(self):
+        self.log = Log_Err_Msg(META_DATA.PROG_NAME, "", "", "")
+
+
+    # --- HELPER AMBIL INPUT ORDER DARI USER ---
+    def __hitung_max_order_valid(banyak_data: int) -> int:
+        print(f"\n[INFO] Valid data count: {banyak_data}")
+        style.dalam_menu_kalkulasi = False
+        sys.stdout.write("\033[J")
+        sys.stdout.write("\n\n\033[2A")
+        sys.stdout.flush()
+        input_ord = input(
+            f"Input desired polynomial degree/order (Max Ordo: {MAX_ORDO - 1}): "
+        ).strip()
+
+        while (
+            not InputValidator.is_numeric(input_ord)
+            or int(input_ord) < 1
+            or int(input_ord) >= MAX_ORDO
+        ):
+            style.dalam_menu_kalkulasi = True
+            sys.stdout.write("\033[J")
+            sys.stdout.write("\n\n\033[2A")
+            sys.stdout.flush()
+            print(
+                f"{AnsiColors.RED}Ordo cannot be less than one and higher that the limit!{AnsiColors.RESET}"
+            )
+            style.dalam_menu_kalkulasi = False
+            sys.stdout.write("\033[J")
+            sys.stdout.write("\n\n\033[2A")
+            sys.stdout.flush()
+            input_ord = input(f"Input valid polynomial order again: ").strip()
+
+        style.dalam_menu_kalkulasi = True
+        sys.stdout.write(
+            "\n\n\033[2A"
+        )  # leaving clock trail so I know when it start running
+        sys.stdout.flush()
+        return int(input_ord)
+
+    def main(self):
+        data_set = Prog_Data.g_xy_dataset
+        if not isinstance(data_set, XY_Dataset):
+            log_activities(self.log.bad_data_type_msg, "ERROR")
+            raise TypeError(self.log.bad_data_type_msg)
+        
+        Prog_Data.byk_data = min(len(data_set.x_data), len(data_set.y_data))
+        if Prog_Data.byk_data < 2:
+            e = self.log.no_data_err_msg
+            print(e)
+            log_activities(e, "ERROR")
+            return
+        
+        # show data
+        print(f"X = {data_set.x_data}")
+        time.sleep(0.2)
+        print(f"Y = {data_set.y_data}")
+        print()
+        time.sleep(0.2)
+
+        pilihan_order = self.__hitung_max_order_valid(Prog_Data.byk_data)
+        print()
+        the_data = Reg_Data(pilihan_order)
+        print()
+        the_data._show_data()
+        print()
+        the_data._calc_expr()
+        print()
+        sys.stdout.write("\n\n\033[5A")
+        sys.stdout.flush()
+        time.sleep(0.1)
+        style.dalam_menu_kalkulasi = False
 
 # ======================================================================
 # This will be only gauss-seidel from the equation
@@ -175,6 +409,7 @@ class Program_IO:
         can_download = download_from_gdrive(META_DATA.PROG_NAME, input_url, META_DATA.IN_CLOUD_PATH)
 
         if not can_download:
+            print(self.log.failed_download)
             log_activities(self.log.failed_download, "ERROR")
             return
 
@@ -269,48 +504,6 @@ class Manage_Log_File:
 
     def _merge():
         print("Test merge")
-
-
-# ======================================================================
-# This will be centered log message and err msg
-# ======================================================================
-class Log_Err_Msg:
-    def __init__(self, _progname, _input_method, _err, _custom_msg):
-        self.progname = _progname
-        self.input_method = _input_method
-        self.err_msg = _err
-        self.custom_msg = _custom_msg
-
-        # Deklarasi template pesan di dalam dictionary
-        self._templates = {
-            "run_program_msg": "Running {progname} by {input_method}", # in every program star
-            "file_not_found_msg": "Error: {progname} cannot find the log file", # file not found err
-            "closing_main_prog_msg": "Closing program {progname}", # for closing main program
-            "no_data_err_msg": "Caught no data in {progname}", # if no data in prog_data
-            "custom_err_msg": "{err_msg} in {progname}", # also custom err
-            "bad_data_type_msg": "Unallowed data type in {progname}", # data type mismatch
-            "csv_err_msg": "CSV Error: {custom_msg} in {progname}", # other csv err
-            "closing_sub_prog_msg": "Quitting {progname} by {input_method}...", # closing sub prog
-            "csv_invalid": "Error: CSV format is not valid by {input_method} in {progname}", # invalid csv
-            "download_failed": "Error: Failed to download by {input_method} in {progname}", # failed download
-        }
-
-    def __getattribute__(self, name):
-        # Ambil dictionary _templates terlebih dahulu dengan aman
-        templates = object.__getattribute__(self, "_templates")
-
-        # Jika atribut yang dicari ada di dalam daftar template kita
-        if name in templates:
-            template_string = templates[name]
-            # Isi template secara dinamis memakai property milik self saat ini
-            return template_string.format(
-                progname=object.__getattribute__(self, "progname"),
-                input_method=object.__getattribute__(self, "input_method"),
-                err_msg=object.__getattribute__(self, "err_msg"),
-                custom_msg=object.__getattribute__(self, "custom_msg"),
-            )
-
-        return object.__getattribute__(self, name)
 
 
 # ======================================================================

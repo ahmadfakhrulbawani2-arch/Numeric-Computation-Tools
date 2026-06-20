@@ -133,7 +133,7 @@ from typing import List
 
 
 def iterateGaussJordan(
-    matrix: List[List[float]], prog_name: str, var_symbol: str
+    matrix: List[List[float]], prog_name: str, var_symbol: str, max_iterations=200
 ) -> List[List[float]]:
     from .IoUtils import Print_2d_obe_Matrix, g_buffer
 
@@ -226,6 +226,15 @@ def iterateGaussJordan(
             Print_2d_obe_Matrix(M, prog_name, var_symbol)
             print()
             step += 1
+            if step >= max_iterations:
+                print("Matrix diagonal akhir:")
+                g_buffer.writelines("Matrix diagonal akhir:")
+                print()
+                g_buffer.writelines(" ")
+                Print_2d_obe_Matrix(M, prog_name, var_symbol)
+                print()
+                g_buffer.writelines(" ")
+                return M
 
     # ========================================================
     # TAHAP 2: ELIMINASI MUNDUR (MENGNOLKAN BAGIAN ATAS DIAGONAL)
@@ -261,6 +270,15 @@ def iterateGaussJordan(
             Print_2d_obe_Matrix(M, prog_name, var_symbol)
             print()
             step += 1
+            if step >= max_iterations:
+                print("Matrix diagonal akhir:")
+                g_buffer.writelines("Matrix diagonal akhir:")
+                print()
+                g_buffer.writelines(" ")
+                Print_2d_obe_Matrix(M, prog_name, var_symbol)
+                print()
+                g_buffer.writelines(" ")
+                return M
 
     print("Matrix diagonal akhir:")
     g_buffer.writelines("Matrix diagonal akhir:")
