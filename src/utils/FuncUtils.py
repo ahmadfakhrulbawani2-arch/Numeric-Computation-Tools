@@ -326,7 +326,7 @@ def iterateGaussSeidel(
     g_buffer.writelines("=== GAUSS-SEIDEL ITERATION STAGE ===\n")
     
     # Main Iteration Loop
-    for k in range(max_iterations):
+    for _ in range(max_iterations):
         X_old = X[:]  # Copy old values to check convergence
         
         # Calculate each variable x_i for this iteration step

@@ -23,10 +23,14 @@ import time  # Ditambahkan karena ada fungsi time.sleep()
 
 class META_DATA:
     # MACRO VARIABLES
-    IO_DIR = "reg_gauss"
-    IN_PATH = f"./input/{IO_DIR}/main_table.csv"
-    IN_CLOUD_PATH = f"./input/{IO_DIR}/cloud_table.csv"
-    OUT_PATH = f"{IO_DIR}/result.txt"
+    IO_DIR_REG = "reg_gauss"
+    IO_DIR_SPL = "spl_gauss"
+    IN_PATH_REG = f"./input/{IO_DIR_REG}/main_table.csv"
+    IN_PATH_SPL = f"./input/{IO_DIR_SPL}/main_table.csv"
+    IN_CLOUD_PATH_REG = f"./input/{IO_DIR_REG}/cloud_table.csv"
+    IN_CLOUD_PATH_SPL = f"./input/{IO_DIR_SPL}/cloud_table.csv"
+    OUT_PATH_SPL = f"{IO_DIR_SPL}/result.txt"
+    OUT_PATH_REG = f"{IO_DIR_REG}/result.txt"
 
     PROG_NAME = "Gauss-Seidel Method"
     REGRESSION_COLORS = [
@@ -51,9 +55,15 @@ class META_DATA:
 
     """
 
-    ADDITIONAL_HEADER = f"\
-        Input directory: {IN_PATH}\n\
-        File output: {OUT_PATH}\n"
+    ADDITIONAL_HEADER = rf"""
+    input_dir:
+        - Polynomial regression: {IN_PATH_REG}
+        - Linear equation case: {IN_PATH_SPL}
+    output_dir:
+        - Polynomial regression: {OUT_PATH_REG}
+        - Linear equation case: {OUT_PATH_SPL}
+
+"""
 
     MAX_ITERATIONS = 0
 
@@ -120,7 +130,9 @@ class Prog_Data:
     g_xy_dataset = XY_Dataset()
     g_eq_dataset = Eq_Dataset()
     byk_data = 0
-    max_iter = 50
+    max_iter = 100 # variable
+    true_cloud_in_path = ""
+    true_out_path = ""
 
 # ======================================================================
 # CAUTION: SET MAX ORDER SO IT IS NOT EXCEED TIME LIMIT
@@ -311,6 +323,9 @@ class Regression_Gaus_Seidel:
             return
         
         # show data
+        sys.stdout.write("\033[J")
+        sys.stdout.write("\n\n\033[2A")
+        sys.stdout.flush()
         print(f"X = {data_set.x_data}")
         time.sleep(0.2)
         print(f"Y = {data_set.y_data}")
@@ -347,6 +362,7 @@ class Gauss_Seidel_Iterate:
 class Program_IO:
     def __init__(self):
         self.log = Log_Err_Msg(META_DATA.PROG_NAME, "", "", "")
+
 
     def __csv_processing(self,PATH):
         try:
@@ -405,14 +421,14 @@ class Program_IO:
         time.sleep(0.2)
         print(f"Make sure you have put correct format or it will error")
         print()
-        can_download = download_from_gdrive(META_DATA.PROG_NAME, input_url, META_DATA.IN_CLOUD_PATH)
+        can_download = download_from_gdrive(META_DATA.PROG_NAME, input_url, Prog_Data.true_cloud_in_path)
 
         if not can_download:
             print(self.log.failed_download)
             log_activities(self.log.failed_download, "ERROR")
             return
 
-        self.__csv_processing(META_DATA.IN_CLOUD_PATH)
+        self.__csv_processing(Prog_Data.true_cloud_in_path)
         return
 
     def _fetch_from_file(self):
@@ -423,10 +439,10 @@ class Program_IO:
         print()
         time.sleep(0.2)
         print()
-        print(f"fetching data from {META_DATA.IN_PATH}")
+        print(f"fetching data from {Prog_Data.true_cloud_in_path}")
         print(f"Make sure you have put correct format or it will error")
         print()
-        self.__csv_processing(META_DATA.IN_PATH)
+        self.__csv_processing(Prog_Data.true_cloud_in_path)
         return
 
 
@@ -599,11 +615,16 @@ def Main_Gauss_Seidel():
             # ubah progname sesuaikan konteks
             if curr_select < 3:
                 META_DATA.PROG_NAME += " for Regression"
+                Prog_Data.true_cloud_in_path = META_DATA.IN_CLOUD_PATH_REG
+                Prog_Data.true_out_path = META_DATA.OUT_PATH_REG
             elif curr_select < 6 and curr_select >= 3:
                 META_DATA.PROG_NAME += " for Linear Equation"
+                Prog_Data.true_cloud_in_path = META_DATA.IN_CLOUD_PATH_SPL
+                Prog_Data.true_out_path = META_DATA.OUT_PATH_SPL
 
             io = Program_IO()
             reg = Regression_Gaus_Seidel()
+            spl = Gauss_Seidel_Iterate()
 
             match curr_select:
                 case 0:
@@ -617,25 +638,25 @@ def Main_Gauss_Seidel():
                     log = Log_Err_Msg(META_DATA.PROG_NAME, "fetch from file", "", "")
                     log_activities(log.run_program_msg)
                 case 2:
-                    Program_IO._fetch_from_gdrive()
-                    Regression_Gaus_Seidel.main()
+                    io._fetch_from_gdrive()
+                    reg.main()
                     log = Log_Err_Msg(
                         META_DATA.PROG_NAME, "fetch from google drive", "", ""
                     )
                     log_activities(log.run_program_msg)
                 case 3:
-                    Program_IO._manually_input()
-                    Gauss_Seidel_Iterate.main()
+                    io._manually_input()
+                    spl.main()
                     log = Log_Err_Msg(META_DATA.PROG_NAME, "manual input", "", "")
                     log_activities(log.run_program_msg)
                 case 4:
-                    Program_IO._fetch_from_file()
-                    Gauss_Seidel_Iterate.main()
+                    io._fetch_from_file()
+                    spl.main()
                     log = Log_Err_Msg(META_DATA.PROG_NAME, "fetch from file", "", "")
                     log_activities(log.run_program_msg)
                 case 5:
-                    Program_IO._fetch_from_gdrive()
-                    Gauss_Seidel_Iterate.main()
+                    io._fetch_from_gdrive()
+                    spl.main()
                     log = Log_Err_Msg(
                         META_DATA.PROG_NAME, "fetch from google drive", "", ""
                     )
@@ -723,7 +744,7 @@ or press {AnsiColors.BOLD}[q]{AnsiColors.RESET} to exit: "
                 break
             elif pilihan == "s":
                 clear_screen()
-                write_result(menu, META_DATA.OUT_PATH, META_DATA.PROG_NAME)
+                write_result(menu, Prog_Data.true_out_path, META_DATA.PROG_NAME)
 
             style.dalam_menu_kalkulasi = False
             clear_screen()
