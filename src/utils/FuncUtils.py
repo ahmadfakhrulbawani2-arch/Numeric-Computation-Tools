@@ -300,7 +300,7 @@ def iterateGaussSeidel(
     
     # --- CRITICAL ERROR HANDLING 1 ---
     if col != row + 1:
-        error_msg = f"Matrix must be size n x (n+1) for Gauss-Seidel. Detected {row}x{col}."
+        error_msg = f"Matrix must be size n x (n+1) for Gauss-Seidel. Detected {row}x{col} matrix."
         print(f"\n[ERROR] {error_msg}")
         raise ValueError(error_msg)
         
@@ -311,7 +311,8 @@ def iterateGaussSeidel(
         sum_row = sum(abs(matrix[i][j]) for j in range(row) if i != j)
         if diagonal <= sum_row:
             is_sdd = False
-            
+            break
+
     if not is_sdd:
         warning_msg = "Warning: Matrix is not diagonally dominant. Gauss-Seidel may fail to converge (diverge)."
         print(f"\n[WARNING] {warning_msg}\n")
@@ -338,12 +339,20 @@ def iterateGaussSeidel(
                 error_msg = f"Division by zero detected on main diagonal M[{i}][{i}]."
                 print(f"\n[ERROR] {error_msg}")
                 raise ZeroDivisionError(error_msg)
+            
+            manipulation_log = f"{var_symbol}{i} = ({matrix[i][-1]:.2f}"
                 
             for j in range(row):
                 if i != j:
                     sigma -= matrix[i][j] * X[j]
+                    sign = " - " if matrix[i][j] >= 0 else " + "
+                    manipulation_log += f"{sign}{abs(matrix[i][j]):.2f}({var_symbol}{j}:{X[j]:.2f})"
+
+            manipulation_log += f") / {matrix[i][i]:.2f}"
             
             X[i] = sigma / matrix[i][i]
+
+            manipulation_log += f" = {X[i]:.2f}"
         
         # Update the constants column in our tracking matrix M with the latest X values 
         # so Print_2d_obe_Matrix displays the updated state
@@ -351,8 +360,8 @@ def iterateGaussSeidel(
             M[i][-1] = X[i]
 
         # Display current iteration snapshot exactly like OBE steps
-        print(f"Iteration step-{step}: Matrix current state")
-        g_buffer.writelines(f"Iteration step-{step}: Matrix current state\n")
+        print(f"Iteration step-{step}: {manipulation_log}")
+        g_buffer.writelines(f"Iteration step-{step}: {manipulation_log}\n")
         
         Print_2d_obe_Matrix(M, prog_name, var_symbol)
         print()
