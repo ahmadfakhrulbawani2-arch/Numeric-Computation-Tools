@@ -71,6 +71,9 @@ class META_DATA:
 # This will be centered log message and err msg
 # ======================================================================
 class Log_Err_Msg:
+    """
+    Centralize logging and error messages
+    """
     def __init__(self, _progname, _input_method, _err, _custom_msg):
         self.progname = _progname
         self.input_method = _input_method
@@ -89,6 +92,7 @@ class Log_Err_Msg:
             "closing_sub_prog_msg": "Quitting {progname} by {input_method}...", # closing sub prog
             "csv_invalid": "Error: CSV format is not valid by {input_method} in {progname}", # invalid csv
             "download_failed": "Error: Failed to download by {input_method} in {progname}", # failed download
+            "txt_invalid": "Error: TXT format is not valid by {input_method} in {progname}",
         }
 
     def __getattribute__(self, name):
@@ -112,7 +116,6 @@ class Log_Err_Msg:
 # ======================================================================
 # This will be data structure
 # ======================================================================
-
 
 class XY_Dataset:
     def __init__(self):
@@ -349,7 +352,7 @@ class Regression_Gaus_Seidel:
 # This will be only gauss-seidel from the equation
 # ======================================================================
 
-
+# spl
 class Gauss_Seidel_Iterate:
     def main():
         print("Test iterate gauss seidel main")
@@ -359,12 +362,35 @@ class Gauss_Seidel_Iterate:
 # This will be fetch from drive, file, and manual
 # ======================================================================
 
+# io
 class Program_IO:
+    """
+    Untuk input output program
+    """
     def __init__(self):
         self.log = Log_Err_Msg(META_DATA.PROG_NAME, "", "", "")
 
+    def __eq_processing(self, PATH):
+        """
+        Masukin data eq input ke variable dari file .txt secara private di kelas ini saja
+        """
+        try:
+            with open(file=PATH, mode="r", encoding="utf-8") as file:
+                isinya = file.read()
+                if InputValidator.is_numeric_coeffs(isinya):
+                    Prog_Data.g_eq_dataset = [float(v) for v in isinya.split()]
+                else:
+                    e = self.log.txt_invalid
+                    log_activities(e, "ERROR")
+                    raise ValueError(e)
+        except FileNotFoundError as e:
+            log_activities(self.log.file_not_found_msg, "ERROR")
+            raise FileNotFoundError(e)
 
     def __csv_processing(self,PATH):
+        """
+        Pengolahan data csv dari file .csv secara private di kelas ini saja
+        """
         try:
             with open(file=PATH, mode="r", encoding="utf-8") as file:
                 reader = csv.reader(file)
@@ -397,6 +423,7 @@ class Program_IO:
             raise FileNotFoundError(e)
 
     def _fetch_from_gdrive(self):
+        """Input otomatis data regresi atau equation dari gdrive"""
         print_text_gradient_angle(META_DATA.REGRESSION_ART, META_DATA.REGRESSION_COLORS)
         time.sleep(0.2)
         PrintIntroProg2(META_DATA.PROG_NAME)
@@ -428,10 +455,12 @@ class Program_IO:
             log_activities(self.log.failed_download, "ERROR")
             return
 
-        self.__csv_processing(Prog_Data.true_cloud_in_path)
+        if("for regression" in META_DATA.PROG_NAME): 
+            self.__csv_processing(Prog_Data.true_cloud_in_path)
         return
 
     def _fetch_from_file(self):
+        """Input otomatis data regresi atau equation dari file"""
         time.sleep(.2)
         print_text_gradient_angle(META_DATA.REGRESSION_ART, META_DATA.REGRESSION_COLORS)
         time.sleep(0.2)
@@ -442,11 +471,14 @@ class Program_IO:
         print(f"fetching data from {Prog_Data.true_cloud_in_path}")
         print(f"Make sure you have put correct format or it will error")
         print()
-        self.__csv_processing(Prog_Data.true_cloud_in_path)
+        if("for regression" in META_DATA.PROG_NAME): 
+            self.__csv_processing(Prog_Data.true_cloud_in_path)
+        else:
+            self.__eq_processing(Prog_Data.true_cloud_in_path)
         return
 
-
-    def _manually_input(self):
+    def _manually_input_data(self):
+        """Input manual data regresi"""
         self.log = Log_Err_Msg(META_DATA.PROG_NAME, "manual input", "", "")
         print_text_gradient_angle(META_DATA.REGRESSION_ART, META_DATA.REGRESSION_COLORS)
         time.sleep(0.2)
@@ -500,6 +532,41 @@ class Program_IO:
         # always turn off the clock
         style.dalam_menu_kalkulasi = True
         return
+    
+    def _manually_input_eq(self):
+        """Input manual untuk kasus SPL tanpa data regresi"""
+
+        self.log = Log_Err_Msg(META_DATA.PROG_NAME, "manual input", "", "")
+        print_text_gradient_angle(META_DATA.REGRESSION_ART, META_DATA.REGRESSION_COLORS)
+        time.sleep(0.2)
+        PrintIntroProg2(META_DATA.PROG_NAME)
+        print()
+        time.sleep(0.2)
+        # i want to show the clock
+        style.dalam_menu_kalkulasi = False
+        sys.stdout.write("\n\n\033[2A")
+        sys.stdout.flush()
+        input_user: str = input(
+            f"\nInput function coefficients (space separated) or {AnsiColors.BOLD}'q'{AnsiColors.RESET} to exit: "
+        ).strip()
+
+        if input_user.lower() == "q":
+            Prog_Data.EXIT_W_SAVE = 0
+            log_activities(self.log.closing_sub_prog_msg)
+            return
+        while not InputValidator.is_numeric_coeffs(input_user):
+            if input_user.lower() == "q":
+                Prog_Data.EXIT_W_SAVE = 0
+                log_activities(self.log.closing_sub_prog_msg)
+                return
+            
+            sys.stdout.write("\033[J")
+            sys.stdout.write("\n\n\033[2A")
+            input_user = input(
+                f"Please input number only (minimal 2 data) or {AnsiColors.BOLD}[q]{AnsiColors.RESET} to exit: "
+            )
+        Prog_Data.g_eq_dataset = [float(val) for val in input_user.split()]
+
 
 # ======================================================================
 # This will be file manager function
@@ -628,15 +695,19 @@ def Main_Gauss_Seidel():
 
             match curr_select:
                 case 0:
-                    io._manually_input()
+                    io._manually_input_data()
                     reg.main()
                     log = Log_Err_Msg(META_DATA.PROG_NAME, "manual input", "", "")
                     log_activities(log.run_program_msg)
+
+
                 case 1:
                     io._fetch_from_file()
                     reg.main()
                     log = Log_Err_Msg(META_DATA.PROG_NAME, "fetch from file", "", "")
                     log_activities(log.run_program_msg)
+
+
                 case 2:
                     io._fetch_from_gdrive()
                     reg.main()
@@ -644,16 +715,22 @@ def Main_Gauss_Seidel():
                         META_DATA.PROG_NAME, "fetch from google drive", "", ""
                     )
                     log_activities(log.run_program_msg)
+
+
                 case 3:
-                    io._manually_input()
+                    io._manually_input_eq()
                     spl.main()
                     log = Log_Err_Msg(META_DATA.PROG_NAME, "manual input", "", "")
                     log_activities(log.run_program_msg)
+
+
                 case 4:
                     io._fetch_from_file()
                     spl.main()
                     log = Log_Err_Msg(META_DATA.PROG_NAME, "fetch from file", "", "")
                     log_activities(log.run_program_msg)
+
+
                 case 5:
                     io._fetch_from_gdrive()
                     spl.main()
@@ -661,12 +738,16 @@ def Main_Gauss_Seidel():
                         META_DATA.PROG_NAME, "fetch from google drive", "", ""
                     )
                     log_activities(log.run_program_msg)
+
+
                 case 6:
                     Manage_Log_File._open_regression()
                     log = Log_Err_Msg(
                         META_DATA.PROG_NAME, "Manage Log File", "opening regression", ""
                     )
                     log_activities(log.run_program_msg)
+
+
                 case 7:
                     Manage_Log_File._open_linear_eq()
                     log = Log_Err_Msg(
@@ -676,6 +757,8 @@ def Main_Gauss_Seidel():
                         "",
                     )
                     log_activities(log.run_program_msg)
+
+
                 case 8:
                     Manage_Log_File._merge()
                     log = Log_Err_Msg(
@@ -683,6 +766,8 @@ def Main_Gauss_Seidel():
                     )
                     log_activities(log.run_program_msg)
                     Prog_Data.EXIT_W_SAVE = 0
+
+
                 case 9:
                     Manage_Log_File._del_regression()
                     log = Log_Err_Msg(
@@ -693,6 +778,8 @@ def Main_Gauss_Seidel():
                     )
                     log_activities(log.run_program_msg)
                     Prog_Data.EXIT_W_SAVE = 0
+
+
                 case 10:
                     Manage_Log_File._del_linear_eq()
                     log = Log_Err_Msg(
@@ -703,6 +790,8 @@ def Main_Gauss_Seidel():
                     )
                     log_activities(log.run_program_msg)
                     Prog_Data.EXIT_W_SAVE = 0
+
+
                 case last_idx:
                     style.stop_jam.set()
                     clear_screen()
@@ -711,6 +800,8 @@ def Main_Gauss_Seidel():
                     log_activities(log.closing_main_prog_msg)
                     Prog_Data.EXIT_W_SAVE = 0
                     break
+
+
 
             print("")
             style.dalam_menu_kalkulasi = False

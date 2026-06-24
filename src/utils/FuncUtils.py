@@ -126,6 +126,15 @@ class InputValidator:
     def is_clean_text(teks: str) -> bool:
         """Menerima huruf, angka, dan spasi (cocok buat input nama/kalimat tanpa simbol aneh)."""
         return bool(re.match(r"^[a-zA-Z0-9\s]+$", teks))
+    
+    @staticmethod
+    def is_numeric_coeffs(teks: str) -> bool: 
+        """Menerima koefisien hanya angka saja dipisah satu space. Menerima deretan angka yang dipisahkan oleh spasi. Mengizinkan angka bulat, desimal, dan bilangan negatif."""
+        if not teks.strip():
+            return False
+            
+        return bool(re.match(r"^[0-9\s.-]+$", teks))
+        
 
 
 # calculating using Operasi Baris Elementer
