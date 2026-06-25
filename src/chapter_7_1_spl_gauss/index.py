@@ -26,9 +26,9 @@ class META_DATA:
     IO_DIR_REG = "reg_gauss"
     IO_DIR_SPL = "spl_gauss"
     IN_PATH_REG = f"./input/{IO_DIR_REG}/main_table.csv"
-    IN_PATH_SPL = f"./input/{IO_DIR_SPL}/main_table.csv"
+    IN_PATH_SPL = f"./input/{IO_DIR_SPL}/main_table.txt"
     IN_CLOUD_PATH_REG = f"./input/{IO_DIR_REG}/cloud_table.csv"
-    IN_CLOUD_PATH_SPL = f"./input/{IO_DIR_SPL}/cloud_table.csv"
+    IN_CLOUD_PATH_SPL = f"./input/{IO_DIR_SPL}/cloud_table.txt"
     OUT_PATH_SPL = f"{IO_DIR_SPL}/result.txt"
     OUT_PATH_REG = f"{IO_DIR_REG}/result.txt"
 
@@ -146,6 +146,7 @@ class Prog_Data:
     byk_data = 0
     max_iter = 100 # variable
     true_cloud_in_path = ""
+    true_file_in_path = ""
     true_out_path = ""
     prog_stop = 0
 
@@ -329,7 +330,6 @@ class Regression_Gaus_Seidel:
         if not isinstance(data_set, XY_Dataset):
             log_activities(self.log.bad_data_type_msg, "ERROR")
             raise TypeError(self.log.bad_data_type_msg)
-        
         Prog_Data.byk_data = min(len(data_set.x_data), len(data_set.y_data))
         if Prog_Data.byk_data < 2:
             e = self.log.no_data_err_msg
@@ -448,15 +448,15 @@ class Gauss_Seidel_Iterate:
         g_buffer.write(f"\n\n")
 
     def main(self):
-        eq_data = Prog_Data.g_eq_dataset
-        if not isinstance(eq_data, Eq_Dataset):
+        data_set = Prog_Data.g_eq_dataset
+        if not isinstance(data_set, Eq_Dataset):
             log_activities(self.log.bad_data_type_msg, "ERROR")
             raise TypeError(self.log.bad_data_type_msg)
         style.dalam_menu_kalkulasi = False
         sys.stdout.write("\033[J")
         sys.stdout.write("\n\n\033[2A")
         sys.stdout.flush()
-        for eq in Prog_Data.g_eq_dataset.equations:
+        for eq in data_set.equations:
             sys.stdout.write("\033[J")
             sys.stdout.write("\n\n\033[2A")
             sys.stdout.flush()
@@ -471,7 +471,7 @@ class Gauss_Seidel_Iterate:
         sys.stdout.flush()
         time.sleep(0.1)
         style.dalam_menu_kalkulasi = False
-        print("Test iterate gauss seidel main")
+        # print("Test iterate gauss seidel main")
 
 
 # ======================================================================
@@ -499,36 +499,41 @@ class Program_IO:
         sys.stdout.write("\033[J")
         sys.stdout.write("\n\n\033[2A")
         sys.stdout.flush()
+        
         try:
             with open(file=PATH, mode="r", encoding="utf-8") as file:
                 temp_dataset = []
-            
+                
                 for line in file:
-                    # 1. Stop baca file kalau n baris data sudah terpenuhi
-                    if len(temp_dataset) == pilihan_order+1:
-                        break
-                        
-                    # Lewati baris kosong
-                    if not line.strip():
+                    # 1. Hilangkan spasi dan newline (\n) di awal/akhir baris
+                    clean_line = line.strip()
+                    
+                    # Lewati jika barisnya kosong
+                    if not clean_line:
                         continue
                     
-                    # 2. Validasi dan masukkan data
-                    if InputValidator.is_numeric_coeffs(line):
-                        row_data = [float(v) for v in line.split()]
+                    # 2. Stop baca file kalau target baris data sudah terpenuhi
+                    if len(temp_dataset) == pilihan_order + 1:
+                        break
+                    
+                    # 3. Validasi menggunakan string yang sudah bersih (\n sudah hilang)
+                    if InputValidator.is_numeric_coeffs(clean_line):
+                        row_data = [float(v) for v in clean_line.split()]
                         temp_dataset.append(row_data)
                     else:
                         e = self.log.txt_invalid
                         log_activities(e, "ERROR")
                         raise ValueError(e)
                 
-                # 3. Cek apakah total baris yang didapat kurang dari n
-                if len(temp_dataset) < pilihan_order+1:
+                # 4. Pengecekan setelah keluar dari loop `for`
+                if len(temp_dataset) < pilihan_order + 1:
                     e = f"Jumlah baris data ({len(temp_dataset)}) kurang dari batas minimal n ({pilihan_order}+1)."
                     log_activities(e, "ERROR")
                     raise ValueError(e)
                 
-                # Berhasil, isi sesuai target n baris
-                Prog_Data.g_eq_dataset = temp_dataset
+                # Jika lolos, masukkan hasilnya ke global data
+                Prog_Data.g_eq_dataset.eq_cnt = len(temp_dataset)
+                Prog_Data.g_eq_dataset.equations = temp_dataset
 
         except FileNotFoundError as e:
             log_activities(self.log.file_not_found_msg, "ERROR")
@@ -617,13 +622,13 @@ class Program_IO:
         print()
         time.sleep(0.2)
         print()
-        print(f"fetching data from {Prog_Data.true_cloud_in_path}")
+        print(f"fetching data from {Prog_Data.true_file_in_path}")
         print(f"Make sure you have put correct format or it will error")
         print()
         if("for Regression" in META_DATA.PROG_NAME): 
-            self.__csv_processing(Prog_Data.true_cloud_in_path)
+            self.__csv_processing(Prog_Data.true_file_in_path)
         else:
-            self.__eq_processing(Prog_Data.true_cloud_in_path)
+            self.__eq_processing(Prog_Data.true_file_in_path)
         return
 
     def _manually_input_data(self):
@@ -825,6 +830,10 @@ def Main_Gauss_Seidel():
             total_selectable_items += 1
 
     while True:
+        # 1. Kosongkan string di dalamnya
+        g_buffer.truncate(0)
+        # 2. Reset posisi pointer ke paling awal
+        g_buffer.seek(0)
         META_DATA.PROG_NAME = "Gauss-Seidel Method"
         menu = ""
         Prog_Data.EXIT_W_SAVE = 1
@@ -867,10 +876,12 @@ def Main_Gauss_Seidel():
                 META_DATA.PROG_NAME += " for Regression"
                 Prog_Data.true_cloud_in_path = META_DATA.IN_CLOUD_PATH_REG
                 Prog_Data.true_out_path = META_DATA.OUT_PATH_REG
+                Prog_Data.true_file_in_path = META_DATA.IN_PATH_REG
             elif curr_select < 6 and curr_select >= 3:
                 META_DATA.PROG_NAME += " for Linear Equation"
                 Prog_Data.true_cloud_in_path = META_DATA.IN_CLOUD_PATH_SPL
                 Prog_Data.true_out_path = META_DATA.OUT_PATH_SPL
+                Prog_Data.true_file_in_path = META_DATA.IN_PATH_SPL
 
             io = Program_IO()
             reg = Regression_Gaus_Seidel()

@@ -1682,3 +1682,80 @@
 2026-06-25 09:53:06 - INFO - Running Gauss-Seidel Method for Linear Equation by manual input
 2026-06-25 09:53:13 - INFO - Closing program Gauss-Seidel Method for Linear Equation...
 2026-06-25 09:53:15 - INFO - Closing program...
+2026-06-25 09:56:23 - INFO - Success unpacking numeric computation package
+2026-06-25 09:56:23 - INFO - Success unpacking internal package
+2026-06-25 09:57:03 - INFO - Gauss-Seidel Method
+2026-06-25 09:57:15 - INFO - Closing program Gauss-Seidel Method
+2026-06-25 09:57:17 - INFO - Closing program...
+2026-06-25 09:57:57 - INFO - Success unpacking numeric computation package
+2026-06-25 09:57:57 - INFO - Success unpacking internal package
+2026-06-25 09:57:59 - INFO - Gauss-Seidel Method
+2026-06-25 09:58:12 - ERROR - Jumlah baris data (0) kurang dari batas minimal n (2+1).
+2026-06-25 09:58:24 - INFO - Success unpacking numeric computation package
+2026-06-25 09:58:24 - INFO - Success unpacking internal package
+2026-06-25 09:58:26 - INFO - Gauss-Seidel Method
+2026-06-25 09:58:43 - ERROR - Jumlah baris data (0) kurang dari batas minimal n (1+1).
+2026-06-25 10:00:46 - INFO - Success unpacking numeric computation package
+2026-06-25 10:00:46 - INFO - Success unpacking internal package
+2026-06-25 10:00:48 - INFO - Gauss-Seidel Method
+2026-06-25 10:00:56 - ERROR - Jumlah baris data (0) kurang dari batas minimal n (2+1).
+2026-06-25 10:03:37 - INFO - Success unpacking numeric computation package
+2026-06-25 10:03:37 - INFO - Success unpacking internal package
+2026-06-25 10:03:38 - INFO - Gauss-Seidel Method
+2026-06-25 10:03:55 - INFO - Success unpacking numeric computation package
+2026-06-25 10:03:55 - INFO - Success unpacking internal package
+2026-06-25 10:03:57 - INFO - Gauss-Seidel Method
+2026-06-25 10:04:04 - ERROR - Jumlah baris data (0) kurang dari batas minimal n (2+1).
+2026-06-25 10:04:37 - INFO - Success unpacking numeric computation package
+2026-06-25 10:04:37 - INFO - Success unpacking internal package
+2026-06-25 10:04:39 - INFO - Gauss-Seidel Method
+2026-06-25 10:04:46 - ERROR - Jumlah baris data (0) kurang dari batas minimal n (2+1).
+2026-06-25 10:05:51 - INFO - Success unpacking numeric computation package
+2026-06-25 10:05:51 - INFO - Success unpacking internal package
+2026-06-25 10:05:53 - INFO - Gauss-Seidel Method
+2026-06-25 10:06:00 - ERROR - Jumlah baris data (0) kurang dari batas minimal n (2+1).
+2026-06-25 10:06:19 - INFO - Success unpacking numeric computation package
+2026-06-25 10:06:19 - INFO - Success unpacking internal package
+2026-06-25 10:06:21 - INFO - Gauss-Seidel Method
+2026-06-25 10:06:46 - ERROR - Jumlah baris data (0) kurang dari batas minimal n (2+1).
+2026-06-25 10:12:14 - INFO - Success unpacking numeric computation package
+2026-06-25 10:12:14 - INFO - Success unpacking internal package
+2026-06-25 10:12:16 - INFO - Gauss-Seidel Method
+2026-06-25 10:12:22 - ERROR - Unallowed data type in Gauss-Seidel Method for Linear Equation
+2026-06-25 10:13:52 - INFO - Success unpacking numeric computation package
+2026-06-25 10:13:52 - INFO - Success unpacking internal package
+2026-06-25 10:13:53 - INFO - Gauss-Seidel Method
+2026-06-25 10:13:59 - ERROR - Unallowed data type in Gauss-Seidel Method for Linear Equation
+2026-06-25 10:15:20 - INFO - Success unpacking numeric computation package
+2026-06-25 10:15:20 - INFO - Success unpacking internal package
+2026-06-25 10:15:22 - INFO - Opening Polynomial Regression
+2026-06-25 10:15:26 - INFO - Gauss-Seidel Method
+2026-06-25 10:16:28 - INFO - Success unpacking numeric computation package
+2026-06-25 10:16:28 - INFO - Success unpacking internal package
+2026-06-25 10:16:29 - INFO - Gauss-Seidel Method
+2026-06-25 10:21:34 - INFO - Success unpacking numeric computation package
+2026-06-25 10:21:34 - INFO - Success unpacking internal package
+2026-06-25 10:21:37 - INFO - Gauss-Seidel Method
+2026-06-25 10:22:46 - INFO - Running Gauss-Seidel Method for Linear Equation by fetch from file
+2026-06-25 10:23:00 - INFO - Closing program Gauss-Seidel Method
+2026-06-25 10:23:01 - INFO - Closing program...
+2026-06-25 10:25:16 - INFO - Success unpacking numeric computation package
+2026-06-25 10:25:17 - INFO - Success unpacking internal package
+2026-06-25 10:25:20 - INFO - Gauss-Seidel Method
+2026-06-25 10:26:30 - INFO - Running Gauss-Seidel Method for Linear Equation by fetch from file
+2026-06-25 10:26:52 - INFO - Closing program Gauss-Seidel Method
+2026-06-25 10:26:54 - INFO - Closing program...
+2026-06-25 10:28:50 - INFO - Success unpacking numeric computation package
+2026-06-25 10:28:50 - INFO - Success unpacking internal package
+2026-06-25 10:28:54 - INFO - Gauss-Seidel Method
+2026-06-25 10:29:04 - INFO - [Cloud] Downloading file from GDrive (ID: 1VtwH8DjfPcDaP6jjI904zbEHKQDiYhXT) in Gauss-Seidel Method for Linear Equation
+2026-06-25 10:29:04 - DEBUG - Starting new HTTPS connection (1): docs.google.com:443
+2026-06-25 10:29:05 - DEBUG - https://docs.google.com:443 "GET /uc?export=download&id=1VtwH8DjfPcDaP6jjI904zbEHKQDiYhXT HTTP/1.1" 303 0
+2026-06-25 10:29:05 - DEBUG - Starting new HTTPS connection (1): drive.usercontent.google.com:443
+2026-06-25 10:29:07 - DEBUG - https://drive.usercontent.google.com:443 "GET /download?id=1VtwH8DjfPcDaP6jjI904zbEHKQDiYhXT&export=download HTTP/1.1" 200 51
+2026-06-25 10:29:07 - INFO - [Cloud] File successfully downloaded and saved to: ./input/spl_gauss/cloud_table.txt in Gauss-Seidel Method for Linear Equation
+2026-06-25 10:30:12 - INFO - Running Gauss-Seidel Method for Linear Equation by fetch from google drive
+2026-06-25 10:30:24 - INFO - Closing program Gauss-Seidel Method
+2026-06-25 10:30:26 - INFO - Closing program...
+2026-06-25 10:33:19 - INFO - Success unpacking numeric computation package
+2026-06-25 10:33:20 - INFO - Success unpacking internal package
