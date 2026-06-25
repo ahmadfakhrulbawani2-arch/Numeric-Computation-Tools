@@ -73,6 +73,17 @@ class META_DATA:
 class Log_Err_Msg:
     """
     Centralize logging and error messages
+    run_program_msg
+    file_not_found_msg
+    closing_main_prog_msg
+    no_data_err_msg
+    custom_err_msg
+    bad_data_type_msg
+    csv_err_msg
+    closing_sub_prog_msg
+    csv_invalid
+    download_failed
+    txt_invalid
     """
     def __init__(self, _progname, _input_method, _err, _custom_msg):
         self.progname = _progname
@@ -126,7 +137,7 @@ class XY_Dataset:
 class Eq_Dataset:
     def __init__(self):
         self.eq_cnt: int = 1
-        self.equations: List[List[int]] = [[]]
+        self.equations: List[List[float]] = [[]]
 
 class Prog_Data:
     EXIT_W_SAVE = 1
@@ -354,7 +365,77 @@ class Regression_Gaus_Seidel:
 
 # spl
 class Gauss_Seidel_Iterate:
-    def main():
+    def __init__(self):
+        self.log = Log_Err_Msg(META_DATA.PROG_NAME, "", "", "")
+
+    def __ngelakoni_gauss_seidel(self) -> None:
+        try:
+            res = iterateGaussSeidel(Prog_Data.g_eq_dataset, META_DATA.PROG_NAME, "a", Prog_Data.max_iter)
+            self.results_coeffs = res
+            print("\n === Didapatkan koefisien akhir ===\n")
+            g_buffer.write("\n === Didapatkan koefisien akhir ===\n")
+            for i, a in enumerate(self.results_coeffs):
+                print(f"a{i} = {a:.4f}")
+                time.sleep(0.2)
+        except (ValueError, ZeroDivisionError) as err:
+            log_activities(f"{err} in {META_DATA.PROG_NAME}", "ERROR")
+            self.results_coeffs = []
+            return
+
+    def __calc_expr(self):
+        Lazy_Loading("Initializing OBE Gauss...", 0.2)
+        print()
+        self.__ngelakoni_gauss_seidel()
+
+        if not self.results_coeffs:
+            print(
+                "[ERROR] Gagal menghitung persamaan fungsi karena matriks bermasalah."
+            )
+            return
+
+        print(f"Hasil akhir: ")
+        g_buffer.write(f"Hasil akhir: \n")
+        sys.stdout.write("    y = ")
+        g_buffer.write("    y = ")
+        for i, coef in enumerate(self.results_coeffs):
+            sign = "+ " if coef >= 0 else "- "
+            _coef = abs(coef)
+            if i == 0:
+                sys.stdout.write(f"{sign}{_coef:.4f} ")
+                g_buffer.write(f"{sign}{_coef:.4f} ")
+            elif i == 1:
+                sys.stdout.write(f"{sign}{_coef:.4f}x ")
+                g_buffer.write(f"{sign}{_coef:.4f}x ")
+            else:
+                sys.stdout.write(f"{sign}{_coef:.4f}x^{i} ")
+                g_buffer.write(f"{sign}{_coef:.4f}x^{i} ")
+        sys.stdout.write("\n\n")
+        g_buffer.write(f"\n\n")
+
+    def main(self):
+        eq_data = Prog_Data.g_eq_dataset
+        if not isinstance(eq_data, Eq_Dataset):
+            log_activities(self.log.bad_data_type_msg, "ERROR")
+            raise TypeError(self.log.bad_data_type_msg)
+        style.dalam_menu_kalkulasi = False
+        sys.stdout.write("\033[J")
+        sys.stdout.write("\n\n\033[2A")
+        sys.stdout.flush()
+        for eq in Prog_Data.g_eq_dataset.equations:
+            sys.stdout.write("\033[J")
+            sys.stdout.write("\n\n\033[2A")
+            sys.stdout.flush()
+            PrintSingleEq(eq)
+        style.dalam_menu_kalkulasi = True
+        sys.stdout.write("\033[J")
+        sys.stdout.write("\n\n\033[2A")
+        sys.stdout.flush()
+        self.__calc_expr()
+        print()
+        sys.stdout.write("\n\n\033[5A")
+        sys.stdout.flush()
+        time.sleep(0.1)
+        style.dalam_menu_kalkulasi = False
         print("Test iterate gauss seidel main")
 
 
@@ -376,13 +457,26 @@ class Program_IO:
         """
         try:
             with open(file=PATH, mode="r", encoding="utf-8") as file:
-                isinya = file.read()
-                if InputValidator.is_numeric_coeffs(isinya):
-                    Prog_Data.g_eq_dataset = [float(v) for v in isinya.split()]
-                else:
-                    e = self.log.txt_invalid
-                    log_activities(e, "ERROR")
-                    raise ValueError(e)
+                temp_dataset = []
+                
+                for line in file:
+                    # Lewati baris kosong jika ada
+                    if not line.strip():
+                        continue
+                    
+                    # Validasi per baris atau langsung validasi elemennya
+                    if InputValidator.is_numeric_coeffs(line):
+                        # Pecah per baris dan ubah ke float
+                        row_data = [float(v) for v in line.split()]
+                        temp_dataset.append(row_data)
+                    else:
+                        e = self.log.txt_invalid
+                        log_activities(e, "ERROR")
+                        raise ValueError(e)
+                
+                # Masukkan ke variabel global/class jika semua baris valid
+                Prog_Data.g_eq_dataset = temp_dataset
+
         except FileNotFoundError as e:
             log_activities(self.log.file_not_found_msg, "ERROR")
             raise FileNotFoundError(e)
@@ -455,8 +549,10 @@ class Program_IO:
             log_activities(self.log.failed_download, "ERROR")
             return
 
-        if("for regression" in META_DATA.PROG_NAME): 
+        if("for Regression" in META_DATA.PROG_NAME): 
             self.__csv_processing(Prog_Data.true_cloud_in_path)
+        else:
+            self.__eq_processing(Prog_Data.true_cloud_in_path)
         return
 
     def _fetch_from_file(self):
@@ -471,7 +567,7 @@ class Program_IO:
         print(f"fetching data from {Prog_Data.true_cloud_in_path}")
         print(f"Make sure you have put correct format or it will error")
         print()
-        if("for regression" in META_DATA.PROG_NAME): 
+        if("for Regression" in META_DATA.PROG_NAME): 
             self.__csv_processing(Prog_Data.true_cloud_in_path)
         else:
             self.__eq_processing(Prog_Data.true_cloud_in_path)
@@ -544,28 +640,40 @@ class Program_IO:
         time.sleep(0.2)
         # i want to show the clock
         style.dalam_menu_kalkulasi = False
+        sys.stdout.write("\033[J")
         sys.stdout.write("\n\n\033[2A")
         sys.stdout.flush()
-        input_user: str = input(
-            f"\nInput function coefficients (space separated) or {AnsiColors.BOLD}'q'{AnsiColors.RESET} to exit: "
-        ).strip()
+        pilihan_order = Regression_Gaus_Seidel().__hitung_max_order_valid(Prog_Data.byk_data)
+        print()
+        for _ in pilihan_order:
+            sys.stdout.write("\033[J")
+            sys.stdout.write("\n\n\033[2A")
+            sys.stdout.flush()
+            input_user: str = input(
+                f"\nInput function coefficients (space separated) or {AnsiColors.BOLD}'q'{AnsiColors.RESET} to exit: "
+            ).strip()
 
-        if input_user.lower() == "q":
-            Prog_Data.EXIT_W_SAVE = 0
-            log_activities(self.log.closing_sub_prog_msg)
-            return
-        while not InputValidator.is_numeric_coeffs(input_user):
             if input_user.lower() == "q":
                 Prog_Data.EXIT_W_SAVE = 0
                 log_activities(self.log.closing_sub_prog_msg)
                 return
-            
-            sys.stdout.write("\033[J")
-            sys.stdout.write("\n\n\033[2A")
-            input_user = input(
-                f"Please input number only (minimal 2 data) or {AnsiColors.BOLD}[q]{AnsiColors.RESET} to exit: "
-            )
-        Prog_Data.g_eq_dataset = [float(val) for val in input_user.split()]
+            while not InputValidator.is_numeric_coeffs(input_user):
+                if input_user.lower() == "q":
+                    Prog_Data.EXIT_W_SAVE = 0
+                    log_activities(self.log.closing_sub_prog_msg)
+                    return
+                
+                sys.stdout.write("\033[J")
+                sys.stdout.write("\n\n\033[2A")
+                input_user = input(
+                    f"Please input function coefficients (space separated) or {AnsiColors.BOLD}'q'{AnsiColors.RESET} to exit: "
+                )
+            Prog_Data.g_eq_dataset.equations.append([float(val) for val in input_user.split()])
+        
+        style.dalam_menu_kalkulasi = True
+        sys.stdout.write("\033[J")
+        sys.stdout.write("\n\n\033[2A")
+        sys.stdout.flush()
 
 
 # ======================================================================

@@ -6,7 +6,8 @@ import os
 import sys
 import io
 
-EPSILON: float = 1e-12
+# EPSILON: float = 1e-12
+EPSILON: float = 1e-6
 
 
 # replacing print(f"")
