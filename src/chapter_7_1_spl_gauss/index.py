@@ -147,6 +147,7 @@ class Prog_Data:
     max_iter = 100 # variable
     true_cloud_in_path = ""
     true_out_path = ""
+    prog_stop = 0
 
 # ======================================================================
 # CAUTION: SET MAX ORDER SO IT IS NOT EXCEED TIME LIMIT
@@ -368,9 +369,43 @@ class Gauss_Seidel_Iterate:
     def __init__(self):
         self.log = Log_Err_Msg(META_DATA.PROG_NAME, "", "", "")
 
+    def _hitung_max_order_valid(self) -> int:
+        style.dalam_menu_kalkulasi = False
+        sys.stdout.write("\033[J")
+        sys.stdout.write("\n\n\033[2A")
+        sys.stdout.flush()
+        input_ord = input(
+            f"Input desired polynomial degree/order (Max Ordo: {MAX_ORDO - 1}): "
+        ).strip()
+
+        while (
+            not InputValidator.is_numeric(input_ord)
+            or int(input_ord) < 1
+            or int(input_ord) >= MAX_ORDO
+        ):
+            style.dalam_menu_kalkulasi = True
+            sys.stdout.write("\033[J")
+            sys.stdout.write("\n\n\033[2A")
+            sys.stdout.flush()
+            print(
+                f"{AnsiColors.RED}Ordo cannot be less than one and higher that the limit!{AnsiColors.RESET}"
+            )
+            style.dalam_menu_kalkulasi = False
+            sys.stdout.write("\033[J")
+            sys.stdout.write("\n\n\033[2A")
+            sys.stdout.flush()
+            input_ord = input(f"Input valid polynomial order again: ").strip()
+
+        style.dalam_menu_kalkulasi = True
+        sys.stdout.write(
+            "\n\n\033[2A"
+        )  # leaving clock trail so I know when it start running
+        sys.stdout.flush()
+        return int(input_ord)
+
     def __ngelakoni_gauss_seidel(self) -> None:
         try:
-            res = iterateGaussSeidel(Prog_Data.g_eq_dataset, META_DATA.PROG_NAME, "a", Prog_Data.max_iter)
+            res = iterateGaussSeidel(Prog_Data.g_eq_dataset.equations, META_DATA.PROG_NAME, "a", Prog_Data.max_iter)
             self.results_coeffs = res
             print("\n === Didapatkan koefisien akhir ===\n")
             g_buffer.write("\n === Didapatkan koefisien akhir ===\n")
@@ -425,7 +460,7 @@ class Gauss_Seidel_Iterate:
             sys.stdout.write("\033[J")
             sys.stdout.write("\n\n\033[2A")
             sys.stdout.flush()
-            PrintSingleEq(eq)
+            PrintSingleEq2(eq)
         style.dalam_menu_kalkulasi = True
         sys.stdout.write("\033[J")
         sys.stdout.write("\n\n\033[2A")
@@ -455,18 +490,30 @@ class Program_IO:
         """
         Masukin data eq input ke variable dari file .txt secara private di kelas ini saja
         """
+        style.dalam_menu_kalkulasi = False
+        sys.stdout.write("\033[J")
+        sys.stdout.write("\n\n\033[2A")
+        sys.stdout.flush()
+        pilihan_order = Gauss_Seidel_Iterate()._hitung_max_order_valid()
+        style.dalam_menu_kalkulasi = True
+        sys.stdout.write("\033[J")
+        sys.stdout.write("\n\n\033[2A")
+        sys.stdout.flush()
         try:
             with open(file=PATH, mode="r", encoding="utf-8") as file:
                 temp_dataset = []
-                
+            
                 for line in file:
-                    # Lewati baris kosong jika ada
+                    # 1. Stop baca file kalau n baris data sudah terpenuhi
+                    if len(temp_dataset) == pilihan_order+1:
+                        break
+                        
+                    # Lewati baris kosong
                     if not line.strip():
                         continue
                     
-                    # Validasi per baris atau langsung validasi elemennya
+                    # 2. Validasi dan masukkan data
                     if InputValidator.is_numeric_coeffs(line):
-                        # Pecah per baris dan ubah ke float
                         row_data = [float(v) for v in line.split()]
                         temp_dataset.append(row_data)
                     else:
@@ -474,7 +521,13 @@ class Program_IO:
                         log_activities(e, "ERROR")
                         raise ValueError(e)
                 
-                # Masukkan ke variabel global/class jika semua baris valid
+                # 3. Cek apakah total baris yang didapat kurang dari n
+                if len(temp_dataset) < pilihan_order+1:
+                    e = f"Jumlah baris data ({len(temp_dataset)}) kurang dari batas minimal n ({pilihan_order}+1)."
+                    log_activities(e, "ERROR")
+                    raise ValueError(e)
+                
+                # Berhasil, isi sesuai target n baris
                 Prog_Data.g_eq_dataset = temp_dataset
 
         except FileNotFoundError as e:
@@ -590,12 +643,14 @@ class Program_IO:
         ).strip()
         if input_user.lower() == "q":
             Prog_Data.EXIT_W_SAVE = 0
+            Prog_Data.prog_stop = 1
             log_activities(self.log.closing_sub_prog_msg)
             return
         
         while not InputValidator.is_numeric(input_user) or int(input_user) < 2:
             if input_user.lower() == "q":
                 Prog_Data.EXIT_W_SAVE = 0
+                Prog_Data.prog_stop = 1
                 log_activities(self.log.closing_sub_prog_msg)
                 return
             
@@ -638,28 +693,44 @@ class Program_IO:
         PrintIntroProg2(META_DATA.PROG_NAME)
         print()
         time.sleep(0.2)
-        # i want to show the clock
+        
         style.dalam_menu_kalkulasi = False
         sys.stdout.write("\033[J")
         sys.stdout.write("\n\n\033[2A")
         sys.stdout.flush()
-        pilihan_order = Regression_Gaus_Seidel().__hitung_max_order_valid(Prog_Data.byk_data)
+        
+        pilihan_order = Gauss_Seidel_Iterate()._hitung_max_order_valid()
         print()
-        for _ in pilihan_order:
+
+        # === FIX 1: Pastikan list .equations dikosongkan sebelum diisi ulang ===
+        # Sesuaikan dengan bagaimana Prog_Data mendefinisikan objek ini
+        if hasattr(Prog_Data.g_eq_dataset, 'equations'):
+            Prog_Data.g_eq_dataset.equations = [] 
+        else:
+            # Jika g_eq_dataset ternyata di-reset jadi object baru di tempat lain:
+            # Prog_Data.g_eq_dataset = ...
+            pass
+
+        for _ in range(pilihan_order+1):
+            style.dalam_menu_kalkulasi = False
             sys.stdout.write("\033[J")
             sys.stdout.write("\n\n\033[2A")
             sys.stdout.flush()
+            
             input_user: str = input(
                 f"\nInput function coefficients (space separated) or {AnsiColors.BOLD}'q'{AnsiColors.RESET} to exit: "
             ).strip()
 
             if input_user.lower() == "q":
                 Prog_Data.EXIT_W_SAVE = 0
+                Prog_Data.prog_stop = 1
                 log_activities(self.log.closing_sub_prog_msg)
                 return
-            while not InputValidator.is_numeric_coeffs(input_user):
+                
+            while not InputValidator.is_numeric_coeffs(input_user) or not input_user:
                 if input_user.lower() == "q":
                     Prog_Data.EXIT_W_SAVE = 0
+                    Prog_Data.prog_stop = 1
                     log_activities(self.log.closing_sub_prog_msg)
                     return
                 
@@ -667,8 +738,9 @@ class Program_IO:
                 sys.stdout.write("\n\n\033[2A")
                 input_user = input(
                     f"Please input function coefficients (space separated) or {AnsiColors.BOLD}'q'{AnsiColors.RESET} to exit: "
-                )
-            Prog_Data.g_eq_dataset.equations.append([float(val) for val in input_user.split()])
+                ).strip() # Tambahkan .strip() di sini juga agar spasi di ujung hilang
+            row_data = [float(val) for val in input_user.split()]
+            Prog_Data.g_eq_dataset.equations.append(row_data)
         
         style.dalam_menu_kalkulasi = True
         sys.stdout.write("\033[J")
@@ -755,6 +827,9 @@ def Main_Gauss_Seidel():
     while True:
         META_DATA.PROG_NAME = "Gauss-Seidel Method"
         menu = ""
+        Prog_Data.EXIT_W_SAVE = 1
+        Prog_Data.prog_stop = 0
+        Prog_Data.byk_data = 0
         style.stop_jam.clear()
         style.dalam_menu_kalkulasi = False
         style.Clock_Widget()
@@ -804,7 +879,10 @@ def Main_Gauss_Seidel():
             match curr_select:
                 case 0:
                     io._manually_input_data()
-                    reg.main()
+                    if not Prog_Data.prog_stop:
+                        reg.main()
+                    else:
+                        print("\n\n")
                     log = Log_Err_Msg(META_DATA.PROG_NAME, "manual input", "", "")
                     log_activities(log.run_program_msg)
 
@@ -827,7 +905,10 @@ def Main_Gauss_Seidel():
 
                 case 3:
                     io._manually_input_eq()
-                    spl.main()
+                    if not Prog_Data.prog_stop:
+                        spl.main()
+                    else:
+                        print("\n\n")
                     log = Log_Err_Msg(META_DATA.PROG_NAME, "manual input", "", "")
                     log_activities(log.run_program_msg)
 
@@ -913,8 +994,9 @@ def Main_Gauss_Seidel():
 
             print("")
             style.dalam_menu_kalkulasi = False
+            sys.stdout.write("\033[J")
+            sys.stdout.write("\n\n\033[5A")
             if Prog_Data.EXIT_W_SAVE == 0:
-                sys.stdout.write("\n\n\033[2A")
                 sys.stdout.flush()
                 pilihan = (
                     input(

@@ -1593,3 +1593,92 @@
 2026-06-24 14:23:03 - INFO - Success unpacking numeric computation package
 2026-06-24 14:23:03 - INFO - Success unpacking internal package
 2026-06-24 14:23:26 - INFO - Gauss-Seidel Method
+2026-06-25 08:57:11 - INFO - Success unpacking numeric computation package
+2026-06-25 08:57:12 - INFO - Success unpacking internal package
+2026-06-25 09:10:40 - INFO - Closing program...
+2026-06-25 09:10:47 - INFO - Success unpacking numeric computation package
+2026-06-25 09:10:48 - INFO - Success unpacking internal package
+2026-06-25 09:10:49 - INFO - Gauss-Seidel Method
+2026-06-25 09:13:55 - INFO - Success unpacking numeric computation package
+2026-06-25 09:13:55 - INFO - Success unpacking internal package
+2026-06-25 09:14:01 - INFO - Gauss-Seidel Method
+2026-06-25 09:14:32 - INFO - Success unpacking numeric computation package
+2026-06-25 09:14:32 - INFO - Success unpacking internal package
+2026-06-25 09:14:34 - INFO - Gauss-Seidel Method
+2026-06-25 09:21:12 - INFO - Quitting Gauss-Seidel Method for Linear Equation by manual input...
+2026-06-25 09:25:56 - INFO - Success unpacking numeric computation package
+2026-06-25 09:25:56 - INFO - Success unpacking internal package
+2026-06-25 09:25:57 - INFO - Gauss-Seidel Method
+2026-06-25 09:26:22 - INFO - Closing program Gauss-Seidel Method
+2026-06-25 09:26:24 - INFO - Closing program...
+2026-06-25 09:28:36 - INFO - Success unpacking numeric computation package
+2026-06-25 09:28:37 - INFO - Success unpacking internal package
+2026-06-25 09:28:41 - INFO - Gauss-Seidel Method
+2026-06-25 09:33:16 - INFO - Success unpacking numeric computation package
+2026-06-25 09:33:16 - INFO - Success unpacking internal package
+2026-06-25 09:33:19 - INFO - Gauss-Seidel Method
+2026-06-25 09:34:29 - INFO - Success unpacking numeric computation package
+2026-06-25 09:34:29 - INFO - Success unpacking internal package
+2026-06-25 09:34:31 - INFO - Gauss-Seidel Method
+2026-06-25 09:34:45 - ERROR - Matrix must be size n x (n+1) for Gauss-Seidel. Detected 4x0 matrix. in Gauss-Seidel Method for Linear Equation
+2026-06-25 09:34:45 - INFO - Running Gauss-Seidel Method for Linear Equation by manual input
+2026-06-25 09:37:54 - INFO - Closing program Gauss-Seidel Method for Linear Equation...
+2026-06-25 09:37:55 - INFO - Closing program...
+2026-06-25 09:38:58 - INFO - Success unpacking numeric computation package
+2026-06-25 09:38:58 - INFO - Success unpacking internal package
+2026-06-25 09:38:59 - INFO - Gauss-Seidel Method
+2026-06-25 09:39:15 - ERROR - Matrix must be size n x (n+1) for Gauss-Seidel. Detected 3x3 matrix. in Gauss-Seidel Method for Linear Equation
+2026-06-25 09:39:15 - INFO - Running Gauss-Seidel Method for Linear Equation by manual input
+2026-06-25 09:42:02 - ERROR - Matrix must be size n x (n+1) for Gauss-Seidel. Detected 3x3 matrix. in Gauss-Seidel Method for Linear Equation
+2026-06-25 09:42:03 - INFO - Running Gauss-Seidel Method for Linear Equation by manual input
+2026-06-25 09:43:08 - INFO - Closing program Gauss-Seidel Method for Linear Equation...
+2026-06-25 09:43:09 - INFO - Closing program...
+2026-06-25 09:43:16 - INFO - Success unpacking numeric computation package
+2026-06-25 09:43:16 - INFO - Success unpacking internal package
+2026-06-25 09:43:19 - INFO - Gauss-Seidel Method
+2026-06-25 09:43:53 - INFO - Quitting Gauss-Seidel Method for Linear Equation by manual input...
+2026-06-25 09:43:53 - INFO - Running Gauss-Seidel Method for Linear Equation by manual input
+2026-06-25 09:44:08 - INFO - Closing program Gauss-Seidel Method for Linear Equation...
+2026-06-25 09:44:09 - INFO - Closing program...
+2026-06-25 09:45:14 - INFO - Success unpacking numeric computation package
+2026-06-25 09:45:14 - INFO - Success unpacking internal package
+2026-06-25 09:45:16 - INFO - Gauss-Seidel Method
+2026-06-25 09:45:27 - INFO - Quitting Gauss-Seidel Method for Linear Equation by manual input...
+2026-06-25 09:45:27 - INFO - Running Gauss-Seidel Method for Linear Equation by manual input
+2026-06-25 09:46:26 - INFO - Closing program Gauss-Seidel Method for Linear Equation...
+2026-06-25 09:46:27 - INFO - Closing program...
+2026-06-25 09:46:34 - INFO - Success unpacking numeric computation package
+2026-06-25 09:46:34 - INFO - Success unpacking internal package
+2026-06-25 09:46:35 - INFO - Gauss-Seidel Method
+2026-06-25 09:46:51 - INFO - Success unpacking numeric computation package
+2026-06-25 09:46:51 - INFO - Success unpacking internal package
+2026-06-25 09:46:53 - INFO - Gauss-Seidel Method
+2026-06-25 09:47:04 - INFO - Quitting Gauss-Seidel Method for Linear Equation by manual input...
+2026-06-25 09:47:04 - INFO - Running Gauss-Seidel Method for Linear Equation by manual input
+2026-06-25 09:47:08 - INFO - Closing program Gauss-Seidel Method for Linear Equation...
+2026-06-25 09:47:08 - INFO - Closing program...
+2026-06-25 09:47:15 - INFO - Success unpacking numeric computation package
+2026-06-25 09:47:15 - INFO - Success unpacking internal package
+2026-06-25 09:47:17 - INFO - Gauss-Seidel Method
+2026-06-25 09:47:34 - INFO - Quitting Gauss-Seidel Method for Linear Equation by manual input...
+2026-06-25 09:47:34 - INFO - Running Gauss-Seidel Method for Linear Equation by manual input
+2026-06-25 09:47:54 - INFO - Running Gauss-Seidel Method for Linear Equation by manual input
+2026-06-25 09:49:24 - INFO - Closing program Gauss-Seidel Method
+2026-06-25 09:49:25 - INFO - Closing program...
+2026-06-25 09:49:31 - INFO - Success unpacking numeric computation package
+2026-06-25 09:49:31 - INFO - Success unpacking internal package
+2026-06-25 09:49:33 - INFO - Gauss-Seidel Method
+2026-06-25 09:49:43 - ERROR - Jumlah baris data (0) kurang dari batas minimal n (2).
+2026-06-25 09:49:55 - INFO - Success unpacking numeric computation package
+2026-06-25 09:49:55 - INFO - Success unpacking internal package
+2026-06-25 09:49:56 - INFO - Gauss-Seidel Method
+2026-06-25 09:50:18 - ERROR - Matrix must be size n x (n+1) for Gauss-Seidel. Detected 2x4 matrix. in Gauss-Seidel Method for Linear Equation
+2026-06-25 09:50:18 - INFO - Running Gauss-Seidel Method for Linear Equation by manual input
+2026-06-25 09:51:16 - INFO - Closing program Gauss-Seidel Method for Linear Equation...
+2026-06-25 09:51:18 - INFO - Closing program...
+2026-06-25 09:51:25 - INFO - Success unpacking numeric computation package
+2026-06-25 09:51:25 - INFO - Success unpacking internal package
+2026-06-25 09:51:27 - INFO - Gauss-Seidel Method
+2026-06-25 09:53:06 - INFO - Running Gauss-Seidel Method for Linear Equation by manual input
+2026-06-25 09:53:13 - INFO - Closing program Gauss-Seidel Method for Linear Equation...
+2026-06-25 09:53:15 - INFO - Closing program...

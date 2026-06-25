@@ -63,6 +63,31 @@ def PrintSingleEq(eq: List[int]) -> None:
     eqStr: str = GetEqState(eq)
     print(f"The Equation is: {eqStr}")
 
+def GetEqState2(eq: List[int]) -> str:
+    if not eq:
+        return ""
+    ruas_kanan = eq[-1]
+    koefisien_variabel = eq[:-1]
+    new_eq = list(reversed(koefisien_variabel))
+    sEq = ""
+    for i in range(len(new_eq) - 1, -1, -1):
+        if new_eq[i]:
+            if i > 1:
+                sEq += f"({new_eq[i]})X^{i} + "
+            elif i == 1:
+                sEq += f"({new_eq[i]})X + "
+            else:
+                sEq += f"({new_eq[i]}) + "
+    ruas_kiri = sEq.rstrip(" + ")
+    if not ruas_kiri:
+        ruas_kiri = "0"
+    return f"{ruas_kiri} = {ruas_kanan}"
+
+
+def PrintSingleEq2(eq: List[int]) -> None:
+    eqStr = GetEqState2(eq)
+    print(f"The Equation is: {eqStr}")
+
 
 # this print iteration step
 def PrintIterations(iter: int, vars: List[str], *params) -> None:
