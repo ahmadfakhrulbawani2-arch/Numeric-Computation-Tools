@@ -141,6 +141,7 @@ class Eq_Dataset:
 
 class Prog_Data:
     EXIT_W_SAVE = 1
+    DIRECT_BACK = 0
     g_xy_dataset = XY_Dataset()
     g_eq_dataset = Eq_Dataset()
     byk_data = 0
@@ -757,20 +758,29 @@ class Program_IO:
 # This will be file manager function
 # ======================================================================
 class Manage_Log_File:
-    def _open_regression():
-        print("Test open regression")
+    def __init__(self):
+        self.log = Log_Err_Msg(META_DATA.PROG_NAME, "", "", "")
 
-    def _open_linear_eq():
-        print("Test open linear")
+    def _open_regression(self):
+        # print("Test open regression")
+        open_output(META_DATA.OUT_PATH_REG, META_DATA.PROG_NAME)
+
+    def _open_linear_eq(self):
+        # print("Test open linear")
+        open_output(META_DATA.OUT_PATH_SPL, META_DATA.PROG_NAME)
 
     def _del_regression():
-        print("Test del regression")
+        # print("Test del regression")
+        delete_output(META_DATA.OUT_PATH_REG, META_DATA.PROG_NAME)
 
     def _del_linear_eq():
-        print("Test del linear eq")
+        # print("Test del linear eq")
+        delete_output(META_DATA.OUT_PATH_SPL, META_DATA.PROG_NAME)
 
     def _merge():
-        print("Test merge")
+        # print("Test merge")
+        merge_output(META_DATA.OUT_PATH_SPL, META_DATA.OUT_PATH_REG, META_DATA.PROG_NAME)
+
 
 
 # ======================================================================
@@ -837,6 +847,7 @@ def Main_Gauss_Seidel():
         META_DATA.PROG_NAME = "Gauss-Seidel Method"
         menu = ""
         Prog_Data.EXIT_W_SAVE = 1
+        Prog_Data.DIRECT_BACK = 0
         Prog_Data.prog_stop = 0
         Prog_Data.byk_data = 0
         style.stop_jam.clear()
@@ -896,6 +907,7 @@ def Main_Gauss_Seidel():
                         print("\n\n")
                     log = Log_Err_Msg(META_DATA.PROG_NAME, "manual input", "", "")
                     log_activities(log.run_program_msg)
+                    menu = "manual input"
 
 
                 case 1:
@@ -903,6 +915,7 @@ def Main_Gauss_Seidel():
                     reg.main()
                     log = Log_Err_Msg(META_DATA.PROG_NAME, "fetch from file", "", "")
                     log_activities(log.run_program_msg)
+                    menu = "fetch from file"
 
 
                 case 2:
@@ -912,6 +925,7 @@ def Main_Gauss_Seidel():
                         META_DATA.PROG_NAME, "fetch from google drive", "", ""
                     )
                     log_activities(log.run_program_msg)
+                    menu = "fetch from gdrive"
 
 
                 case 3:
@@ -922,6 +936,7 @@ def Main_Gauss_Seidel():
                         print("\n\n")
                     log = Log_Err_Msg(META_DATA.PROG_NAME, "manual input", "", "")
                     log_activities(log.run_program_msg)
+                    menu = "manual input"
 
 
                 case 4:
@@ -929,6 +944,7 @@ def Main_Gauss_Seidel():
                     spl.main()
                     log = Log_Err_Msg(META_DATA.PROG_NAME, "fetch from file", "", "")
                     log_activities(log.run_program_msg)
+                    menu = "fetch from file"
 
 
                 case 5:
@@ -938,6 +954,7 @@ def Main_Gauss_Seidel():
                         META_DATA.PROG_NAME, "fetch from google drive", "", ""
                     )
                     log_activities(log.run_program_msg)
+                    menu = "fetch from gdrive"
 
 
                 case 6:
@@ -946,6 +963,8 @@ def Main_Gauss_Seidel():
                         META_DATA.PROG_NAME, "Manage Log File", "opening regression", ""
                     )
                     log_activities(log.run_program_msg)
+                    Prog_Data.EXIT_W_SAVE = 0
+
 
 
                 case 7:
@@ -957,6 +976,7 @@ def Main_Gauss_Seidel():
                         "",
                     )
                     log_activities(log.run_program_msg)
+                    Prog_Data.EXIT_W_SAVE = 0
 
 
                 case 8:
@@ -965,7 +985,8 @@ def Main_Gauss_Seidel():
                         META_DATA.PROG_NAME, "Manage Log File", "merging log file", ""
                     )
                     log_activities(log.run_program_msg)
-                    Prog_Data.EXIT_W_SAVE = 0
+                    # Prog_Data.EXIT_W_SAVE = 0
+                    Prog_Data.DIRECT_BACK = 1
 
 
                 case 9:
@@ -977,7 +998,8 @@ def Main_Gauss_Seidel():
                         "",
                     )
                     log_activities(log.run_program_msg)
-                    Prog_Data.EXIT_W_SAVE = 0
+                    # Prog_Data.EXIT_W_SAVE = 0
+                    Prog_Data.DIRECT_BACK = 1
 
 
                 case 10:
@@ -989,7 +1011,8 @@ def Main_Gauss_Seidel():
                         "",
                     )
                     log_activities(log.run_program_msg)
-                    Prog_Data.EXIT_W_SAVE = 0
+                    # Prog_Data.EXIT_W_SAVE = 0
+                    Prog_Data.DIRECT_BACK = 1
 
 
                 case last_idx:
@@ -998,7 +1021,7 @@ def Main_Gauss_Seidel():
                     print(f"\n Keluar dari program {META_DATA.PROG_NAME}")
                     log = Log_Err_Msg(META_DATA.PROG_NAME, "", "", "")
                     log_activities(log.closing_main_prog_msg)
-                    Prog_Data.EXIT_W_SAVE = 0
+                    # Prog_Data.EXIT_W_SAVE = 0
                     break
 
 
@@ -1017,6 +1040,8 @@ or press {AnsiColors.BOLD}[q]{AnsiColors.RESET} to exit: "
                     .strip()
                     .lower()
                 )
+            elif Prog_Data.DIRECT_BACK: 
+                pass
             else:
                 pilihan = (
                     input(
@@ -1028,15 +1053,15 @@ or press {AnsiColors.BOLD}[q]{AnsiColors.RESET} to exit: "
                     .lower()
                 )
 
-            if pilihan == "q":
-                style.stop_jam.set()
-                clear_screen()
-                print("\nKeluar dari program. Sampai jumpa, Bre!")
-                log_activities(f"Closing program {META_DATA.PROG_NAME}...")
-                break
-            elif pilihan == "s":
-                clear_screen()
-                write_result(menu, Prog_Data.true_out_path, META_DATA.PROG_NAME)
+                if pilihan == "q":
+                    style.stop_jam.set()
+                    clear_screen()
+                    print("\nKeluar dari program. Sampai jumpa, Bre!")
+                    log_activities(f"Closing program {META_DATA.PROG_NAME}...")
+                    break
+                elif pilihan == "s":
+                    clear_screen()
+                    write_result(menu, Prog_Data.true_out_path, META_DATA.PROG_NAME)
 
             style.dalam_menu_kalkulasi = False
             clear_screen()

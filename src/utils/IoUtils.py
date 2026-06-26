@@ -358,7 +358,7 @@ def write_result(menu: str, path: str, PROG_NAME: str):
             print()
             time.sleep(5)
     except FileNotFoundError:
-        log_activities(f"File not found in {PROG_NAME}. Failed to write", "ERROR")
+        log_activities(f"File not found in {PROG_NAME} at write_result.", "ERROR")
         raise FileNotFoundError(f"File/Path not found")
 
 
@@ -379,7 +379,7 @@ def delete_output(path: str, PROG_NAME: str):
             print()
             time.sleep(5)
     except FileNotFoundError:
-        log_activities(f"File not found in {PROG_NAME}. Failed to cleaning", "ERROR")
+        log_activities(f"File not found in {PROG_NAME} at delete_output.", "ERROR")
         raise FileNotFoundError(f"File/Path not found")
 
 
@@ -390,7 +390,7 @@ def open_output(out_path: str, PROG_NAME: str):
     true_path = root_dir / "out" / out_path
     print(f"=== Output file of {PROG_NAME} ===")
     print()
-    success_run_cnt = 0
+    success_run_cnt, total_run = 0, 0
     Lazy_Loading(f"Opening {PROG_NAME} logs...", duration=0.15)
     try:
         with open(file=true_path, mode="r", encoding="utf-8") as file:
@@ -399,11 +399,56 @@ def open_output(out_path: str, PROG_NAME: str):
                     success_run_cnt += 1
                 print(line.strip())
                 time.sleep(0.0025)
+                total_run += 1
             print("=== TL;DR: ===")
-            print(f"Success run count = {success_run_cnt}")
+            print(f"Success run count = {success_run_cnt}\nTotal run count = {total_run}")
     except FileNotFoundError:
-        log_activities(f"File not found in {PROG_NAME}. Failed to write", "ERROR")
+        log_activities(f"File not found in {PROG_NAME} at open_output.", "ERROR")
         raise FileNotFoundError(f"File/Path not found")
+    
+def merge_output(src_path: str, dst_path: str, PROG_NAME: str):
+    from .FuncUtils import Lazy_Loading
+    true_src = root_dir / "out" / src_path
+    true_dst = root_dir / "out" / dst_path
+    print(f"=== Merging file of {PROG_NAME} ===")
+    print()
+    print(f"From: {true_src}")
+    print(f"To: {true_dst}")
+    print()
+    Lazy_Loading("Extracting source file...", .75)
+    src_buf, src_buf_res, dst_proc_res = "", "", ""
+    try:
+        with open(file=true_src, mode="r", encoding="utf-8") as file:
+            src_buf = file.read()
+    except FileNotFoundError:
+        src_buf_res = f"Error to extract source file. File not found in {PROG_NAME} at merge_output."
+        log_activities(src_buf_res, "ERROR")
+        raise FileNotFoundError(src_buf_res)
+    src_buf_res = "Successfully extracting source"
+    print(f"{src_buf_res}")
+    print()
+    Lazy_Loading("Appending to file destination...", 1)
+    try:
+        with open(file=true_dst, mode="a", encoding="utf-8") as file:
+            sekarang = datetime.datetime.now()
+            str_now = sekarang.strftime("%A, %d-%m-%Y | %H:%M:%S WIB")
+            file.write(f"{str_now}\n")
+            file.write(f"\n[MERGE] FROM {true_src}\n")
+            file.write(src_buf)
+            sys.stdout.write("\033[J")
+            sys.stdout.write("\n\n\033[4A")
+            sys.stdout.flush()
+            print()
+            print(
+                f"\nFile merged and saved successfully in {AnsiColors.BG_BLACK}{AnsiColors.BOLD}{true_dst}{AnsiColors.RESET}\n"
+            )
+            print("Going back to menu in 5 seconds...")
+            print()
+            time.sleep(5)
+    except FileNotFoundError:
+        dst_proc_res = f"Error to append destination file. File not found in {PROG_NAME} at merge_output."
+        log_activities(dst_proc_res, "ERROR")
+        raise FileNotFoundError(dst_proc_res)
 
 
 # =============================================================================
