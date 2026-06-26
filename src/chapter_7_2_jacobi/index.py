@@ -34,10 +34,10 @@ class META_DATA:
 
     PROG_NAME = "Gauss-Seidel Method"
     REGRESSION_COLORS = [
-        (0, 245, 255),    # Neon Cyan / Garis Regresi Utama
-        (255, 0, 170),    # Hot Magenta / Data Points
-        (15, 15, 26),     # Midnight Navy Dark / Background
-    ]
+		(136, 192, 208),  # Frost Blue / Garis Regresi Utama
+		(250, 190, 132),  # Pastel Orange / Data Points
+		(26, 32, 44),     # Deep Charcoal / Background
+	]
     REGRESSION_ART = rf"""
 
        ____                           
