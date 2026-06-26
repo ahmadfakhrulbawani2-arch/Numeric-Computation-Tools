@@ -68,8 +68,8 @@ def Lazy_Loading(texts: str, duration=1.5) -> None:
     spinner.start()
     # Simulasi proses matematika/loading (misal 3 detik)
     time.sleep(duration)
-    # Selesai dengan status sukses (Centang Hijau)
-    spinner.succeed("Ok done...")
+    # Selesai dengan status checking response
+    spinner.succeed("Done, checking response...")
     time.sleep(0.5)
     # os.system('cls' if os.name == 'nt' else 'clear')
 
