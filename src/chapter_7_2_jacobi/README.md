@@ -12,6 +12,6 @@ git clone https://github.com/ahmadfakhrulbawani2-arch/numeric-computation-tools.
 
 ```bash
 # bash
-python -m src.chapter_7_2_jacobi.index
+python -m src.bisection-method.index
 # run as module
 ```
